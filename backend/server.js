@@ -4,6 +4,8 @@ const morgan = require("morgan")
 const app = express()
 
 
+app.use(express.json())
+
 
 // dev logging middleware
 app.use(morgan("tiny"))

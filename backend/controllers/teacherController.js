@@ -1,4 +1,6 @@
+const asyncHandler = require('express-async-handler')
 
+const Teacher = require('../models/teacher')
 
 /**********************************
  *      @desc Get all teachers
@@ -6,13 +8,15 @@
  *      @access Public
 /**********************************/
 
-exports.getTeachers = (req, res) => {
+exports.getTeachers = asyncHandler(async (req, res) => {
     res.status(200).json({
         success: true,
         msg: "All teachers"
     })
 
-}
+})
+
+
 
 
 
@@ -39,14 +43,16 @@ exports.getTeacher = (req, res) => {
  *      @access PRIVATE
 /**********************************/
 
-exports.createTeachers = (req, res) => {
+exports.createTeachers = asyncHandler(async(req, res) => {
+
+    const teacher = await Teacher.create(req.body);
 
     res.status(200).json({
         success: true,
-        msg: "Create Teacher"
+        data: teacher
     })
 
-}
+})
 
 
 /**********************************
