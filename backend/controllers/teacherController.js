@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler')
 
 const Teacher = require('../models/teacher')
 
+
 /**********************************
  *      @desc Get all teachers
  *      @route GET /api/v1/teachers
@@ -9,9 +10,12 @@ const Teacher = require('../models/teacher')
 /**********************************/
 
 exports.getTeachers = asyncHandler(async (req, res) => {
+    const teacher = await Teacher.find()
+
+
     res.status(200).json({
         success: true,
-        msg: "All teachers"
+        data: teacher
     })
 
 })
@@ -26,14 +30,25 @@ exports.getTeachers = asyncHandler(async (req, res) => {
  *      @access Public
 /**********************************/
 
-exports.getTeacher = (req, res) => {
+exports.getTeacher = asyncHandler(async (req, res) => {
+
+    const teacher = await Teacher.findById(req.params.id)
+
+    if (!teacher) {
+        res.status(404).json({
+            success: false,
+            msg: `No teacher found with id: ${req.params.id}`
+
+        })
+    }
 
     res.status(200).json({
         success: true,
-        msg: "Single teacher"
+        data: teacher
+
     })
 
-}
+})
 
 
 
@@ -43,11 +58,11 @@ exports.getTeacher = (req, res) => {
  *      @access PRIVATE
 /**********************************/
 
-exports.createTeachers = asyncHandler(async(req, res) => {
+exports.createTeachers = asyncHandler(async (req, res) => {
 
     const teacher = await Teacher.create(req.body);
 
-    res.status(200).json({
+    res.status(201).json({
         success: true,
         data: teacher
     })
@@ -61,15 +76,23 @@ exports.createTeachers = asyncHandler(async(req, res) => {
  *      @access PRIVATE
 /**********************************/
 
-exports.updateTeachers = (req, res) => {
+exports.updateTeachers = asyncHandler(async (req, res) => {
+    const id = req.params.id
+    if (!id) {
+        res.status(404).json({
+            success: false,
+            msg: `No teacher found with id: ${req.params.id}`
+        })
+    }
+
+    const teacher = await Teacher.findByIdAndUpdate(id, req.body)
 
     res.status(200).json({
         success: true,
-        id: req.params.id,
-        msg: "Update Teacher"
+        data: teacher,
     })
 
-}
+})
 
 /**********************************
  *      @desc Delete Teacher
@@ -77,12 +100,21 @@ exports.updateTeachers = (req, res) => {
  *      @access PRIVATE
 /**********************************/
 
-exports.deleteTeachers = (req, res) => {
+exports.deleteTeachers = asyncHandler(async (req, res) => {
+
+    const id = req.params.id
+    if (!id) {
+        res.status(404).json({
+            success: false,
+            msg: `No teacher found with id: ${req.params.id}`
+        })
+    }
+
+    const teacher = await Teacher.findByIdAndDelete(id)
 
     res.status(200).json({
         success: true,
-        id: req.params.id,
-        msg: "Delete Teacher"
+        data: teacher,
     })
 
-}
+})
