@@ -17,6 +17,7 @@ app.use(morgan("tiny"))
 // Importing all routes
 
 const teachersRoutes = require("./routes/teacherRoutes")
+const errorHander = require('./middleware/error')
 
 
 
@@ -40,6 +41,10 @@ app.get("/", (req, res) => {
 // Mounting all routes
 
 app.use("/api/v1/teachers", teachersRoutes)
+
+
+// error handler
+app.use(errorHander)
 
 
 // listening to port

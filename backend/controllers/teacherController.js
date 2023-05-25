@@ -1,7 +1,7 @@
-const asyncHandler = require('express-async-handler')
-
-const Teacher = require('../models/teacher')
-
+const asyncHandler = require("express-async-handler");
+const ErrorResponse = require("../utils/ErrorResponse");
+const Teacher = require("../models/teacher");
+const errorHander = require("../middleware/error");
 
 /**********************************
  *      @desc Get all teachers
@@ -10,19 +10,14 @@ const Teacher = require('../models/teacher')
 /**********************************/
 
 exports.getTeachers = asyncHandler(async (req, res) => {
-    const teacher = await Teacher.find()
+  const teacher = await Teacher.find();
 
-
-    res.status(200).json({
-        success: true,
-        data: teacher
-    })
-
-})
-
-
-
-
+  res.status(200).json({
+    success: true,
+    count: teacher.length,
+    data: teacher,
+  });
+});
 
 /**********************************
  *      @desc Get single teacher
@@ -30,27 +25,20 @@ exports.getTeachers = asyncHandler(async (req, res) => {
  *      @access Public
 /**********************************/
 
-exports.getTeacher = asyncHandler(async (req, res) => {
+exports.getTeacher = asyncHandler(async (req, res, next) => {
+  const teacher = await Teacher.findById(req.params.id);
 
-    const teacher = await Teacher.findById(req.params.id)
+  if (!teacher) {
+    return next(
+      new ErrorResponse(`No teacher found with id : ${req.params.id}`, 404)
+    );
+  }
 
-    if (!teacher) {
-        res.status(404).json({
-            success: false,
-            msg: `No teacher found with id: ${req.params.id}`
-
-        })
-    }
-
-    res.status(200).json({
-        success: true,
-        data: teacher
-
-    })
-
-})
-
-
+  res.status(200).json({
+    success: true,
+    data: teacher,
+  });
+});
 
 /**********************************
  *      @desc Create Teacher
@@ -58,17 +46,20 @@ exports.getTeacher = asyncHandler(async (req, res) => {
  *      @access PRIVATE
 /**********************************/
 
-exports.createTeachers = asyncHandler(async (req, res) => {
+exports.createTeachers = asyncHandler(async (req, res, next) => {
+  // check for existign teacher
+  if (req.params.id === (await Teacher._id)) {
+    return next(new ErrorResponse("Teacher already exists", 400));
+  }
 
-    const teacher = await Teacher.create(req.body);
+  // Create teacher
+  const teacher = await Teacher.create(req.body);
 
-    res.status(201).json({
-        success: true,
-        data: teacher
-    })
-
-})
-
+  res.status(201).json({
+    success: true,
+    data: teacher,
+  });
+});
 
 /**********************************
  *      @desc Update Teacher
@@ -76,23 +67,21 @@ exports.createTeachers = asyncHandler(async (req, res) => {
  *      @access PRIVATE
 /**********************************/
 
-exports.updateTeachers = asyncHandler(async (req, res) => {
-    const id = req.params.id
-    if (!id) {
-        res.status(404).json({
-            success: false,
-            msg: `No teacher found with id: ${req.params.id}`
-        })
-    }
+exports.updateTeachers = asyncHandler(async (req, res, next) => {
+  const id = req.params.id;
+  if (!id) {
+    return next(
+      ErrorResponse(`No teacher found with id : ${req.params.id}`, 404)
+    );
+  }
 
-    const teacher = await Teacher.findByIdAndUpdate(id, req.body)
+  const teacher = await Teacher.findByIdAndUpdate(id, req.body);
 
-    res.status(200).json({
-        success: true,
-        data: teacher,
-    })
-
-})
+  res.status(200).json({
+    success: true,
+    data: teacher,
+  });
+});
 
 /**********************************
  *      @desc Delete Teacher
@@ -100,21 +89,18 @@ exports.updateTeachers = asyncHandler(async (req, res) => {
  *      @access PRIVATE
 /**********************************/
 
-exports.deleteTeachers = asyncHandler(async (req, res) => {
+exports.deleteTeachers = asyncHandler(async (req, res, next) => {
+  const id = req.params.id;
+  if (!id) {
+    return next(
+      ErrorResponse(`No teacher found with id : ${req.params.id}`, 404)
+    );
+  }
 
-    const id = req.params.id
-    if (!id) {
-        res.status(404).json({
-            success: false,
-            msg: `No teacher found with id: ${req.params.id}`
-        })
-    }
+  const teacher = await Teacher.findByIdAndDelete(id);
 
-    const teacher = await Teacher.findByIdAndDelete(id)
-
-    res.status(200).json({
-        success: true,
-        data: teacher,
-    })
-
-})
+  res.status(200).json({
+    success: true,
+    data: teacher,
+  });
+});
