@@ -48,10 +48,11 @@ exports.getTeacher = asyncHandler(async (req, res, next) => {
 
 exports.createTeachers = asyncHandler(async (req, res, next) => {
   // check for existign teacher
-  if (req.params.id === (await Teacher._id)) {
+  const { name } = req.body;
+  const existingTeacher = await Teacher.findOne({ name });
+  if (existingTeacher) {
     return next(new ErrorResponse("Teacher already exists", 400));
   }
-
   // Create teacher
   const teacher = await Teacher.create(req.body);
 
