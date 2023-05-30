@@ -19,13 +19,13 @@
   width: 80%;
 }
 .home-page-wrapper h1 {
-  font-size: 4rem;
+  font-size: 3rem;
 }
 .home-page-wrapper h1 span {
   color: #5037ec;
 }
 .home-page-wrapper p {
-  margin: 4rem auto;
+  margin: 2rem auto;
   color: gray;
   line-height: 1.5;
   font-size: 1.2rem;
@@ -67,10 +67,17 @@
     width: 100%;
   }
   .home-page-wrapper h1 {
-    font-size: 3rem;
+    /* font-size: 3rem; */
     margin-top: 2rem;
   }
   .home-page-wrapper p {
     margin: 2rem auto;
   }
 }
+
+@media (min-width:1600px) {
+  .home-page-wrapper h1 {
+    font-size: 4rem;
+  }
+}
+
