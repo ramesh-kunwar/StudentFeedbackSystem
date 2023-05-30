@@ -24,6 +24,7 @@ const errorHander = require("./middleware/error");
 
 //  basic route
 app.get("/", (req, res) => {
+  console.log(req.user);
   res.status(200).json({
     success: true,
     msg: "Welcome to student teacher feedback app",

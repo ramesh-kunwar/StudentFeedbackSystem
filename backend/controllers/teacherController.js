@@ -9,6 +9,7 @@ const errorHander = require("../middleware/error");
  *      @access Public
 /**********************************/
 
+
 exports.getTeachers = asyncHandler(async (req, res) => {
   const teacher = await Teacher.find();
 

@@ -1,0 +1,95 @@
+.login-screen {
+  height: 100vh;
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  /* justify-content: space-between; */
+}
+.login-screen img {
+  width: 100%;
+}
+
+.login-screen .item-left {
+  background-color: #5037ec;
+  padding: 2rem;
+  height: 100vh;
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-screen .item {
+  height: 100vh;
+}
+.login-screen h1 {
+  font-size: 5rem;
+  margin-bottom: 3rem;
+  font-weight: bold;
+}
+
+.login-screen .item-right {
+  width: 60%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+.login-screen .item-right input {
+  padding: 0.8rem;
+  border-radius: 5px;
+  width: 90%;
+  outline: none;
+  border: 1px solid gray;
+  box-sizing: border-box;
+  margin-top: 0.5rem;
+  /* margin-right: 0 auto; */
+}
+.login-screen .item-right input[type="submit"] {
+  background-color: #5037ec;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  margin-top: 3rem;
+  cursor: pointer;
+}
+
+.login-screen .item-right input[type="submit"]:hover {
+  background-color: #474af1;
+  transition: 0.3s ease-in-out;
+}
+
+.login-screen .form-item {
+  margin-bottom: 2rem;
+  color: rgb(58, 58, 58);
+  font-weight: lighter;
+}
+
+.login-screen .sign-up-message {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.login-screen .sign-up-message p {
+  color: #1e1e1e;
+  margin: 1rem auto;
+}
+.login-screen .sign-up-message a {
+  color: #5037ec;
+}
+
+@media (max-width: 700px) {
+  .login-screen {
+    /* display: block; */
+    width: 100%;
+  }
+  .login-screen .item-left {
+    display: none;
+  }
+  .login-screen .item-right {
+    width: 80%;
+    /* padding: 8rem; */
+  }
+
+  .login-screen h1 {
+    font-size: 3rem;
+  }
+}
