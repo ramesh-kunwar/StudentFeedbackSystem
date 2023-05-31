@@ -11,12 +11,14 @@ import App from "./App.jsx";
 import "./index.css";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
+import Teachers from "./components/Teacher/Teachers.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index={true} path="/" element={<Home />} />
       <Route  path="/login" element={<Login />} />
+      <Route  path="/teachers" element={<Teachers />} />
       {/* <Route path="/product/:id" element={<ProductScreen />} /> */}
     </Route>
   )
