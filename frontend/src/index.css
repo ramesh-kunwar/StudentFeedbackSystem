@@ -11,6 +11,12 @@ input{
 
 }
 
+.overflow{
+    /* text-overflow: ellipsis; */
+
+}
+
+
 .container{
     width: 90%;
     margin: 0 auto;

@@ -1,6 +1,8 @@
 import React from "react";
 import "./Teachers.scss";
 import TeacherItem from "./TeacherItem";
+import { AiFillStar } from "react-icons/ai";
+
 const Teachers = () => {
   const repeat = 10;
   return (
@@ -9,6 +11,8 @@ const Teachers = () => {
         <h1>All Teachers</h1>
 
         <div className="teacher-wrapper">
+          <TeacherItem />
+          <TeacherItem />
           <TeacherItem />
           <TeacherItem />
           <TeacherItem />

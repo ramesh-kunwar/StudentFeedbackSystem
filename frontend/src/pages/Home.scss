@@ -35,8 +35,6 @@
   display: flex;
 }
 .home-page-wrapper .buttons .btn {
-  /* margin-top: 4rem; */
-  /* margin-top: 4rem; */
   display: block;
   padding: 1rem 2rem;
   border-radius: 8px;
@@ -44,7 +42,8 @@
   transition: 0.3s ease-in-out;
 }
 .home-page-wrapper .buttons .btn:hover {
-  margin-top: -5px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  transform: translateY(3px);
 }
 
 .home-page-wrapper .buttons .btn-teachers {
@@ -75,9 +74,8 @@
   }
 }
 
-@media (min-width:1600px) {
+@media (min-width: 1600px) {
   .home-page-wrapper h1 {
     font-size: 4rem;
   }
 }
-

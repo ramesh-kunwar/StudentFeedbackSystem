@@ -1,55 +1,59 @@
-
 .teacher-wrapper .teacher-item {
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
-      rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-    background-color: white;
-  
-    /* max-width: 250px; */
-    /* width: 25%; */
-    border-radius: 10px;
-  }
-  .teacher-wrapper .teacher-item img {
-    border-radius: 10px 10px 0 0;
-  }
-  img {
-    width: 100%;
-  }
-  .teacher-item .teacher-item-content {
-    padding: 0 1rem;
-  }
-  .teacher-item .teacher-item-content h3 {
-    margin: 1rem auto;
-  }
-  .teacher-item .teacher-item-content ul {
-    display: flex;
-    gap: 0.4rem;
-    flex-wrap: wrap;
-  }
-  
-  .teacher-item .teacher-item-content ul li {
-    background-color: #5037ec;
-    color: white;
-    padding: 0.3rem 0.8rem;
-    border-radius: 0.2rem;
-    font-size: 0.7rem;
-  }
-  
-  .teacher-item-bottom {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem;
-  
-    margin-bottom: 1rem;
-  }
-  
-  .teacher-item-bottom h4 {
-    color: orangered;
-  }
-  .teacher-item-bottom h5 {
-    font-weight: lighter;
-    background-color: #db490b;
-    color: white;
-    /* font-size: ; */
-    padding: 0.2rem 0.4rem;
-    border-radius: 3px;
-  }
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  background-color: white;
+
+  border-radius: 10px;
+
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+.teacher-wrapper .teacher-item:hover {
+  transform: translateY(-3px);
+}
+.teacher-wrapper .teacher-item img {
+  border-radius: 10px 10px 0 0;
+}
+img {
+  width: 100%;
+}
+
+.teacher-item .teacher-item-content {
+  padding: 0 1rem;
+}
+.teacher-item .teacher-item-content h3 {
+  margin: 1rem auto;
+}
+.teacher-item .teacher-item-content ul {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.teacher-item .teacher-item-content ul li {
+  background-color: #5037ec;
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 0.2rem;
+  font-size: 0.7rem;
+}
+
+.teacher-item-bottom {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+
+  margin-bottom: 1rem;
+}
+
+.teacher-item-bottom h4 {
+  color: orangered;
+}
+.teacher-item-bottom h5 {
+  font-weight: lighter;
+  background-color: #db490b;
+  color: white;
+  /* font-size: ; */
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+}
