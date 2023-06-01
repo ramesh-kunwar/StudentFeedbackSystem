@@ -1,6 +1,6 @@
 import React from "react";
 import logoColor from "../assets/logo/svg/logo-no-background.svg";
-import "./Login.css";
+import "./Login.scss";
 
 const Login = () => {
   return (

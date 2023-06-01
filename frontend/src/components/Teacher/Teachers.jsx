@@ -1,5 +1,5 @@
 import React from "react";
-import "./Teachers.css";
+import "./Teachers.scss";
 import TeacherItem from "./TeacherItem";
 const Teachers = () => {
   const repeat = 10;

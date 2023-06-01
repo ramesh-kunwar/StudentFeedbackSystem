@@ -2,7 +2,7 @@ import React from "react";
 // import { AiFillStar } from "react-icons/ai";
 import { AiFillStar } from "react-icons/ai";
 
-import "./TeacherItem.css";
+import "./TeacherItem.scss";
 const TeacherItem = () => {
   return (
     <div className="teacher-item">
