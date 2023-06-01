@@ -78,15 +78,15 @@
 
 @media (max-width: 700px) {
   .login-screen {
-    /* display: block; */
+    margin-top: 3rem;
     width: 100%;
   }
   .login-screen .item-left {
     display: none;
   }
   .login-screen .item-right {
-    width: 80%;
-    /* padding: 8rem; */
+    width: 100%;
+    margin-left: 2rem;
   }
 
   .login-screen h1 {
