@@ -6,8 +6,12 @@
   border-radius: 10px;
 
   transition: 0.3s ease-in-out;
-  cursor: pointer;
+  a {
+    color: black;
+    // text-decoration: underline;
+  }
 }
+
 .teacher-wrapper .teacher-item:hover {
   transform: translateY(-3px);
 }

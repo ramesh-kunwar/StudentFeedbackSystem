@@ -9,7 +9,6 @@ const errorHander = require("../middleware/error");
  *      @access Public
 /**********************************/
 
-
 exports.getTeachers = asyncHandler(async (req, res) => {
   const teacher = await Teacher.find();
 
@@ -49,7 +48,12 @@ exports.getTeacher = asyncHandler(async (req, res, next) => {
 
 exports.createTeachers = asyncHandler(async (req, res, next) => {
   // check for existign teacher
-  const { name } = req.body;
+  const { name, description, coursesTaught } = req.body;
+  if (!name || !description || !coursesTaught) {
+    return next(
+      new ErrorResponse("Name, description, coursesTaught are required", 401)
+    );
+  }
   const existingTeacher = await Teacher.findOne({ name });
   if (existingTeacher) {
     return next(new ErrorResponse("Teacher already exists", 400));
