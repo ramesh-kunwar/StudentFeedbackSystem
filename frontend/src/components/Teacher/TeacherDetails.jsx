@@ -1,23 +1,28 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useGetTeacherDetailsQuery } from "../../slices/teacherApiSlice";
 
 const TeacherDetails = () => {
-  const [teacher, setTeacher] = useState({});
+  // const [teacher, setTeacher] = useState({});
   const teacherId = useParams();
   const id = teacherId.teacherId;
-  console.log(id, "taecher id");
+  const { data: teachers, isLoading, error } = useGetTeacherDetailsQuery(id);
+  console.log(teachers);
 
-  useEffect(() => {
-    const fetchTeacher = async () => {
-      const { data } = await axios.get(`/api/v1/teachers/${id}`);
-      setTeacher(data.data);
-      console.log(data, "data");
-    };
-
-    fetchTeacher();
-  }, []);
-  return <div>{teacher.name}</div>;
+  return (
+    <div className="container">
+      {isLoading ? (
+        <h1>Loading....</h1>
+      ) : (
+        <>
+          <h3>{teachers?.data?.name}</h3>
+          <p>{teachers?.data?.description}</p>
+          <img src={teachers?.data?.image} alt="" />
+        </>
+      )}
+    </div>
+  );
 };
 
 export default TeacherDetails;
