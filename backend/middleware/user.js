@@ -5,13 +5,14 @@ const jwt = require("jsonwebtoken");
 
 exports.isLoggedIn = asyncHandler(async (req, res, next) => {
   let token;
+
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
   ) {
     token = req.headers.authorization.split(" ")[1];
-  } else if (req.cookies.token) {
-    token = req.cookies.token;
+  } else if (req.cookies.jwt) {
+    token = req.cookies.jwt;
   }
 
   // Make sure token is exists
@@ -31,3 +32,11 @@ exports.isLoggedIn = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse(`Not authorized to access this route`, 401));
   }
 });
+
+exports.isAdmin = (req, res, next) => {
+  if (req.user && req.user.role) {
+    next();
+  } else {
+    return next(new ErrorResponse(`Not authorized as admin`, 401));
+  }
+};

@@ -1,15 +1,14 @@
 import React from "react";
 import logoColor from "../assets/logo/svg/logo-no-background.svg";
 import "./Login.scss";
-
+import {BiLogInCircle} from 'react-icons/bi'
 const Login = () => {
   return (
     <div className="login-screen ">
-      <div className="item-left  ">
-        <img src={logoColor} alt="" className="logo-color" />
-      </div>
-      <div className="item-right ">
-        <h1>Login</h1>
+      <div className="login-container ">
+        <h1>Login
+          <BiLogInCircle />
+        </h1>
 
         <form action="">
           <div className="form-item">
