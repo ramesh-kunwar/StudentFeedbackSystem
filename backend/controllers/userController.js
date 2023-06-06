@@ -63,11 +63,14 @@ exports.loginUser = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse(`All fields are required`, 400));
   }
 
-  const user = await User.findOne({ email }).select("+password");
+  const user = await User.findOne({ email });
+  if (!user) {
+    return next(new ErrorResponse(`Invalid Credentials`, 404));
+  }
 
   const isMatchedPassword = await user.comparePassword(password);
-  if (!isMatchedPassword) {
-    return next(new ErrorResponse(`Invalid credentials`, 404));
+  if (!user && !isMatchedPassword) {
+    return next(new ErrorResponse(`Invalid credentials`, 401));
   }
 
   sendTokenResponse(user, 200, res);

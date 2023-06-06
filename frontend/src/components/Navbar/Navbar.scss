@@ -14,6 +14,14 @@
 .nav-links ul {
   display: flex;
   gap: 20px;
+  align-items: center;
+  color: gray;
+
+  .profile-icon {
+    font-size: 1.5rem;
+    // margin-left: .5rem;
+    cursor: pointer;
+  }
 }
 .nav-links ul a {
   font-size: 1.2rem;
@@ -56,14 +64,9 @@
   .nav-links ul {
     display: block;
 
-    li {
+    a {
+      display: block;
       padding: 1rem 2rem;
-    }
-    li:hover {
-      background-color: gainsboro;
-      a {
-        display: block;
-      }
     }
   }
   ul.close {
