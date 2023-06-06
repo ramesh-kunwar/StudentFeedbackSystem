@@ -1,46 +1,61 @@
 import React, { useEffect, useState } from "react";
 import logoColor from "../assets/logo/svg/logo-no-background.svg";
-import "./Login.scss";
-import { BiLogInCircle } from "react-icons/bi";
-import { useDispatch } from "react-redux";
+import "./Register.scss";
+import { IoArrowForwardCircleOutline, IoCreateOutline } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { useLoginMutation } from "../slices/userApiSlice";
 import { setCredentials } from "../slices/authSlice";
 
 import { toast } from "react-toastify";
+import { useRegisterMutation } from "../slices/userApiSlice";
 
-const Login = () => {
+const Register = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const [login, { isLoading }] = useLoginMutation();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {}, []);
+  const { userInfo } = useDispatch((state) => state.userInfo);
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/teachers");
+    }
+  }, []);
+  const [register] = useRegisterMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await login({ email, password }).unwrap();
+      const res = await register({ name, email, password }).unwrap();
       dispatch(setCredentials({ ...res }));
-      toast.success("Login Success");
+      toast.success("User Registered Successfully");
       navigate("/teachers");
     } catch (error) {
       console.log(error);
-      toast.error(error?.data?.message || error?.data.error);
+      toast.error(error?.data?.error || error.error);
     }
   };
   return (
-    <div className="login-screen ">
-      <div className="login-container ">
+    <div className="register-screen ">
+      <div className="register-container ">
         <h1>
-          Login
-          <BiLogInCircle />
+          Register
+          <IoCreateOutline />
         </h1>
 
         <form action="" onSubmit={handleSubmit}>
+          <div className="form-item">
+            <label htmlFor="name">name</label>
+            <input
+              type="name"
+              className="form-control"
+              placeholder="ramesh"
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
           <div className="form-item">
             <label htmlFor="email">Email</label>
             <input
@@ -61,12 +76,12 @@ const Login = () => {
           </div>
 
           <div className="form-item">
-            <input type="submit" value="Login" />
+            <input type="submit" value="Register" />
           </div>
 
           <div className="sign-up-message">
-            <p>Don't have an account ? </p>
-            <Link to="/register">Signup Here</Link>
+            <p>Already have an account ? </p>
+            <Link to="/login">Login Here</Link>
           </div>
         </form>
       </div>
@@ -74,4 +89,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
