@@ -36,6 +36,9 @@ const TeacherDetails = () => {
           </div>
         </div>
       )}
+
+      <h1>All Reviews</h1>
+      {/* review component goes here */}
     </div>
   );
 };
