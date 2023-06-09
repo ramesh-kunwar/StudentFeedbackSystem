@@ -7,10 +7,11 @@ import { TiDelete } from "react-icons/ti";
 import { Link } from "react-router-dom";
 const TeacherTable = () => {
   const { data: teachers, isLoading } = useGetTeachersQuery();
+
   return (
     <div className="teacher-table ">
       <h1>All Teachers</h1>
-      {teachers?.data.map((teacher) => {
+      {teachers.data.map((teacher) => {
         return (
           <div className="teacher-item" key={teacher._id}>
             <div className="left">
