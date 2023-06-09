@@ -50,7 +50,7 @@ const Register = () => {
           <div className="form-item">
             <label htmlFor="name">name</label>
             <input
-              type="name"
+              type="text"
               className="form-control"
               placeholder="ramesh"
               onChange={(e) => setName(e.target.value)}

@@ -11,7 +11,7 @@ const NavProfileToggle = ({ userInfo }) => {
   const [logoutApiCall] = useLogoutMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  console.log(userInfo);
   const handleLogout = async () => {
     console.log("logout");
     try {
@@ -26,12 +26,21 @@ const NavProfileToggle = ({ userInfo }) => {
   return (
     <div>
       <ul className="nav-toggle-profile">
-        <Link to={"/profile"}>
-          <div className="icon">
-            <FaUserCircle className="profile-icon" />
-          </div>
-          {userInfo?.data?.name}
-        </Link>
+        {userInfo?.data?.role === "admin" ? (
+          <Link to={"/admin/dashboard"}>
+            <div className="icon">
+              <FaUserCircle className="profile-icon" />
+            </div>
+            Profile
+          </Link>
+        ) : (
+          <Link to={"/user/profile"}>
+            <div className="icon">
+              <FaUserCircle className="profile-icon" />
+            </div>
+            {userInfo?.data?.name}
+          </Link>
+        )}
 
         <Link to={"/logout"} onClick={handleLogout}>
           <div className="icon">

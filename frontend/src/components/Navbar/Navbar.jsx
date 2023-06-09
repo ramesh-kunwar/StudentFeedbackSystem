@@ -19,7 +19,9 @@ const Navbar = () => {
         <div className="">
           <div className="nav-wrapper">
             <div className="nav-logo">
-              <h3>Feedback Loop</h3>
+              <h3>
+                <Link>Feedback Loop</Link>
+              </h3>
               <div className="toggleMenu">
                 <a href="#" onClick={() => setToggleMenu(!toggleMenu)}>
                   {toggleMenu ? <CgMenuLeft /> : <GrClose />}

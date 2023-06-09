@@ -6,10 +6,10 @@ const {
   updateTeachers,
   deleteTeachers,
 } = require("../controllers/teacherController");
-const { isLoggedIn } = require("../middleware/user");
+const { isLoggedIn, isAdmin } = require("../middleware/user");
 const router = express.Router();
 
-router.route("/").get(getTeachers).post(isLoggedIn, createTeachers);
+router.route("/").get(getTeachers).post(isLoggedIn, isAdmin, createTeachers);
 
 router.route("/:id").get(getTeacher).put(updateTeachers).delete(deleteTeachers);
 

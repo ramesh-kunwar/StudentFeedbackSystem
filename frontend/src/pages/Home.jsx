@@ -1,6 +1,7 @@
 import React from "react";
 import homeImage from "../assets/images/home.jpg";
 import "./Home.scss";
+import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <div className="home-page">
@@ -15,12 +16,12 @@ const Home = () => {
             quaerat natus.
           </p>
           <div className="buttons">
-            <a href="" className="btn btn-teachers">
+            <Link to="/teachers" className="btn btn-teachers">
               View Teachers
-            </a>
-            <a href="" className="btn btn-semester">
+            </Link>
+            <Link to="/semester" className="btn btn-semester">
               View Semester
-            </a>
+            </Link>
           </div>
         </div>
         <div className="item item-right">

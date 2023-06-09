@@ -15,6 +15,22 @@ export const teacherApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
+    createTeacher: builder.mutation({
+      query: (data) => ({
+        url: `${TEACHERS_URL}`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+
+    updateTeacher: builder.mutation({
+      query: (data) => ({
+        url: `${TEACHERS_URL}/${data.productId}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["Products"],
+    }),
 
     // getProductDetails: builder.query({
     //   query: (productId) => ({
@@ -25,4 +41,9 @@ export const teacherApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetTeachersQuery, useGetTeacherDetailsQuery } = teacherApiSlice;
+export const {
+  useGetTeachersQuery,
+  useGetTeacherDetailsQuery,
+  useCreateTeacherMutation,
+  useUpdateTeacherMutation
+} = teacherApiSlice;

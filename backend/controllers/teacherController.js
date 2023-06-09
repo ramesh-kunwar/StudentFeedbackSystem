@@ -48,8 +48,10 @@ exports.getTeacher = asyncHandler(async (req, res, next) => {
 
 exports.createTeachers = asyncHandler(async (req, res, next) => {
   // check for existign teacher
-  const { name, description, coursesTaught } = req.body;
-  if (!name || !description || !coursesTaught) {
+  // const { name, description, coursesTaught } = req.body;
+  const { name, description,  } = req.body;
+
+  if (!name || !description ) {
     return next(
       new ErrorResponse("Name, description, coursesTaught are required", 401)
     );

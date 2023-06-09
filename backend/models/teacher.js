@@ -9,7 +9,7 @@ const teacherSchema = new mongoose.Schema(
     },
     image: {
       type: String,
-      required: true,
+      // required: true,
     },
     description: {
       type: String,
@@ -26,7 +26,7 @@ const teacherSchema = new mongoose.Schema(
     },
     coursesTaught: {
       type: [],
-      require: true,
+      // require: true,
     },
     user: {
       type: mongoose.Schema.ObjectId,

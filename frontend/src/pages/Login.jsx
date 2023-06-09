@@ -6,11 +6,19 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../slices/userApiSlice";
 import { setCredentials } from "../slices/authSlice";
+import { useForm } from "react-hook-form";
 
 import { toast } from "react-toastify";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  // const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [login, { isLoading }] = useLoginMutation();
@@ -20,8 +28,11 @@ const Login = () => {
 
   useEffect(() => {}, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (data) => {
+    const { email, password } = data;
+    console.log(email, "ad");
+    console.log(password, "ad");
+    // e.preventDefault();
     try {
       const res = await login({ email, password }).unwrap();
       dispatch(setCredentials({ ...res }));
@@ -32,6 +43,7 @@ const Login = () => {
       toast.error(error?.data?.message || error?.data.error);
     }
   };
+
   return (
     <div className="login-screen ">
       <div className="login-container ">
@@ -40,15 +52,19 @@ const Login = () => {
           <BiLogInCircle />
         </h1>
 
-        <form action="" onSubmit={handleSubmit}>
+        <form action="" onSubmit={handleSubmit(onSubmit)}>
           <div className="form-item">
             <label htmlFor="email">Email</label>
             <input
               type="email"
               className="form-control"
               placeholder="ramesh@gmail.com"
-              onChange={(e) => setEmail(e.target.value)}
+              // onChange={(e) => setEmail(e.target.value)}
+              {...register("email", { required: true })}
             />
+            {errors.email?.type === "required" && (
+              <p className="text-danger text-italic mt-1">Email is required</p>
+            )}
           </div>
 
           <div className="form-item">
@@ -56,8 +72,14 @@ const Login = () => {
             <input
               type="password"
               className="form-control"
-              onChange={(e) => setPassword(e.target.value)}
+              // onChange={(e) => setPassword(e.target.value)}
+              {...register("password", { required: true })}
             />
+            {errors.password?.type === "required" && (
+              <p className="text-danger text-italic mt-1">
+                Password is required
+              </p>
+            )}
           </div>
 
           <div className="form-item">

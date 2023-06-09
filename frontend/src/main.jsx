@@ -16,17 +16,30 @@ import TeacherDetails from "./components/Teacher/TeacherDetails.jsx";
 import { Provider } from "react-redux";
 import store from "./store.js";
 import Register from "./pages/Register.jsx";
+import AdminRoute from "./components/AdminRoute.jsx";
+import AdminDashBoard from "./components/Admin/AdminDashBoard.jsx";
+import { ToastContainer } from "react-toastify";
+import CreateTeacherForm from "./components/Admin/CreateTeacherForm.jsx";
+import EditTeacher from "./components/Admin/EditTeacher.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<App />}>
-      <Route index={true} path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/teachers" element={<Teachers />} />
-      <Route path="/teacherDetails/:teacherId" element={<TeacherDetails />} />
-      {/* <Route path="/product/:id" element={<ProductScreen />} /> */}
-    </Route>
+    <>
+      <Route path="/" element={<App />}>
+        <Route index={true} path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/teachers" element={<Teachers />} />
+        <Route path="/teacherDetails/:teacherId" element={<TeacherDetails />} />
+        {/* <Route path="/product/:id" element={<ProductScreen />} /> */}
+      </Route>
+      {/* admin route */}
+      <Route path="" element={<AdminRoute />}>
+        <Route path="/admin/dashboard" element={<AdminDashBoard />} />
+        <Route path="/admin/teacher/create" element={<CreateTeacherForm />} />
+        <Route path="/admin/teacher/:id/edit" element={<EditTeacher />} />
+      </Route>
+    </>
   )
 );
 
