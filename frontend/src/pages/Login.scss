@@ -1,11 +1,10 @@
 .login-screen {
   display: flex;
-
-  align-items: center;
+  // align-items: center;
   justify-content: center;
 }
 .login-screen h1 {
-  margin-top: 3rem;
+  padding-top: 3rem;
   font-size: 3rem;
   margin-bottom: 3rem;
   font-weight: bold;

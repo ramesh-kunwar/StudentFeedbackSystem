@@ -1,19 +1,23 @@
 .create-teacher-form {
   //   background-color: red;
-  background-color: white;
+  // background-color: white;
   padding: 1rem;
   padding-bottom: 4rem;
   border-radius: 5px;
-  width: 80%;
+  // width: 80%;
 
   max-width: 600px;
-  margin: 4rem auto;
+  margin: 0 auto;
 
   // box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
   //   rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
 
   h1 {
+    padding-top: 3rem;
+    font-size: 3rem;
     margin-bottom: 3rem;
+    font-weight: bold;
+    text-align: center;
   }
 
   .container {
@@ -22,6 +26,7 @@
   label {
     display: block;
     margin-bottom: 0.5rem;
+    font-weight: lighter;
     span {
       font-style: italic;
       color: red;
@@ -32,6 +37,13 @@
   }
 
   input {
+    // padding: 0.8rem;
+    // border-radius: 5px;
+    // width: 100%;
+    // outline: none;
+    // border: 1px solid rgb(183, 183, 183);
+    // box-sizing: border-box;
+    // margin-top: 0.5rem;
     padding: 0.8rem;
     border-radius: 5px;
     width: 100%;
@@ -47,20 +59,12 @@
     background-color: #5037ec;
     color: white;
     font-weight: bold;
+    width: 100%;
+    margin-top: 1rem;
+    cursor: pointer;
   }
 }
 
-// @media (max-width: 700px) {
-//   .create-teacher-form {
-//     max-width: 500px;
-//     top: 10%;
-//     left: 5%;
-
-//     //   right: 50%;
-//     //   bottom: 50%;
-//     // max-width: 700px;
-//     //   transform: translate(10%, 50%);
-//   }
 // }
 
 @media (max-width: 750px) {

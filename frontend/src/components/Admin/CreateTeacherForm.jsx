@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./CreateTeacherForm.scss";
 import { RxCross1 } from "react-icons/rx";
+import { IoIosCreate } from "react-icons/io";
 import { useCreateTeacherMutation } from "../../slices/teacherApiSlice";
 import { useDispatch } from "react-redux";
 import { setTeachers } from "../../slices/teacherSlice";
@@ -41,47 +42,52 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
   };
 
   return (
-    <form
-      className="create-teacher-form container"
-      onSubmit={createProductHandler}
-    >
-      <div className="container">
-        <h1>Create Teachers</h1>
-        <div className="mb-2">
-          <label htmlFor="teacher-name">Teacher Name</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div className="mb-2">
-          <label htmlFor="teacher-details">Teacher Details</label>
-          <input
-            type="text"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </div>
-        <div className="mb-2">
-          <label htmlFor="teacher-details">
-            Courses Taught <span>(Separate using comma)</span>{" "}
-          </label>
-          <input
-            type="text"
-            name="coursesTaught"
-            // value={coursesTaught}
-            onChange={handleCourse}
-          />
-        </div>
-        {/* <div className="mb-2">
+    <div className="create-teacher">
+      <form
+        className="create-teacher-form container"
+        onSubmit={createProductHandler}
+      >
+        <div className="container">
+          <h1>
+            Create Teachers
+            <IoIosCreate />
+          </h1>
+          <div className="mb-2">
+            <label htmlFor="teacher-name">Teacher Name</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div className="mb-2">
+            <label htmlFor="teacher-details">Teacher Details</label>
+            <input
+              type="text"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </div>
+          <div className="mb-2">
+            <label htmlFor="teacher-details">
+              Courses Taught <span>(Separate using comma)</span>{" "}
+            </label>
+            <input
+              type="text"
+              name="coursesTaught"
+              // value={coursesTaught}
+              onChange={handleCourse}
+            />
+          </div>
+          {/* <div className="mb-2">
           <label htmlFor="teacher-name">Teacher Name</label>
           <input type="text" />
         </div> */}
 
-        <button className="create"> Create</button>
-      </div>
-    </form>
+          <button className="create"> Create</button>
+        </div>
+      </form>
+    </div>
   );
 };
 
