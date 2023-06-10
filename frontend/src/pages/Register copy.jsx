@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import logoColor from "../assets/logo/svg/logo-no-background.svg";
+import "./Register.scss";
 import { IoArrowForwardCircleOutline, IoCreateOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -38,62 +39,49 @@ const Register = () => {
     }
   };
   return (
-    <div>
-      <div className="container max-w-xl mx-auto">
-        <h1 className="text-5xl font-extrabold  mt-20 flex justify-center">
-          Register <IoCreateOutline />
+    <div className="register-screen ">
+      <div className="register-container ">
+        <h1>
+          Register
+          <IoCreateOutline />
         </h1>
 
-        <form action="" className="px-5 mt-10" onSubmit={handleSubmit}>
-          <div className="mb-6">
-            <label className="block mb-2 text-md   text-gray-700 ">Name</label>
+        <form action="" onSubmit={handleSubmit}>
+          <div className="form-item">
+            <label htmlFor="name">name</label>
             <input
-              type="name"
+              type="text"
+              className="form-control"
               placeholder="ramesh"
               onChange={(e) => setName(e.target.value)}
-              className="border border-gray-300 outline-none focus:border-gray-600 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
             />
           </div>
-          <div className="mb-6">
-            <label className="block mb-2 text-md   text-gray-700 ">Email</label>
+          <div className="form-item">
+            <label htmlFor="email">Email</label>
             <input
               type="email"
+              className="form-control"
               placeholder="ramesh@gmail.com"
               onChange={(e) => setEmail(e.target.value)}
-              className="border border-gray-300 outline-none focus:border-gray-600 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
             />
           </div>
 
-          <div className="">
-            <label
-              htmlFor="password"
-              className="block mb-2 text-md   text-gray-700 "
-            >
-              Password
-            </label>
+          <div className="form-item">
+            <label htmlFor="password">password</label>
             <input
               type="password"
-              placeholder="password"
-              className=" border border-gray-300 outline-none focus:border-gray-600  text-gray-900 text-sm rounded-lg  block w-full p-2.5 "
+              className="form-control"
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
-          <div className="mt-5">
-            <button
-              type="submit"
-              value="Login"
-              className=" bg-blue-700 text-white rounded-lg block w-full p-2.5 "
-            >
-              Register
-            </button>
+          <div className="form-item">
+            <input type="submit" value="Register" />
           </div>
 
-          <div className="text-center mt-5">
+          <div className="sign-up-message">
             <p>Already have an account ? </p>
-            <Link to="/login" className="text-blue-700 mt-2 block">
-              Login Here
-            </Link>
+            <Link to="/login">Login Here</Link>
           </div>
         </form>
       </div>

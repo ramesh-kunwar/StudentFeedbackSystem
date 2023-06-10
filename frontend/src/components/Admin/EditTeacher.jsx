@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./EditTeacher.scss";
 import { FaUserEdit } from "react-icons/fa";
 import {
@@ -12,54 +12,53 @@ import { setTeachers } from "../../slices/teacherSlice";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 
-const EditTeacher = ({ isFormOpen, setIsFormOpen }) => {
+const EditTeacher = ({}) => {
   const { id: teacherId } = useParams();
-  console.log(teacherId, "sdfasdf");
   const { data: teacher, isLoading } = useGetTeacherDetailsQuery(teacherId);
-  console.log(teacher, "t");
 
-  const [name, setName] = useState(teacher?.data?.name || "");
-  const [description, setDescription] = useState(
-    teacher?.data?.description || ""
-  );
-  const [coursesTaught, setCoursesTaught] = useState(
-    teacher?.data?.coursesTaught || []
-  );
+  const [updateTeacher, { isLoading: loading }] = useUpdateTeacherMutation();
 
-  const dispatch = useDispatch();
-  //   const [teacher, { isLoading }] = useGetTeachersQuery();
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [coursesTaught, setCoursesTaught] = useState("");
+
+  useEffect(() => {
+    if (teacher) {
+      setName(teacher.data.name);
+      setDescription(teacher.data.description);
+      setCoursesTaught(teacher.data.coursesTaught);
+    }
+  }, [teacher]);
 
   function handleCourse(e) {
-    // const text = e.target.value;
-    // const splittedText = text.split(",");
-    // setCoursesTaught(splittedText);
+    const text = e.target.value;
+    const splittedText = text.split(",");
+    setCoursesTaught(splittedText);
   }
-  // const createProductHandler = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const res = await updateTeacher({
-  //       name,
-  //       description,
-  //       coursesTaught,
-  //     }).unwrap();
-  //     console.log(res);
-  //     // dispatch(setTeachers({ ...res }));
-  //     toast.success("Teacher Added Successfully");
 
-  //     setName("");
-  //     setDescription("");
-  //     setCoursesTaught("");
-  //   } catch (error) {
-  //     toast.error(error.data.error);
-  //     console.log(error.data.error);
-  //     // toast.success("User Registered Successfully");
-  //   }
-  // };
+  const editTeacherHandler = async (e) => {
+    e.preventDefault();
+    console.log(teacherId);
+    const updatedTeacher = {
+      teacherId,
+      name,
+      description,
+      coursesTaught,
+    };
+
+    const res = await updateTeacher(updatedTeacher);
+    console.log(res);
+    if (res.errors) {
+      toast.error("Unsuccess");
+    } else {
+      toast.success("updates");
+    }
+  };
 
   return (
     <form
       className="create-teacher-form container"
-      // onSubmit={createProductHandler}
+      onSubmit={editTeacherHandler}
     >
       <div className="container">
         <h1>
@@ -78,20 +77,15 @@ const EditTeacher = ({ isFormOpen, setIsFormOpen }) => {
           <label htmlFor="teacher-details">Teacher Details</label>
           <input
             type="text"
-            value={description}
             onChange={(e) => setDescription(e.target.value)}
+            value={description}
           />
         </div>
         <div className="mb-2">
           <label htmlFor="teacher-details">
             Courses Taught <span>(Separate using comma)</span>{" "}
           </label>
-          <input
-            type="text"
-            name="coursesTaught"
-            value={coursesTaught}
-            onChange={handleCourse}
-          />
+          <input type="text" onChange={handleCourse} value={coursesTaught} />
         </div>
         {/* <div className="mb-2">
           <label htmlFor="teacher-name">Teacher Name</label>

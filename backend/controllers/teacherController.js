@@ -49,9 +49,9 @@ exports.getTeacher = asyncHandler(async (req, res, next) => {
 exports.createTeachers = asyncHandler(async (req, res, next) => {
   // check for existign teacher
   // const { name, description, coursesTaught } = req.body;
-  const { name, description,  } = req.body;
+  const { name, description } = req.body;
 
-  if (!name || !description ) {
+  if (!name || !description) {
     return next(
       new ErrorResponse("Name, description, coursesTaught are required", 401)
     );
@@ -76,18 +76,21 @@ exports.createTeachers = asyncHandler(async (req, res, next) => {
 /**********************************/
 
 exports.updateTeachers = asyncHandler(async (req, res, next) => {
-  const id = req.params.id;
-  if (!id) {
+  const teacher = await Teacher.findById(req.params.id);
+
+  const { name, description, coursesTaught } = req.body;
+
+  if (!teacher) {
     return next(
-      ErrorResponse(`No teacher found with id : ${req.params.id}`, 404)
+      new ErrorResponse(`No teacher found with id : ${req.params.id}`, 404)
     );
   }
 
-  const teacher = await Teacher.findByIdAndUpdate(id, req.body);
+  const updatedTeacher = await Teacher.findByIdAndUpdate(teacher, req.body);
 
   res.status(200).json({
     success: true,
-    data: teacher,
+    updatedTeacher,
   });
 });
 

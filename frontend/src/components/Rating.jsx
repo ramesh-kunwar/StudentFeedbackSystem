@@ -2,7 +2,7 @@ import React from "react";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 const Rating = ({ value, text }) => {
   return (
-    <div className="rating">
+    <div className=" flex rating">
       <span>
         {value >= 1 ? (
           <FaStar />

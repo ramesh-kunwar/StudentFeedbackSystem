@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import logoColor from "../assets/logo/svg/logo-no-background.svg";
-import "./Login.scss";
+
 import { BiLogInCircle } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -11,15 +11,16 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 const Login = () => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   watch,
+  //   formState: { errors },
+  // } = useForm();
 
   // const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
 
   const [login, { isLoading }] = useLoginMutation();
 
@@ -28,11 +29,13 @@ const Login = () => {
 
   useEffect(() => {}, []);
 
-  const onSubmit = async (data) => {
-    const { email, password } = data;
-    console.log(email, "ad");
-    console.log(password, "ad");
+  const handleSubmit = async (e) => {
+    // const { email, password } = data;
+    // console.log(email, "ad");
+    // console.log(password, "ad");
     // e.preventDefault();
+
+    e.preventDefault();
     try {
       const res = await login({ email, password }).unwrap();
       dispatch(setCredentials({ ...res }));
@@ -45,50 +48,53 @@ const Login = () => {
   };
 
   return (
-    <div className="login-screen ">
-      <div className="login-container ">
-        <h1>
-          Login
-          <BiLogInCircle />
+    <div>
+      <div className="container max-w-xl mx-auto">
+        <h1 className="text-5xl font-extrabold  mt-20 flex justify-center">
+          Login <BiLogInCircle />
         </h1>
 
-        <form action="" onSubmit={handleSubmit(onSubmit)}>
-          <div className="form-item">
-            <label htmlFor="email">Email</label>
+        <form action="" className="px-5 mt-10" onSubmit={handleSubmit}>
+          <div className="mb-6">
+            <label className="block mb-2 text-md   text-gray-700 ">Email</label>
             <input
               type="email"
-              className="form-control"
               placeholder="ramesh@gmail.com"
-              // onChange={(e) => setEmail(e.target.value)}
-              {...register("email", { required: true })}
+              onChange={(e) => setEmail(e.target.value)}
+              className="border border-gray-300 outline-none focus:border-gray-600 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
             />
-            {errors.email?.type === "required" && (
-              <p className="text-danger text-italic mt-1">Email is required</p>
-            )}
           </div>
 
-          <div className="form-item">
-            <label htmlFor="password">password</label>
+          <div className="">
+            <label
+              htmlFor="password"
+              className="block mb-2 text-md   text-gray-700 "
+            >
+              Password
+            </label>
             <input
               type="password"
-              className="form-control"
-              // onChange={(e) => setPassword(e.target.value)}
-              {...register("password", { required: true })}
+              placeholder="password"
+              className=" border border-gray-300 outline-none focus:border-gray-600  text-gray-900 text-sm rounded-lg  block w-full p-2.5 "
+              onChange={(e) => setPassword(e.target.value)}
             />
-            {errors.password?.type === "required" && (
-              <p className="text-danger text-italic mt-1">
-                Password is required
-              </p>
-            )}
           </div>
 
-          <div className="form-item">
-            <input type="submit" value="Login" />
+          <div className="mt-5">
+            <button
+              type="submit"
+              value="Login"
+              className=" bg-blue-700 text-white rounded-lg block w-full p-2.5 "
+            >
+              Login
+            </button>
           </div>
 
-          <div className="sign-up-message">
+          <div className="text-center mt-5">
             <p>Don't have an account ? </p>
-            <Link to="/register">Signup Here</Link>
+            <Link to="/register" className="text-blue-700 mt-2 block">
+              Signup Here
+            </Link>
           </div>
         </form>
       </div>

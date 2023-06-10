@@ -6,7 +6,6 @@ import { ToastContainer } from "react-toastify";
 
 const AdminRoute = () => {
   const { userInfo } = useSelector((state) => state.auth);
-  console.log(userInfo);
   return (
     <>
       <ToastContainer autoClose={1500} />

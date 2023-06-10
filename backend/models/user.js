@@ -33,12 +33,14 @@ userSchema.pre("save", async function (next) {
     return next();
   }
 
-  this.password =  bcrypt.hashSync(this.password, 10);
+  this.password =  bcrypt.hash(this.password, 10);
   next();
 });
 
-userSchema.methods.comparePassword = async function (enteredPassowrd) {
-  return  bcrypt.compareSync(enteredPassowrd, this.password);
+userSchema.methods.comparePassword = async function (enteredPassword) {
+  // return  await bcrypt.compare(enteredPassowrd, this.password);
+  console.log(enteredPassword, ' ' , this.password);
+  return await bcrypt.compare(enteredPassword, this.password);
 };
 
 userSchema.methods.getJwtToken = async function () {
