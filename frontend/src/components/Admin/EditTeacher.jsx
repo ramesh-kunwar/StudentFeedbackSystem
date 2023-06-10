@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./EditTeacher.scss";
 import { FaUserEdit } from "react-icons/fa";
 import {
   useCreateTeacherMutation,
@@ -56,45 +55,63 @@ const EditTeacher = ({}) => {
   };
 
   return (
-    <form
-      className="create-teacher-form container"
-      onSubmit={editTeacherHandler}
-    >
-      <div className="container">
-        <h1>
-          Edit Teacher
-          <FaUserEdit />
-        </h1>
-        <div className="mb-2">
-          <label htmlFor="teacher-name">Teacher Name</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div className="mb-2">
-          <label htmlFor="teacher-details">Teacher Details</label>
-          <input
-            type="text"
-            onChange={(e) => setDescription(e.target.value)}
-            value={description}
-          />
-        </div>
-        <div className="mb-2">
-          <label htmlFor="teacher-details">
-            Courses Taught <span>(Separate using comma)</span>{" "}
-          </label>
-          <input type="text" onChange={handleCourse} value={coursesTaught} />
-        </div>
-        {/* <div className="mb-2">
-          <label htmlFor="teacher-name">Teacher Name</label>
-          <input type="text" />
-        </div> */}
+    <>
+      <div>
+        <div className="container max-w-xl mx-auto">
+          <h1 className="text-5xl font-extrabold  mt-20 flex justify-center">
+            Edit Teacher <FaUserEdit />
+          </h1>
 
-        <button className="create"> Edit</button>
+          <form action="" className="px-5 mt-10" onSubmit={editTeacherHandler}>
+            <div className="mb-6">
+              <label className="block mb-2 text-md   text-gray-700 ">
+                Teacher Name
+              </label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="border border-gray-300 outline-none focus:border-gray-600 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
+              />
+            </div>
+            <div className="mb-6">
+              <label className="block mb-2 text-md   text-gray-700 ">
+                Teacher Details
+              </label>
+              <input
+                type="text"
+                onChange={(e) => setDescription(e.target.value)}
+                value={description}
+                className="border border-gray-300 outline-none focus:border-gray-600 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
+              />
+            </div>
+            <div className="mb-6">
+              <label className="block mb-2 text-md   text-gray-700 ">
+                Courses Taught{" "}
+                <span className="text-red-600 italic">
+                  (Separate using comma)
+                </span>
+              </label>
+              <input
+                type="text"
+                onChange={handleCourse}
+                value={coursesTaught}
+                className="border border-gray-300 outline-none focus:border-gray-600 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
+              />
+            </div>
+
+            <div className="mt-5">
+              <button
+                type="submit"
+                className=" bg-blue-700 hover:bg-blue-800 text-white rounded-lg block w-full p-2.5 "
+              >
+                Edit
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-    </form>
+    </>
   );
 };
 

@@ -14,6 +14,7 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
 
   const dispatch = useDispatch();
   const [createTeacher, { isLoading }] = useCreateTeacherMutation();
+
   function handleCourse(e) {
     const text = e.target.value;
     const splittedText = text.split(",");
@@ -99,64 +100,15 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
             <div className="mt-5">
               <button
                 type="submit"
-                className=" bg-blue-700 text-white rounded-lg block w-full p-2.5 "
+                className=" bg-blue-700 hover:bg-blue-800 text-white rounded-lg block w-full p-2.5 "
               >
                 Create
               </button>
-            </div>
-
-            <div className="text-center mt-5">
-              <p>Don't have an account ? </p>
-              <Link to="/register" className="text-blue-700 mt-2 block">
-                Signup Here
-              </Link>
             </div>
           </form>
         </div>
       </div>
     </>
-    // <div className="create-teacher">
-    //   <form
-    //     className="create-teacher-form container"
-    //     onSubmit={createProductHandler}
-    //   >
-    //     <div className="container">
-    //       <h1>
-    //         Create Teachers
-    //         <IoIosCreate />
-    //       </h1>
-    //       <div className="mb-2">
-    //         <label htmlFor="teacher-name">Teacher Name</label>
-    //         <input
-    //           type="text"
-    //           value={name}
-    //           onChange={(e) => setName(e.target.value)}
-    //         />
-    //       </div>
-    //       <div className="mb-2">
-    //         <label htmlFor="teacher-details">Teacher Details</label>
-    //         <input
-    //           type="text"
-    //           value={description}
-    //           onChange={(e) => setDescription(e.target.value)}
-    //         />
-    //       </div>
-    //       <div className="mb-2">
-    //         <label htmlFor="teacher-details">
-    //           Courses Taught <span>(Separate using comma)</span>{" "}
-    //         </label>
-    //         <input
-    //           type="text"
-    //           name="coursesTaught"
-    //           // value={coursesTaught}
-    //           onChange={handleCourse}
-    //         />
-    //       </div>
-
-    //       <button className="create"> Create</button>
-    //     </div>
-    //   </form>
-    // </div>
   );
 };
 
