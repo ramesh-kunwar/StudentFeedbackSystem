@@ -2,8 +2,8 @@ import React from "react";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 const Rating = ({ value, text }) => {
   return (
-    <div className=" flex rating">
-      <span>
+    <div className=" flex text-orange-600">
+      <div>
         {value >= 1 ? (
           <FaStar />
         ) : value >= 0.5 ? (
@@ -11,8 +11,8 @@ const Rating = ({ value, text }) => {
         ) : (
           <FaRegStar />
         )}
-      </span>
-      <span>
+      </div>
+      <div>
         {value >= 2 ? (
           <FaStar />
         ) : value >= 1.5 ? (
@@ -20,8 +20,8 @@ const Rating = ({ value, text }) => {
         ) : (
           <FaRegStar />
         )}
-      </span>
-      <span>
+      </div>
+      <div>
         {value >= 3 ? (
           <FaStar />
         ) : value >= 2.5 ? (
@@ -29,8 +29,8 @@ const Rating = ({ value, text }) => {
         ) : (
           <FaRegStar />
         )}
-      </span>
-      <span>
+      </div>
+      <div>
         {value >= 4 ? (
           <FaStar />
         ) : value >= 3.5 ? (
@@ -38,8 +38,8 @@ const Rating = ({ value, text }) => {
         ) : (
           <FaRegStar />
         )}
-      </span>
-      <span>
+      </div>
+      <div>
         {value >= 5 ? (
           <FaStar />
         ) : value >= 4.5 ? (
@@ -47,8 +47,8 @@ const Rating = ({ value, text }) => {
         ) : (
           <FaRegStar />
         )}
-      </span>
-      <span className="rating-text">{text && text}</span>
+      </div>
+      <div className="rating-text">{text && text}</div>
     </div>
   );
 };

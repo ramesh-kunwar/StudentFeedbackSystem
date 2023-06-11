@@ -13,27 +13,34 @@ const TeacherDetails = () => {
 
   return (
     <div className="bg-slate-50 pt-10 min-h-screen">
-      <div className="container mx-auto max-w-6xl bg-white shadow-xl rounded-xl ">
-        <div className="lg:grid pb-10 sm:block px-8 md:px-0 gap-6 items-center mx-3 md:grid-cols-5 ">
-          <div className="row-start-1 row-span-1">
+      <div className="container  mx-auto max-w-6xl bg-white shadow-xl rounded-xl ">
+        <div className="lg:grid sm:block px-8 md:px-0 gap-6  py-6 mx-3 md:grid-cols-4 ">
+          <div className="col-span-1">
             <img
               src={teacher?.data?.image}
               alt=""
               className=" rounded-md h-fit w-fit"
             />
-            <p className="text-2xl my-3 mx-2  text-orange-600 ">
+
+            <div className="text-xl my-3 mx-2  text-orange-600 ">
               <Rating value={teacher?.data?.averageRating} />
-            </p>
+            </div>
+            <button className="btn  btn-primary btn-wide rounded-md text-white font-bold ">
+              Rate Teacher
+            </button>
           </div>
 
-          <div className="col-span-3 md:p-5 items-center">
-            <h1 className="text-4xl font-extrabold my-2">
+          <div className="col-span-3 md:p-5">
+            <h1 className="text-4xl font-extrabold  my-2">
               {teacher?.data?.name}
             </h1>
             <div className="flex gap-2">
               {teacher?.data?.coursesTaught.map((course, index) => {
                 return (
-                  <p className="bg-orange-600 text-white rounded px-2 py-0.5 my-2">
+                  <p
+                    key={index}
+                    className="bg-orange-600 text-white rounded px-2 py-0.5 my-2"
+                  >
                     {course}
                   </p>
                 );
@@ -41,41 +48,27 @@ const TeacherDetails = () => {
             </div>
             <p className="my-2">{teacher?.data?.description}</p>
           </div>
-          <div className="col-span-1">
-            <button className="bg-purple-700 px-6 py-3 rounded-md text-white font-bold hover:bg-purple-800">
+          {/* <div className="col-span-1">
+            <button className="btn  btn-primary px-6 py-3 rounded-md text-white font-bold ">
               Rate Teacher
             </button>
-          </div>
+          </div> */}
+        </div>
+      </div>
+
+      {/* Reviews Section */}
+
+      <div className="mt-20 container mx-auto max-w-6xl">
+        <h1 className="text-5xl font-bold">Reviews</h1>
+        <div className="bg-white">
+          <h1>User 1 Reivew</h1>
+          <h1>User 1 Reivew</h1>
+          <h1>User 1 Reivew</h1>
+          <h1>User 1 Reivew</h1>
+          <h1>User 1 Reivew</h1>
         </div>
       </div>
     </div>
-    // <div className="container">
-    //   {isLoading ? (
-    //     <LoadingIcon />
-    //   ) : (
-    //     <div className="teacher-detail">
-    //       <div className="teacher-image">
-    //         <img src={teachers?.data?.image} alt="" />
-    //       </div>
-    //       <div className="teacher-desc">
-    //         <h1>{teachers?.data?.name}</h1>
-    //         {teachers?.data?.coursesTaught.map((course, index) => {
-    //           return <h3 key={index}>{course}</h3>;
-    //         })}
-    //         <p>{teachers?.data?.description}</p>
-    //         <h2>
-    //           <Rating value={teachers?.data?.averageRating} />
-    //         </h2>
-    //       </div>
-    //       <div className="review-button">
-    //         <button>Add Review</button>
-    //       </div>
-    //     </div>
-    //   )}
-
-    //   <h1>All Reviews</h1>
-    //   {/* review component goes here */}
-    // </div>
   );
 };
 

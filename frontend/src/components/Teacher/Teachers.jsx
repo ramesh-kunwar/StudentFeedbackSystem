@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import "./Teachers.scss";
-import TeacherItem from "./TeacherItem";
 import { Link } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
 import axios from "axios";
@@ -10,7 +8,7 @@ import Rating from "../Rating";
 
 const Teachers = () => {
   const { data: teachers, isLoading, error } = useGetTeachersQuery();
-  console.log(teachers);
+
   return (
     <div className=" w-full bg-slate-50 ">
       <div className="container max-w-6xl mx-auto py-20 px-5">
@@ -19,7 +17,9 @@ const Teachers = () => {
         <div className="grid  grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
           {teachers?.data?.map((teacher) => {
             return (
-              <div className="bg-white  shadow rounded-md hover:-translate-y-1 transition duration-300 ease-in-out">
+              <div 
+              key={teacher._id}
+              className="bg-white  shadow rounded-md hover:-translate-y-1 transition duration-300 ease-in-out">
                 <Link to={`/teacherDetails/${teacher._id}`}>
                   <img src={teacher.image} alt="" className="rounded-t-md" />
                 </Link>
@@ -34,7 +34,7 @@ const Teachers = () => {
                       return (
                         <p
                           key={index}
-                          className="bg-purple-700 text-[10px] px-2 py-1 rounded text-white"
+                          className="bg-primary text-[10px] px-2 py-1 rounded text-white"
                         >
                           {course}
                         </p>
@@ -42,7 +42,7 @@ const Teachers = () => {
                     })}
                   </div>
 
-                  <div className="flex justify-between items-center py-3">
+                  <div className="flex justify-between items-center mt-2 py-3">
                     <h4>
                       <Rating value={teacher.averageRating} />
                     </h4>
@@ -62,21 +62,6 @@ const Teachers = () => {
         </div>
       </div>
     </div>
-    // <div className="teachers">
-    //   <div className="container ">
-    //     <h1>All Teachers</h1>
-
-    //     <div className="teacher-wrapper">
-    //       {isLoading ? (
-    //         <LoadingIcon />
-    //       ) : (
-    //         teachers?.data?.map((teacher) => {
-    //           return <TeacherItem key={teacher._id} teacher={teacher} />;
-    //         })
-    //       )}
-    //     </div>
-    //   </div>
-    // </div>
   );
 };
 

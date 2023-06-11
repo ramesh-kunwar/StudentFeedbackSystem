@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./CreateTeacherForm.scss";
 import { Link } from "react-router-dom";
 import { RxCross1 } from "react-icons/rx";
 import { IoIosCreate } from "react-icons/io";
@@ -100,7 +99,7 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
             <div className="mt-5">
               <button
                 type="submit"
-                className=" bg-blue-700 hover:bg-blue-800 text-white rounded-lg block w-full p-2.5 "
+                className=" btn btn-primary text-white rounded-lg block w-full p-2.5 "
               >
                 Create
               </button>

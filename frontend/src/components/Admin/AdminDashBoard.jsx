@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "./AdminDashboard.scss";
 import { useSelector } from "react-redux";
 import { FaUserEdit } from "react-icons/fa";
+import { RiDeleteBack2Fill } from "react-icons/ri";
 import { TiDelete } from "react-icons/ti";
-import TeacherTable from "./TeacherTable";
+
 import CreateTeacherForm from "./CreateTeacherForm";
 import { Link } from "react-router-dom";
 import { useGetTeachersQuery } from "../../slices/teacherApiSlice";
@@ -18,7 +18,7 @@ const AdminDashBoard = () => {
       <div className="container px-4 mx-auto max-w-6xl">
         <div className="">
           <Link to="/admin/teacher/create">
-            <button className="px-8 py-4 bg-blue-800 text-white font-bold rounded-lg">
+            <button className="px-8 py-4 btn btn-primary  text-white font-bold rounded-lg">
               Create Teachers
             </button>
           </Link>
@@ -36,62 +36,27 @@ const AdminDashBoard = () => {
                 />
                 <h3 className="text-md">{teacher.name}</h3>
               </div>
-              <div className="flex gap-6 text-2xl">
+              <div className="flex gap-3 items-center md:text-2xl">
                 <p className="text-orange-600">
                   <Rating value={teacher.averageRating} />
                 </p>
                 <Link
-                  className="text-blue-600"
+                  className="btn bg-transparent hover:bg-transparent border-none text-xl md:text-3xl text-primary"
                   to={`/admin/teacher/${teacher._id}/edit`}
                 >
                   <FaUserEdit />
                 </Link>
-                <Link className="text-red-600">
-                  <TiDelete />
+                <Link className="text-red-600 btn text-xl md:text-4xl bg-transparent hover:bg-transparent border-none">
+                  <RiDeleteBack2Fill />
                 </Link>
               </div>
             </div>
           );
         })}
       </div>
+
+
     </div>
-
-    // {/* <div className="teacher-table ">
-    // <h1>All Teachers</h1>
-    // {teachers?.data.map((teacher) => {
-    //   return (
-    //     <div className="teacher-item" key={teacher._id}>
-    //       <div className="left">
-    //         <img src={teacher.image} alt="" />
-    //         <p>{teacher.name}</p>
-    //       </div>
-    //       <div>
-    //         <div className="right">
-    //           <Rating value={teacher.averageRating} />
-    //           <Link to={`/admin/teacher/${teacher._id}/edit`}>
-    //             <FaUserEdit />
-    //           </Link>
-    //           <Link className="delete">
-    //             <TiDelete />
-    //           </Link>
-    //         </div>
-    //       </div>
-    //     </div> */}
-
-    // <div className="admin-dashboard">
-    //   <div className="container">
-    //     <Link to="/admin/teacher/create">
-    //       <button
-    //         onClick={() => setIsFormOpen(!isFormOpen)}
-    //         className="create-teachers"
-    //       >
-    //         Create Teachers
-    //       </button>
-    //     </Link>
-
-    //     <TeacherTable />
-    //   </div>
-    // </div>
   );
 };
 

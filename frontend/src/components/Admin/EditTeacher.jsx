@@ -103,7 +103,7 @@ const EditTeacher = ({}) => {
             <div className="mt-5">
               <button
                 type="submit"
-                className=" bg-blue-700 hover:bg-blue-800 text-white rounded-lg block w-full p-2.5 "
+                className=" btn btn-primary text-white rounded-lg block w-full p-2.5 "
               >
                 Edit
               </button>

@@ -11,14 +11,6 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 const Login = () => {
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   watch,
-  //   formState: { errors },
-  // } = useForm();
-
-  // const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
@@ -30,10 +22,7 @@ const Login = () => {
   useEffect(() => {}, []);
 
   const handleSubmit = async (e) => {
-    // const { email, password } = data;
-    // console.log(email, "ad");
-    // console.log(password, "ad");
-    // e.preventDefault();
+
 
     e.preventDefault();
     try {
@@ -84,7 +73,7 @@ const Login = () => {
             <button
               type="submit"
               value="Login"
-              className=" bg-blue-700 text-white rounded-lg block w-full p-2.5 "
+              className=" btn btn-primary text-white rounded-lg block w-full p-2.5 "
             >
               Login
             </button>
