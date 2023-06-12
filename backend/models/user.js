@@ -28,22 +28,23 @@ const userSchema = new mongoose.Schema({
 
 // Encrypth the password
 
+// Pre-save hook to hash the password
 userSchema.pre("save", async function (next) {
+  // Check if the password field is modified or new
   if (!this.isModified("password")) {
     return next();
   }
 
-  this.password =  bcrypt.hash(this.password, 10);
-  next();
+  this.password = await bcrypt.hash(this.password, 10);
+
+  return next();
 });
 
 userSchema.methods.comparePassword = async function (enteredPassword) {
-  // return  await bcrypt.compare(enteredPassowrd, this.password);
   return await bcrypt.compare(enteredPassword, this.password);
 };
-
 userSchema.methods.getJwtToken = async function () {
-  return  jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+  return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRY,
   });
 };

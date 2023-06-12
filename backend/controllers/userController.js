@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const ErrorResponse = require("../utils/ErrorResponse");
 const User = require("../models/user");
-
+const bcrypt = require("bcryptjs");
 /**********************************
  *      @desc Create user
  *      @route POST /api/v1/users
@@ -64,13 +64,18 @@ exports.loginUser = asyncHandler(async (req, res, next) => {
   }
 
   const user = await User.findOne({ email });
-  if (!user) {
+  if (!user )  {
+
     return next(new ErrorResponse(`Invalid Credentials`, 404));
   }
 
-  // const isMatchedPassword = user.comparePassword(password);
+  const isMatchedPassword = await user.comparePassword(password);
 
-  if (!user.comparePassword(password)) {
+  console.log('PASS-',password);
+  console.log(password);
+  console.log(password, '-pass');
+
+  if (!isMatchedPassword) {
     return next(new ErrorResponse(`Invalid credentials`, 401));
   }
 

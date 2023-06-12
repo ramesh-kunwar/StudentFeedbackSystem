@@ -13,7 +13,7 @@ const TeacherDetails = () => {
 
   return (
     <div className="bg-slate-50 pt-10 min-h-screen">
-      <div className="container  mx-auto max-w-6xl bg-white shadow-xl rounded-xl ">
+      <div className="container  mx-auto max-w-6xl bg-white shadow rounded-xl ">
         <div className="lg:grid sm:block px-8 md:px-0 gap-6  py-6 mx-3 md:grid-cols-4 ">
           <div className="col-span-1">
             <img
@@ -59,15 +59,22 @@ const TeacherDetails = () => {
       {/* Reviews Section */}
 
       <div className="mt-20 container mx-auto max-w-6xl">
-        <h1 className="text-5xl font-bold">Reviews</h1>
-        <div className="bg-white">
-          <h1>User 1 Reivew</h1>
-          <h1>User 1 Reivew</h1>
-          <h1>User 1 Reivew</h1>
-          <h1>User 1 Reivew</h1>
-          <h1>User 1 Reivew</h1>
+        <h1 className="text-5xl my-8 font-bold">Reviews</h1>
+        <div className="bg-white container mx-auto p-5 shadow rounded-md">
+          <h1 className="font-bold text-xl  text-gray-600">User 1 Reivew</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum,
+            eveniet. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+            Aliquam, doloremque.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum,
+            eveniet. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+            Aliquam, doloremque.
+          </p>
         </div>
       </div>
+      {/* / Review Section */}
     </div>
   );
 };
