@@ -19,9 +19,13 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
   const dispatch = useDispatch();
 
   const [createTeacher, { isLoading }] = useCreateTeacherMutation();
-  const [uploadTeacherImage, { isLoading: loadingUpload }] =
-    useUploadTeacherImageMutation();
-
+  // const [uploadTeacherImage, { isLoading: loadingUpload }] =
+  //   useUploadTeacherImageMutation();
+  const [teacher, setTeacher] = useState({
+    name: "",
+    description: "",
+    coursesTaught: "",
+  });
   function handleCourse(e) {
     const text = e.target.value;
     const splittedText = text.split(",");
@@ -29,17 +33,23 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
   }
 
   const createTeacherHandler = async (e) => {
+    console.log(image, "image");
     console.log(photos, "sb");
     e.preventDefault();
 
     try {
-      const res = await createTeacher({
+      // const res = await createTeacher({
+      //   name,
+      //   description,
+      //   coursesTaught,
+      // }).unwrap();
+      await createTeacher({
         name,
         description,
         coursesTaught,
-
+        image,
       }).unwrap();
-      console.log(res, "res");
+
       // dispatch(setTeachers({ ...res }));
       toast.success("Teacher Added Successfully");
 
@@ -48,24 +58,26 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
       setCoursesTaught("");
     } catch (error) {
       toast.error(error.data.error);
-      console.log(error.data.error);
-      // toast.success("User Registered Successfully");
+      console.log(error?.data?.error);
     }
   };
+  console.log(image);
 
-  const handleImageChange = async (e) => {
-    console.log(e.target.files[0]);
+  const handleImage = async (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
     const formData = new FormData();
-    formData.append("image", e.target.files[0]);
+    reader.onload = (r) => {
+      setImage({
+        // placeholder: r.target.result,
+        file: e.target.files[0],
+      });
+    formData.append(image);
 
-    try {
-      const res = await uploadTeacherImage(formData).unwrap();
-      toast.success("Successs");
-      console.log(res);
-      setPhotos(res.photos);
-    } catch (error) {
-      console.log(error);
-    }
+      console.log(r.target.result);
+    };
+    console.log(reader, "rea");
   };
 
   return (
@@ -76,7 +88,11 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
             Create Teacher <IoIosCreate />
           </h1>
 
-          <form method="POST" encType="multipars/form-data" className="px-5 mt-10" onSubmit={createTeacherHandler}>
+          <form
+            method="POST"
+            className="px-5 mt-10"
+            onSubmit={createTeacherHandler}
+          >
             <div className="mb-6">
               <label className="block mb-2 text-md   text-gray-700 ">
                 Teacher Name
@@ -113,6 +129,7 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
               <input
                 type="text"
                 name="coursesTaught"
+                value={coursesTaught}
                 onChange={handleCourse}
                 className=" border border-gray-300 outline-none focus:border-gray-600  text-gray-900 text-sm rounded-lg  block w-full p-2.5 "
               />
@@ -127,10 +144,9 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
               </label>
               <input
                 type="file"
-                value={photos}
                 className=" border border-gray-300 outline-none focus:border-gray-600  text-gray-900 text-sm rounded-lg  block w-full p-2.5 "
                 multiple={false}
-                onChange={(e)=> setPhotos(e.target.files[0])}
+                onChange={handleImage}
               />
             </div>
 

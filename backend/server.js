@@ -20,7 +20,7 @@ cloudinary.config({
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
 
 // app.use(
 //   fileUpload({
@@ -35,7 +35,7 @@ app.use(morgan("tiny"));
 
 const teachersRoutes = require("./routes/teacherRoutes");
 const userRoutes = require("./routes/userRoutes");
-const uploadRoutes = require("./routes/uploadRoutes");
+// const uploadRoutes = require("./routes/uploadRoutes");
 
 const errorHander = require("./middleware/error");
 
@@ -51,12 +51,12 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1/teachers", teachersRoutes);
 app.use("/api/v1/users", userRoutes);
-app.use("/api/v1/upload", uploadRoutes);
+// app.use("/api/v1/upload", uploadRoutes);
 
-// const __dirname = path.resolve()
-__dirname = path.resolve();
+// // const __dirname = path.resolve()
+// __dirname = path.resolve();
 
-app.use("/uploads", express.static(path.join(__dirname)));
+// app.use("/uploads", express.static(path.join(__dirname)));
 
 // error handler
 app.use(errorHander);

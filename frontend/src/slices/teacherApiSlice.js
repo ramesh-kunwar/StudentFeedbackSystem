@@ -21,17 +21,18 @@ export const teacherApiSlice = apiSlice.injectEndpoints({
       query: (data) => ({
         url: `${TEACHERS_URL}`,
         method: "POST",
+
         body: data,
       }),
       invalidatesTags: ["Teachers"],
     }),
-    uploadTeacherImage: builder.mutation({
-      query: (data) => ({
-        url: `${UPLOAD_URL}`,
-        method: "POST",
-        body: data,
-      }),
-    }),
+    // uploadTeacherImage: builder.mutation({
+    //   query: (data) => ({
+    //     url: `${UPLOAD_URL}`,
+    //     method: "POST",
+    //     body: data,
+    //   }),
+    // }),
 
     updateTeacher: builder.mutation({
       query: (data) => ({
@@ -49,12 +50,16 @@ export const teacherApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ["Teachers"],
     }),
 
-    // getProductDetails: builder.query({
-    //   query: (productId) => ({
-    //     url: `${PRODUCTS_URL}/${productId}`,
-    //   }),
-    //   keepUnusedDataFor: 5,
-    // }),
+    createReview: builder.mutation({
+      query: (data) => ({
+        url: `${TEACHERS_URL}/${data.id}/reviews`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Product"],
+    }),
+
+   
   }),
 });
 
@@ -64,5 +69,6 @@ export const {
   useCreateTeacherMutation,
   useUpdateTeacherMutation,
   useUploadTeacherImageMutation,
-  useDeleteTeacherMutation
+  useDeleteTeacherMutation,
+  useCreateReviewMutation,
 } = teacherApiSlice;

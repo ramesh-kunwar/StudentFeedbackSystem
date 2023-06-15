@@ -47,9 +47,10 @@ exports.getTeacher = asyncHandler(async (req, res, next) => {
 /**********************************/
 
 exports.createTeachers = asyncHandler(async (req, res, next) => {
+  console.log(req.file);
+
   // check for existign teacher
-  // const { name, description, coursesTaught } = req.body;
-  const { name, description, image, coursesTaught } = req.body;
+  const { name, description, coursesTaught, image } = req.body;
 
   if (!name || !description) {
     return next(
@@ -60,21 +61,18 @@ exports.createTeachers = asyncHandler(async (req, res, next) => {
     );
   }
 
-  // if (!req.files) {
+  // if (!req.file) {
   //   return next(new ErrorResponse("Image is required", 401));
   // }
 
-  // // uploading image
-  // if (req.files) {
-  //   const result = await cloudinary.uploader.upload(
-  //     req.files.photos.tempFilePath
-  //   );
-  //   const photosObj = {
+  // if (req.file) {
+  //   const result = await cloudinary.uploader.upload(req.file.path);
+  //   const imagesObj = {
   //     id: result.public_id,
   //     secure_url: result.secure_url,
   //   };
 
-  //   req.body.photos = photosObj;
+  //   req.body.image = imagesObj;
   // }
 
   // Checking for existing user
@@ -99,7 +97,7 @@ exports.createTeachers = asyncHandler(async (req, res, next) => {
 /**********************************/
 
 exports.updateTeachers = asyncHandler(async (req, res, next) => {
-  const { name, description, coursesTaught, image } = req.body;
+  const { name, description, coursesTaught, photo } = req.body;
 
   const teacher = await Teacher.findById(req.params.id);
 
@@ -113,12 +111,12 @@ exports.updateTeachers = asyncHandler(async (req, res, next) => {
     (teacher.name = name),
       (teacher.description = description),
       (teacher.coursesTaught = coursesTaught);
-    teacher.image = image;
+    teacher.photo = photo;
 
     const updatedTeacher = await teacher.save();
     res.status(200).json({
       success: true,
-      image,
+      photo,
       updatedTeacher,
     });
   }
@@ -146,10 +144,14 @@ exports.deleteTeachers = asyncHandler(async (req, res, next) => {
   });
 });
 
-exports.createdTeacherReview = asyncHandler(async (req, res) => {
-  const { averageRating, comment } = req.body;
+exports.createTeacherReview = asyncHandler(async (req, res, next) => {
+  const { rating, comment } = req.body;
 
   const teacher = await Teacher.findById(req.params.id);
+
+  if (!teacher) {
+    return next(new ErrorResponse("Teacher not found ", 404));
+  }
 
   if (teacher) {
     const alreadyReviewed = teacher.reviews.find(
@@ -165,5 +167,19 @@ exports.createdTeacherReview = asyncHandler(async (req, res) => {
       comment,
       user: req.user._id,
     };
+
+    teacher.reviews.push(review);
+
+    teacher.numOfReviews = teacher.reviews.length;
+
+    teacher.rating =
+      teacher.reviews.reduce((acc, review) => acc + review.rating, 0) /
+      teacher.reviews.length;
+
+    await teacher.save();
+
+    res.status(201).json({
+      message: "Review Added",
+    });
   }
 });

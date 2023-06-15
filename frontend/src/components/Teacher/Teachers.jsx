@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
 import axios from "axios";
-import { useGetTeachersQuery } from "../../slices/teacherApiSlice";
+import {
+  useCreateReviewMutation,
+  useGetTeachersQuery,
+} from "../../slices/teacherApiSlice";
 import LoadingIcon from "../LoadingIcon/LoadingIcon";
 import Rating from "../Rating";
 
 const Teachers = () => {
   const { data: teachers, isLoading, error } = useGetTeachersQuery();
-console.log(teachers);
+
+  console.log(teachers);
   return (
     <div className=" w-full bg-slate-50 ">
       <div className="container max-w-6xl mx-auto py-20 px-5">
@@ -17,11 +21,16 @@ console.log(teachers);
         <div className="grid  grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
           {teachers?.data?.map((teacher) => {
             return (
-              <div 
-              key={teacher._id}
-              className="bg-white  shadow rounded-md hover:-translate-y-1 transition duration-300 ease-in-out">
+              <div
+                key={teacher._id}
+                className="bg-white  shadow rounded-md hover:-translate-y-1 transition duration-300 ease-in-out"
+              >
                 <Link to={`/teacherDetails/${teacher._id}`}>
-                  <img src={teacher.image || teacher?.photos?.secure_url} alt="" className="rounded-t-md w-full h-48" />
+                  <img
+                    src={teacher.image}
+                    alt=""
+                    className="rounded-t-md w-full h-48"
+                  />
                 </Link>
 
                 <div className="px-4 py-2">
