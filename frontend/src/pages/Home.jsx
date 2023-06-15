@@ -22,9 +22,9 @@ const Home = () => {
                   View Teachers
                 </button>
               </Link>
-              <Link>
+              <Link to={'/semester'}>
                 <button className=" block shadow-md px-4 py-3 md:px-8 md:py-4 btn bg-orange-600 hover:bg-orange-500 text-white rounded-lg md:rounded-xl">
-                  View Teachers
+                  View Semester
                 </button>
               </Link>
             </div>

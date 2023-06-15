@@ -21,6 +21,7 @@ import AdminDashBoard from "./components/Admin/AdminDashBoard.jsx";
 import { ToastContainer } from "react-toastify";
 import CreateTeacherForm from "./components/Admin/CreateTeacherForm.jsx";
 import EditTeacher from "./components/Admin/EditTeacher.jsx";
+import Semester from "./components/Semester/Semester.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,7 +32,8 @@ const router = createBrowserRouter(
         <Route path="/register" element={<Register />} />
         <Route path="/teachers" element={<Teachers />} />
         <Route path="/teacherDetails/:teacherId" element={<TeacherDetails />} />
-        {/* <Route path="/product/:id" element={<ProductScreen />} /> */}
+
+        <Route path="/semester" element={<Semester />} />
       </Route>
       {/* admin route */}
       <Route path="" element={<AdminRoute />}>

@@ -1,7 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  teachers: null,
+  // teachers: null,
+  teachers: localStorage.getItem("teacherInfo")
+    ? JSON.parse(localStorage.getItem("teacherInfo"))
+    : null,
 };
 const teacherSlice = createSlice({
   name: "teachers",
@@ -10,7 +13,7 @@ const teacherSlice = createSlice({
     setTeachers: (state, action) => {
       //   state.teacherInfo = action.payload;
       // storing in localstorage
-      //   localStorage.setItem("userInfo", JSON.stringify(action.payload));
+      localStorage.setItem("teacherInfo", JSON.stringify(action.payload));
     },
   },
 });

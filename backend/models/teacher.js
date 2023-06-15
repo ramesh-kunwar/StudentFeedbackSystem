@@ -1,5 +1,22 @@
 const mongoose = require("mongoose");
 
+
+const reviewSchema = mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    rating: { type: Number, required: true },
+    comment: { type: String, required: true },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
 const teacherSchema = new mongoose.Schema(
   {
     name: {
@@ -10,6 +27,7 @@ const teacherSchema = new mongoose.Schema(
     image: {
       type: String,
       // required: true,
+      default: 'https://media.istockphoto.com/id/1083619800/photo/crazy-angry-professor-yelling-and-pointing-with-a-stick.jpg?s=612x612&w=0&k=20&c=ykXbJvGrrRltXpJNl9iB55cf393d4NtCkDSg9tsuqU0='
     },
     description: {
       type: String,
@@ -23,6 +41,12 @@ const teacherSchema = new mongoose.Schema(
       type: Number,
       required: true,
       default: 0,
+    },
+    reviews: [reviewSchema],
+  
+    photos: {
+      id: { type: String },
+      secure_url: { type: String },
     },
     coursesTaught: {
       type: [],

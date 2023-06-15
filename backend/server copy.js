@@ -4,9 +4,9 @@ const express = require("express");
 const morgan = require("morgan");
 const connectDB = require("./config/connect");
 const cookieParser = require("cookie-parser");
-const cloudinary = require("cloudinary").v2;
+const cloudinary = require("cloudinary").v2
 const fileUpload = require("express-fileupload");
-const bodyParser = require("body-parser");
+const bodyParser = require("body-parser")
 
 const app = express();
 
@@ -20,14 +20,15 @@ cloudinary.config({
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}))
 
-// app.use(
-//   fileUpload({
-//     useTempFiles: true,
-//     tempFileDir: "/tmp/",
-//   })
-// );
+
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "/tmp/",
+  })
+);
 
 app.use(morgan("tiny"));
 
@@ -35,12 +36,13 @@ app.use(morgan("tiny"));
 
 const teachersRoutes = require("./routes/teacherRoutes");
 const userRoutes = require("./routes/userRoutes");
-const uploadRoutes = require("./routes/uploadRoutes");
+// const uploadRoutes = require("./routes/uploadRoutes");
 
 const errorHander = require("./middleware/error");
 
 //  basic route
 app.get("/", (req, res) => {
+  console.log(req.user);
   res.status(200).json({
     success: true,
     msg: "Welcome to student teacher feedback app",
@@ -51,12 +53,15 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1/teachers", teachersRoutes);
 app.use("/api/v1/users", userRoutes);
-app.use("/api/v1/upload", uploadRoutes);
+// app.use("/api/v1/upload", uploadRoutes);
 
-// const __dirname = path.resolve()
-__dirname = path.resolve();
+// make upload folder a static folder
 
-app.use("/uploads", express.static(path.join(__dirname)));
+// const __dirname = path.resolve(); // set __dirname to current directory
+// app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
+
+// const __dirname = path.resolve();
+app.use('../uploads', express.static(path.join(__dirname, '../uploads')));
 
 // error handler
 app.use(errorHander);

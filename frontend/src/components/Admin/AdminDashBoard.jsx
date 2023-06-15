@@ -6,13 +6,27 @@ import { TiDelete } from "react-icons/ti";
 
 import CreateTeacherForm from "./CreateTeacherForm";
 import { Link } from "react-router-dom";
-import { useGetTeachersQuery } from "../../slices/teacherApiSlice";
+import {
+  useDeleteTeacherMutation,
+  useGetTeachersQuery,
+} from "../../slices/teacherApiSlice";
 import Rating from "../Rating";
+import { toast } from "react-toastify";
 
 const AdminDashBoard = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const { data: teachers, isLoading } = useGetTeachersQuery();
+  const [deleteTeacher, { isLoading: isDeleting }] = useDeleteTeacherMutation();
 
+  const deleteHandler = async (id) => {
+    try {
+      await deleteTeacher(id);
+      toast.success("Teacher deelted successfully");
+    } catch (error) {
+      toast.error(error.error);
+      console.log(error);
+    }
+  };
   return (
     <div className="bg-slate-50 pt-16 min-h-screen">
       <div className="container px-4 mx-auto max-w-6xl">
@@ -27,7 +41,10 @@ const AdminDashBoard = () => {
 
         {teachers?.data?.map((teacher) => {
           return (
-            <div className="flex items-center justify-between bg-white my-2 px-4 py-2 rounded-md ">
+            <div
+              key={teacher._id}
+              className="flex items-center justify-between bg-white my-2 px-4 py-2 rounded-md "
+            >
               <div className="flex items-center gap-5">
                 <img
                   src={teacher.image}
@@ -37,16 +54,19 @@ const AdminDashBoard = () => {
                 <h3 className="text-md">{teacher.name}</h3>
               </div>
               <div className="flex gap-3 items-center md:text-2xl">
-                <p className="text-orange-600">
+                <div className="text-orange-600">
                   <Rating value={teacher.averageRating} />
-                </p>
+                </div>
                 <Link
                   className="btn bg-transparent hover:bg-transparent border-none text-xl md:text-3xl text-primary"
                   to={`/admin/teacher/${teacher._id}/edit`}
                 >
                   <FaUserEdit />
                 </Link>
-                <Link className="text-red-600 btn text-xl md:text-4xl bg-transparent hover:bg-transparent border-none">
+                <Link
+                  className="text-red-600 btn text-xl md:text-4xl bg-transparent hover:bg-transparent border-none"
+                  onClick={() => deleteHandler(teacher._id)}
+                >
                   <RiDeleteBack2Fill />
                 </Link>
               </div>
@@ -54,8 +74,6 @@ const AdminDashBoard = () => {
           );
         })}
       </div>
-
-
     </div>
   );
 };

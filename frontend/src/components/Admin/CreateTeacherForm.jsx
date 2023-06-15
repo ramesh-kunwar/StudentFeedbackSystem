@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { RxCross1 } from "react-icons/rx";
-import { IoIosCreate } from "react-icons/io";
-import { useCreateTeacherMutation } from "../../slices/teacherApiSlice";
+import { IoIosCreate, IoMdCodeWorking } from "react-icons/io";
+import axios, { Axios } from "axios";
+import {
+  useCreateTeacherMutation,
+  useUploadTeacherImageMutation,
+} from "../../slices/teacherApiSlice";
 import { useDispatch } from "react-redux";
 import { setTeachers } from "../../slices/teacherSlice";
 import { toast } from "react-toastify";
@@ -10,16 +14,22 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [coursesTaught, setCoursesTaught] = useState([]);
-
+  const [photos, setPhotos] = useState();
+  const [image, setImage] = useState("");
   const dispatch = useDispatch();
+
   const [createTeacher, { isLoading }] = useCreateTeacherMutation();
+  const [uploadTeacherImage, { isLoading: loadingUpload }] =
+    useUploadTeacherImageMutation();
 
   function handleCourse(e) {
     const text = e.target.value;
     const splittedText = text.split(",");
     setCoursesTaught(splittedText);
   }
-  const createProductHandler = async (e) => {
+
+  const createTeacherHandler = async (e) => {
+    console.log(photos, "sb");
     e.preventDefault();
 
     try {
@@ -27,8 +37,9 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
         name,
         description,
         coursesTaught,
+
       }).unwrap();
-      console.log(res);
+      console.log(res, "res");
       // dispatch(setTeachers({ ...res }));
       toast.success("Teacher Added Successfully");
 
@@ -42,6 +53,21 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
     }
   };
 
+  const handleImageChange = async (e) => {
+    console.log(e.target.files[0]);
+    const formData = new FormData();
+    formData.append("image", e.target.files[0]);
+
+    try {
+      const res = await uploadTeacherImage(formData).unwrap();
+      toast.success("Successs");
+      console.log(res);
+      setPhotos(res.photos);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <div>
@@ -50,11 +76,7 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
             Create Teacher <IoIosCreate />
           </h1>
 
-          <form
-            action=""
-            className="px-5 mt-10"
-            onSubmit={createProductHandler}
-          >
+          <form method="POST" encType="multipars/form-data" className="px-5 mt-10" onSubmit={createTeacherHandler}>
             <div className="mb-6">
               <label className="block mb-2 text-md   text-gray-700 ">
                 Teacher Name
@@ -62,7 +84,7 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
               <input
                 type="text"
                 value={name}
-                onChange={(e) => name(e.target.value)}
+                onChange={(e) => setName(e.target.value)}
                 className="border border-gray-300 outline-none focus:border-gray-600 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
               />
             </div>
@@ -93,6 +115,22 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
                 name="coursesTaught"
                 onChange={handleCourse}
                 className=" border border-gray-300 outline-none focus:border-gray-600  text-gray-900 text-sm rounded-lg  block w-full p-2.5 "
+              />
+            </div>
+
+            <div className="mb-6">
+              <label
+                htmlFor="teacherImage"
+                className="block mb-2 text-md   text-gray-700 "
+              >
+                Upload Image
+              </label>
+              <input
+                type="file"
+                value={photos}
+                className=" border border-gray-300 outline-none focus:border-gray-600  text-gray-900 text-sm rounded-lg  block w-full p-2.5 "
+                multiple={false}
+                onChange={(e)=> setPhotos(e.target.files[0])}
               />
             </div>
 

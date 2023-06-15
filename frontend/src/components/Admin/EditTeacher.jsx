@@ -5,6 +5,7 @@ import {
   useGetTeacherDetailsQuery,
   useGetTeachersQuery,
   useUpdateTeacherMutation,
+  useUploadTeacherImageMutation,
 } from "../../slices/teacherApiSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setTeachers } from "../../slices/teacherSlice";
@@ -16,8 +17,12 @@ const EditTeacher = ({}) => {
   const { data: teacher, isLoading } = useGetTeacherDetailsQuery(teacherId);
 
   const [updateTeacher, { isLoading: loading }] = useUpdateTeacherMutation();
+  const [uploadTeacherImage, { isLoading: loadingImage }] =
+    useUploadTeacherImageMutation();
 
   const [name, setName] = useState("");
+  const [image, setImage] = useState('');
+  const [photos, setPHotos] = useState(null);
   const [description, setDescription] = useState("");
   const [coursesTaught, setCoursesTaught] = useState("");
 
@@ -54,6 +59,22 @@ const EditTeacher = ({}) => {
     }
   };
 
+  const uploadFileHandler = async (e) => {
+    const formData = new FormData();
+
+    formData.append("image", e.target.files[0]);
+    console.log(e.target.files[0]);
+
+    try {
+      const res = await uploadTeacherImage(formData).unwrap();
+      toast.success(res.message);
+      setImage(res.image);
+    } catch (error) {
+      console.log(error.error);
+      toast.error(err?.data?.message || error.error);
+    }
+  };
+
   return (
     <>
       <div>
@@ -63,6 +84,18 @@ const EditTeacher = ({}) => {
           </h1>
 
           <form action="" className="px-5 mt-10" onSubmit={editTeacherHandler}>
+            <div className="mb-6">
+              <input type="text" placeholder="Enter Image url" value={image} onChange={(e)=> setImage} />
+              <label className="block mb-2 text-md   text-gray-700 ">
+                Upload Image
+              </label>
+              <input
+                type="file"
+                // value={image}
+                onChange={uploadFileHandler}
+                className="border border-gray-300 outline-none focus:border-gray-600 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
+              />
+            </div>
             <div className="mb-6">
               <label className="block mb-2 text-md   text-gray-700 ">
                 Teacher Name

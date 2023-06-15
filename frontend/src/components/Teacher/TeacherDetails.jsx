@@ -4,12 +4,17 @@ import { useParams } from "react-router-dom";
 import { useGetTeacherDetailsQuery } from "../../slices/teacherApiSlice";
 import LoadingIcon from "../LoadingIcon/LoadingIcon";
 import Rating from "../../components/Rating";
+import { useSelector } from "react-redux";
+import RatingModelForm from "./RatingModelForm";
 
 const TeacherDetails = () => {
   // const [teacher, setTeacher] = useState({});
   const teacherId = useParams();
   const id = teacherId.teacherId;
   const { data: teacher, isLoading, error } = useGetTeacherDetailsQuery(id);
+
+  const { userInfo } = useSelector((state) => state.auth);
+  console.log(userInfo);
 
   return (
     <div className="bg-slate-50 pt-10 min-h-screen">
@@ -25,9 +30,8 @@ const TeacherDetails = () => {
             <div className="text-xl my-3 mx-2  text-orange-600 ">
               <Rating value={teacher?.data?.averageRating} />
             </div>
-            <button className="btn  btn-primary btn-wide rounded-md text-white font-bold ">
-              Rate Teacher
-            </button>
+            <RatingModelForm userInfo={userInfo} />
+  
           </div>
 
           <div className="col-span-3 md:p-5">
@@ -48,11 +52,6 @@ const TeacherDetails = () => {
             </div>
             <p className="my-2">{teacher?.data?.description}</p>
           </div>
-          {/* <div className="col-span-1">
-            <button className="btn  btn-primary px-6 py-3 rounded-md text-white font-bold ">
-              Rate Teacher
-            </button>
-          </div> */}
         </div>
       </div>
 

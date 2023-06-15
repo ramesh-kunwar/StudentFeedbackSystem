@@ -15,7 +15,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="nav">
+      <div className="nav px-6  md:py-4 md:px-20">
         <div className="">
           <div className="nav-wrapper">
             <div className="nav-logo">

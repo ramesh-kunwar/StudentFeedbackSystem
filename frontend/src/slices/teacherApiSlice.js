@@ -1,4 +1,4 @@
-import { TEACHERS_URL } from "../constants";
+import { TEACHERS_URL, UPLOAD_URL } from "../constants";
 import { apiSlice } from "./apiSlice";
 
 export const teacherApiSlice = apiSlice.injectEndpoints({
@@ -25,12 +25,26 @@ export const teacherApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Teachers"],
     }),
+    uploadTeacherImage: builder.mutation({
+      query: (data) => ({
+        url: `${UPLOAD_URL}`,
+        method: "POST",
+        body: data,
+      }),
+    }),
 
     updateTeacher: builder.mutation({
       query: (data) => ({
         url: `${TEACHERS_URL}/${data.teacherId}`,
         method: "PUT",
         body: data,
+      }),
+      invalidatesTags: ["Teachers"],
+    }),
+    deleteTeacher: builder.mutation({
+      query: (teacherId) => ({
+        url: `${TEACHERS_URL}/${teacherId}`,
+        method: "DELETE",
       }),
       invalidatesTags: ["Teachers"],
     }),
@@ -49,4 +63,6 @@ export const {
   useGetTeacherDetailsQuery,
   useCreateTeacherMutation,
   useUpdateTeacherMutation,
+  useUploadTeacherImageMutation,
+  useDeleteTeacherMutation
 } = teacherApiSlice;

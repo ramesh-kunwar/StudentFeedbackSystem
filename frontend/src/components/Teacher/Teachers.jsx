@@ -8,7 +8,7 @@ import Rating from "../Rating";
 
 const Teachers = () => {
   const { data: teachers, isLoading, error } = useGetTeachersQuery();
-
+console.log(teachers);
   return (
     <div className=" w-full bg-slate-50 ">
       <div className="container max-w-6xl mx-auto py-20 px-5">
@@ -21,7 +21,7 @@ const Teachers = () => {
               key={teacher._id}
               className="bg-white  shadow rounded-md hover:-translate-y-1 transition duration-300 ease-in-out">
                 <Link to={`/teacherDetails/${teacher._id}`}>
-                  <img src={teacher.image} alt="" className="rounded-t-md" />
+                  <img src={teacher.image || teacher?.photos?.secure_url} alt="" className="rounded-t-md w-full h-48" />
                 </Link>
 
                 <div className="px-4 py-2">
