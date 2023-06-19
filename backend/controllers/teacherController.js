@@ -145,7 +145,13 @@ exports.deleteTeachers = asyncHandler(async (req, res, next) => {
 });
 
 exports.createTeacherReview = asyncHandler(async (req, res, next) => {
-  const { rating, comment } = req.body;
+  const {
+    rating,
+    comment,
+    teachingSkill,
+    communicationSkill,
+    resourceProvided,
+  } = req.body;
 
   const teacher = await Teacher.findById(req.params.id);
 
@@ -162,12 +168,25 @@ exports.createTeacherReview = asyncHandler(async (req, res, next) => {
       return next(new ErrorResponse("Product already reviewed", 400));
     }
     const review = {
+      // teachingSkill: Number(teachingSkill),
+      // communicationSkill: Number(teachingSkill),
+      // resourceProvided: Number(teachingSkill),
+
       name: req.user.name,
       rating: Number(rating),
       comment,
       user: req.user._id,
     };
 
+    // teaching skill rating
+    // teacher.teachingSkill = teacher.reviews.reduce(
+    //   (acc, review) => acc + review.teachingSkill,
+    //   0
+    // );
+    // teacher.communicationSkill = teacher.reviews.reduce(
+    //   (acc, review) => acc + review.communicationSkill,
+    //   0
+    // );
     teacher.reviews.push(review);
 
     teacher.numOfReviews = teacher.reviews.length;
@@ -175,6 +194,8 @@ exports.createTeacherReview = asyncHandler(async (req, res, next) => {
     teacher.rating =
       teacher.reviews.reduce((acc, review) => acc + review.rating, 0) /
       teacher.reviews.length;
+    // const average = (teacher.teachingSkill + teacher.communicationSkill) / 2;
+    // teacher.rating = average / teacher.reviews.length;
 
     await teacher.save();
 

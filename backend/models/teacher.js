@@ -4,6 +4,9 @@ const reviewSchema = mongoose.Schema(
   {
     name: { type: String, required: true },
     rating: { type: Number, required: true },
+    // teachingSkill: { type: Number, required: true },
+    // communicationSkill: { type: Number, required: true },
+    // resourceProvided: { type: Number, required: true },
     comment: { type: String, required: true },
     user: {
       type: mongoose.Schema.Types.ObjectId,
@@ -25,19 +28,22 @@ const teacherSchema = new mongoose.Schema(
     },
     image: {
       type: String,
-      // required: true,
+      // default: "images/teacherProfile.jpeg",
       default:
-        "https://media.istockphoto.com/id/1083619800/photo/crazy-angry-professor-yelling-and-pointing-with-a-stick.jpg?s=170667a&w=0&k=20&c=rpt1trxyXX9pmzp_qrGgQEx6IZWb63T97htEkDniT7Y=",
-      // "https://media.istockphoto.com/id/1083619800/photo/crazy-angry-professor-yelling-and-pointing-with-a-stick.jpg?s=612x612&w=0&k=20&c=ykXbJvGrrRltXpJNl9iB55cf393d4NtCkDSg9tsuqU0=",
-      // id: { type: String },
-      // secure_url: { type: String },
+        "https://media.istockphoto.com/id/1083619800/photo/crazy-angry-professor-yelling-and-pointing-with-a-stick.jpg?s=612x612&w=0&k=20&c=ykXbJvGrrRltXpJNl9iB55cf393d4NtCkDSg9tsuqU0=",
     },
     description: {
       type: String,
     },
+
+    // teachingSkill: { type: Number},
+    // communicationSkill: { type: Number},
+    // resourceProvided: { type: Number, required: true },
+
     rating: {
       type: Number,
     },
+
     numOfReviews: {
       type: Number,
       required: true,

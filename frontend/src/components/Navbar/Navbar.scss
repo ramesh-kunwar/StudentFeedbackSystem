@@ -15,7 +15,7 @@
   display: flex;
   gap: 20px;
   align-items: center;
-  color: gray;
+  // color: gray;
 
   .profile-icon {
     font-size: 1.5rem;
@@ -25,8 +25,9 @@
 }
 .nav-links ul a {
   font-size: 1.2rem;
-  color: gray;
-  font-weight: lighter;
+  // color: gray;
+  // font-weight: lighter;
+  font-weight: light;
   transition: 0.3s ease-in-out;
 }
 .nav-links ul a:hover {

@@ -31,7 +31,7 @@ const NavProfileToggle = ({ userInfo }) => {
             <div className="icon">
               <FaUserCircle className="profile-icon" />
             </div>
-            Profile
+            {userInfo?.data?.name}
           </Link>
         ) : (
           <Link to={"/user/profile"}>

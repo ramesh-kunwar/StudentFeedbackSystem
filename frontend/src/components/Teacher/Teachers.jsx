@@ -53,9 +53,9 @@ const Teachers = () => {
 
                   <div className="flex justify-between items-center mt-2 py-3">
                     <h4>
-                      <Rating value={teacher.averageRating} />
+                      <Rating value={teacher.rating} />
                     </h4>
-                    {teacher.averageRating >= 4.5 ? (
+                    {teacher.rating >= 4.5 ? (
                       <h5 className="text-[10px] text-white bg-orange-600 px-1 py-0.5 rounded">
                         {" "}
                         Top Instructor{" "}

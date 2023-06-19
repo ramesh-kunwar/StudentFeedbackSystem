@@ -30,6 +30,8 @@ const TeacherDetails = () => {
   const navigate = useNavigate();
 
   const [rating, setRating] = useState(0);
+  const [teachingSkill, setTeachingSkill] = useState(0);
+  const [communicationSkill, setCommunicationSkill] = useState(0);
   const [comment, setComment] = useState("");
   const { userInfo } = useSelector((state) => state.auth);
   console.log(teacher, "teacher");
@@ -40,6 +42,8 @@ const TeacherDetails = () => {
       await createReview({
         id, // teacherId
         comment,
+        // teachingSkill,
+        // communicationSkill,
         rating,
       }).unwrap();
       refetch();
@@ -60,7 +64,7 @@ const TeacherDetails = () => {
             />
 
             <div className="text-xl my-3 mx-2  text-orange-600 flex items-center gap-3 ">
-              <Rating value={5} />
+              <Rating value={teacher?.data?.rating} />
               {/* <Rating value={teacher?.data?.averageRating} /> */}
               <p className="text-sm text-black">
                 {teacher?.data?.numOfReviews} Reviews
@@ -70,70 +74,7 @@ const TeacherDetails = () => {
 
             {/* rating model */}
 
-            <>
-              {/* Open the modal using ID.showModal() method */}
-              <button
-                onClick={() => window.my_modal_2.showModal()}
-                className="btn  btn-primary btn-wide rounded-md text-white font-bold "
-                disabled={!userInfo?.data?._id}
-              >
-                Rate Teacher
-              </button>
-              <dialog id="my_modal_2" className="modal">
-                <form
-                  method="dialog"
-                  className="modal-box"
-                  onSubmit={submitReviewHandler}
-                >
-                  {/* <FormModel /> */}
-                  <div className="container max-w-xl mx-auto px-5 ">
-                    <h1 className="text-3xl font-bold  mx-auto ">
-                      Rate Teacher
-                    </h1>
-
-                    <div className="mb-6">
-                      <label className="block mb-2 text-md   text-gray-700 ">
-                        Rating
-                      </label>
-                      <input
-                        type="number"
-                        value={rating}
-                        onChange={(e) => setRating(e.target.value)}
-                        placeholder="0 - 5"
-                        className="border border-gray-300 outline-none focus:border-gray-600 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
-                      />
-                    </div>
-                    <div className="mb-6">
-                      <label className="block mb-2 text-md   text-gray-700 ">
-                        Give Your Feedback
-                      </label>
-                      <textarea
-                        value={comment}
-                        onChange={(e) => setComment(e.target.value)}
-                        placeholder="Feedback Here"
-                        className="textarea textarea-bordered textarea-sm w-full "
-                      ></textarea>
-                    </div>
-
-                    <div className="mt-5">
-                      <button
-                        type="submit"
-                        value="Login"
-                        className=" btn btn-primary text-white rounded-lg block w-full p-2.5 modal-backdrop "
-                        method="dialog"
-                      >
-                        Rate Teacher
-                      </button>
-                    </div>
-                  </div>
-                  {/* formm model */}
-                </form>
-                <form method="dialog" className="modal-backdrop">
-                  <button>close</button>
-                </form>
-              </dialog>
-            </>
-            {/* / rating model */}
+            <RatingModelForm />
           </div>
 
           <div className="col-span-3 md:p-5">
@@ -165,14 +106,27 @@ const TeacherDetails = () => {
           {teacher?.data?.reviews.length === 0 && (
             <p className="font-bold text-xl">No reviews</p>
           )}
-          <div className="bg-white container mx-auto p-5 shadow rounded-md">
+          <div>
             {teacher?.data?.reviews.map((review) => {
+              const date = new Date(review.createdAt);
+              const year = date.getFullYear();
+              const month = date.getMonth();
+              const day = date.getDate();
+
+              const reviewDate = `${year}-${month}-${day}`;
               return (
-                <div key={review._id}>
-                  <div className="flex items-center gap-3">
-                    <h1 className="font-bold text-xl">{review.name}</h1>
-                    <p>{review.rating}</p>
-                  </div>
+                <div
+                  key={review._id}
+                  className="bg-white container mx-auto p-5 shadow rounded-md my-4"
+                >
+                  <h1 className="text-4xl">{review.teachingSkill}</h1>
+                  <p className="text-gray-700 text-sm">{reviewDate}</p>
+                  <>
+                    <div className="flex items-center gap-3 my-1">
+                      <h1 className="font-bold text-xl"> {review.name}</h1>
+                      <Rating value={review.rating} />
+                    </div>
+                  </>
                   <p>{review.comment}</p>
                 </div>
               );

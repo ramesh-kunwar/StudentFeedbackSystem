@@ -42,7 +42,7 @@ const Navbar = () => {
                     <FaUserCircle className="profile-icon" />
                   </Link>
                 ) : (
-                  <Link to="/login">Login</Link>
+                  <Link to="/login" className="">Login</Link>
                 )}
               </ul>
             </div>

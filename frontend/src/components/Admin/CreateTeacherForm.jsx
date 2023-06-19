@@ -47,7 +47,6 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
         name,
         description,
         coursesTaught,
-        image,
       }).unwrap();
 
       // dispatch(setTeachers({ ...res }));
@@ -73,7 +72,7 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
         // placeholder: r.target.result,
         file: e.target.files[0],
       });
-    formData.append(image);
+      formData.append(image);
 
       console.log(r.target.result);
     };
@@ -142,12 +141,12 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
               >
                 Upload Image
               </label>
-              <input
+              {/* <input
                 type="file"
                 className=" border border-gray-300 outline-none focus:border-gray-600  text-gray-900 text-sm rounded-lg  block w-full p-2.5 "
                 multiple={false}
                 onChange={handleImage}
-              />
+              /> */}
             </div>
 
             <div className="mt-5">
