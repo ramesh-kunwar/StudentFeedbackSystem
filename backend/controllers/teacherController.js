@@ -165,37 +165,53 @@ exports.createTeacherReview = asyncHandler(async (req, res, next) => {
     );
 
     if (alreadyReviewed) {
-      return next(new ErrorResponse("Product already reviewed", 400));
+      return next(new ErrorResponse("Teacher already reviewed", 400));
     }
     const review = {
-      // teachingSkill: Number(teachingSkill),
-      // communicationSkill: Number(teachingSkill),
-      // resourceProvided: Number(teachingSkill),
+      teachingSkill: Number(teachingSkill),
+      communicationSkill: Number(communicationSkill),
+      resourceProvided: Number(resourceProvided),
 
       name: req.user.name,
-      rating: Number(rating),
+      averageRating: (
+        (Number(communicationSkill) +
+          Number(teachingSkill) +
+          Number(resourceProvided)) /
+        3
+      ).toFixed(2),
       comment,
       user: req.user._id,
     };
 
-    // teaching skill rating
-    // teacher.teachingSkill = teacher.reviews.reduce(
-    //   (acc, review) => acc + review.teachingSkill,
-    //   0
-    // );
-    // teacher.communicationSkill = teacher.reviews.reduce(
-    //   (acc, review) => acc + review.communicationSkill,
-    //   0
-    // );
     teacher.reviews.push(review);
 
     teacher.numOfReviews = teacher.reviews.length;
 
-    teacher.rating =
-      teacher.reviews.reduce((acc, review) => acc + review.rating, 0) /
+    // teaching skill
+    teacher.teachingSkill =
+      teacher.reviews
+        .filter((review) => !isNaN(review.teachingSkill))
+        .reduce((acc, review) => acc + review.teachingSkill, 0) /
       teacher.reviews.length;
-    // const average = (teacher.teachingSkill + teacher.communicationSkill) / 2;
-    // teacher.rating = average / teacher.reviews.length;
+
+    // communicatin skill
+    teacher.communicationSkill =
+      teacher.reviews
+        .filter((review) => !isNaN(review.communicationSkill))
+        .reduce((acc, review) => acc + review.communicationSkill, 0) /
+      teacher.reviews.length;
+
+    // resource provided
+    teacher.resourceProvided =
+      teacher.reviews
+        .filter((review) => !isNaN(review.resourceProvided))
+        .reduce((acc, review) => acc + review.resourceProvided, 0) /
+      teacher.reviews.length;
+
+    // rating
+    teacher.rating =
+      teacher.reviews.reduce((acc, review) => acc + review.averageRating, 0) /
+      teacher.numOfReviews;
 
     await teacher.save();
 

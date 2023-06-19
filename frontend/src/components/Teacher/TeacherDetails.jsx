@@ -86,7 +86,7 @@ const TeacherDetails = () => {
                 return (
                   <p
                     key={index}
-                    className="bg-orange-600 text-white rounded px-2 py-0.5 my-2"
+                    className="bg-primary text-white rounded px-2 py-0.5 my-2"
                   >
                     {course}
                   </p>
@@ -94,6 +94,21 @@ const TeacherDetails = () => {
               })}
             </div>
             <p className="my-2">{teacher?.data?.description}</p>
+            <div className="grid grid-cols-3">
+              <div>
+                <p className="font-bold font-xl my-2">Teaching Skill</p>
+
+                <Rating value={teacher?.data?.teachingSkill?.toFixed(2)} />
+              </div>
+              <div>
+                <p className="font-bold font-xl my-2">Communication Skill</p>
+                <Rating value={teacher?.data?.communicationSkill?.toFixed(2)} />
+              </div>
+              <div>
+                <p className="font-bold font-xl my-2"> Resource Provided</p>
+                <Rating value={teacher?.data?.resourceProvided?.toFixed(2)} />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -112,6 +127,7 @@ const TeacherDetails = () => {
               const year = date.getFullYear();
               const month = date.getMonth();
               const day = date.getDate();
+              console.log("Review", review);
 
               const reviewDate = `${year}-${month}-${day}`;
               return (
@@ -119,12 +135,11 @@ const TeacherDetails = () => {
                   key={review._id}
                   className="bg-white container mx-auto p-5 shadow rounded-md my-4"
                 >
-                  <h1 className="text-4xl">{review.teachingSkill}</h1>
                   <p className="text-gray-700 text-sm">{reviewDate}</p>
                   <>
                     <div className="flex items-center gap-3 my-1">
                       <h1 className="font-bold text-xl"> {review.name}</h1>
-                      <Rating value={review.rating} />
+                      <Rating value={review.averageRating} />
                     </div>
                   </>
                   <p>{review.comment}</p>

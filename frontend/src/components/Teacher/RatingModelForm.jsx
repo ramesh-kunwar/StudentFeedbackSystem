@@ -6,7 +6,7 @@ import {
   useCreateReviewMutation,
   useGetTeacherDetailsQuery,
 } from "../../slices/teacherApiSlice";
-
+import {  toast } from "react-toastify";
 const RatingModelForm = () => {
   const teacherId = useParams();
   const id = teacherId.teacherId;
@@ -27,9 +27,9 @@ const RatingModelForm = () => {
   const [rating, setRating] = useState(0);
   const [teachingSkill, setTeachingSkill] = useState(0);
   const [communicationSkill, setCommunicationSkill] = useState(0);
+  const [resourceProvided, setResourceProvided] = useState(0);
   const [comment, setComment] = useState("");
   const { userInfo } = useSelector((state) => state.auth);
-  console.log(teacher, "teacher");
 
   const submitReviewHandler = async (e) => {
     e.preventDefault();
@@ -37,15 +37,20 @@ const RatingModelForm = () => {
       await createReview({
         id, // teacherId
         comment,
-        // teachingSkill,
-        // communicationSkill,
-        rating,
+        teachingSkill,
+        communicationSkill,
+        resourceProvided,
+        // rating,
       }).unwrap();
       refetch();
     } catch (error) {
+      toast.error(error?.data?.error);
+
       console.log(error);
     }
   };
+  console.log(teacher, "teacher");
+
   return (
     <>
       {/* Open the modal using ID.showModal() method */}
@@ -66,7 +71,7 @@ const RatingModelForm = () => {
           <div className="container max-w-xl mx-auto px-5 ">
             <h1 className="text-3xl font-bold  mx-auto ">Rate Teacher</h1>
 
-            <div className="mb-6">
+            {/* <div className="mb-6">
               <label className="block mb-2 text-md   text-gray-700 ">
                 Rating
               </label>
@@ -77,7 +82,7 @@ const RatingModelForm = () => {
                 placeholder="0 - 5"
                 className="border border-gray-300 outline-none focus:border-gray-600 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
               />
-            </div>
+            </div> */}
             <div className="mb-6">
               <label className="block mb-2 text-md   text-gray-700 ">
                 Communication Skill
@@ -98,6 +103,18 @@ const RatingModelForm = () => {
                 type="number"
                 value={teachingSkill}
                 onChange={(e) => setTeachingSkill(e.target.value)}
+                placeholder="0 - 5"
+                className="border border-gray-300 outline-none focus:border-gray-600 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
+              />
+            </div>
+            <div className="mb-6">
+              <label className="block mb-2 text-md   text-gray-700 ">
+                Teaching Skill
+              </label>
+              <input
+                type="number"
+                value={resourceProvided}
+                onChange={(e) => setResourceProvided(e.target.value)}
                 placeholder="0 - 5"
                 className="border border-gray-300 outline-none focus:border-gray-600 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
               />

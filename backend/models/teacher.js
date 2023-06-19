@@ -3,8 +3,17 @@ const mongoose = require("mongoose");
 const reviewSchema = mongoose.Schema(
   {
     name: { type: String, required: true },
-    rating: { type: Number, required: true },
-    // teachingSkill: { type: Number, required: true },
+    rating: { type: Number,  },
+    teachingSkill: Number,
+    communicationSkill: Number,
+    resourceProvided: Number,
+    averageRating: Number,
+
+    // teachingSkill: {
+    //    type: Number,
+
+    //     required: true
+    //   },
     // communicationSkill: { type: Number, required: true },
     // resourceProvided: { type: Number, required: true },
     comment: { type: String, required: true },
@@ -36,10 +45,19 @@ const teacherSchema = new mongoose.Schema(
       type: String,
     },
 
-    // teachingSkill: { type: Number},
-    // communicationSkill: { type: Number},
-    // resourceProvided: { type: Number, required: true },
+    // teachingSkill: {
+    //   type: Number,
+    // },
+    // communicationSkill: {
+    //   type: Number,
+    // },
+    // resourceProvided: {
+    //   type: Number,
+    // },
 
+    teachingSkill: Number,
+    communicationSkill: Number,
+    resourceProvided: Number,
     rating: {
       type: Number,
     },
