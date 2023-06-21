@@ -24,6 +24,7 @@ import EditTeacher from "./components/Admin/EditTeacher.jsx";
 import Semester from "./components/Semester/Semester.jsx";
 import SemesterDetails from "./components/Semester/SemesterDetails.jsx";
 import GetAllStudents from "./components/Admin/GetAllStudents.jsx";
+import NotFound from "./components/NotFound.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -40,6 +41,7 @@ const router = createBrowserRouter(
           path="/semesterDetails/:semesterId"
           element={<SemesterDetails />}
         />
+        <Route path="*" element={<NotFound />} />
       </Route>
       {/* admin route */}
       <Route path="" element={<AdminRoute />}>
@@ -47,7 +49,6 @@ const router = createBrowserRouter(
         <Route path="/admin/students" element={<GetAllStudents />} />
         <Route path="/admin/teacher/create" element={<CreateTeacherForm />} />
         <Route path="/admin/teacher/:id/edit" element={<EditTeacher />} />
-
       </Route>
     </>
   )

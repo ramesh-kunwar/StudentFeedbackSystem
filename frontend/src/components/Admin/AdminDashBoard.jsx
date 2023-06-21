@@ -68,14 +68,16 @@ const AdminDashBoard = () => {
                       scope="row"
                       className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                     >
-                      <div className="flex items-center gap-5">
-                        <img
-                          src={teacher.image}
-                          className="w-14 h-14 rounded-full"
-                          alt=""
-                        />
-                        <h3 className="text-md">{teacher.name}</h3>
-                      </div>
+                      <Link to={`/teacherDetails/${teacher._id}`}>
+                        <div className="flex items-center gap-5">
+                          <img
+                            src={teacher.image}
+                            className="w-14 h-14 rounded-full"
+                            alt=""
+                          />
+                          <h3 className="text-md">{teacher.name}</h3>
+                        </div>
+                      </Link>
                     </th>
                     <td className="px-6 py-4 text-orange-600 text-xl">
                       <Rating value={teacher.rating} />
