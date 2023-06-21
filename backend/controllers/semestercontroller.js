@@ -54,7 +54,7 @@ exports.createSemester = asyncHandler(async (req, res, next) => {
   }
 
   // Checking for existing user
-  const existingSemester = await Semester.findOne({ name });
+  const existingTeacher = await Semester.findOne({ name });
 
   if (existingTeacher) {
     return next(new ErrorResponse("Semester already exists", 400));
@@ -93,7 +93,6 @@ exports.updateSemester = asyncHandler(async (req, res, next) => {
     const updateSemester = await semester.save();
     res.status(200).json({
       success: true,
-      photo,
       updateSemester,
     });
   }

@@ -34,6 +34,7 @@ app.use(morgan("tiny"));
 // Importing all routes
 
 const teachersRoutes = require("./routes/teacherRoutes");
+const semesterRoutes = require("./routes/semesterRoutes");
 const userRoutes = require("./routes/userRoutes");
 // const uploadRoutes = require("./routes/uploadRoutes");
 
@@ -51,6 +52,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1/teachers", teachersRoutes);
 app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/semesters", semesterRoutes);
 // app.use("/api/v1/upload", uploadRoutes);
 
 // // const __dirname = path.resolve()

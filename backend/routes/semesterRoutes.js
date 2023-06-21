@@ -4,6 +4,9 @@ const { isLoggedIn, isAdmin } = require("../middleware/user");
 const {
   getSemesters,
   createSemester,
+  getSemester,
+  updateSemester,
+  deleteSemester,
 } = require("../controllers/semestercontroller");
 
 const router = express.Router();
@@ -24,5 +27,6 @@ const router = express.Router();
 
 // Semester
 router.route("/").get(getSemesters).post(createSemester);
+router.route("/:id").get(getSemester).put(updateSemester).delete(deleteSemester)
 
 module.exports = router;
