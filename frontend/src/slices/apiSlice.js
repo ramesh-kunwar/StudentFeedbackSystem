@@ -6,6 +6,6 @@ const baseQuery = fetchBaseQuery({ baseUrl: BASE_URL });
 
 export const apiSlice = createApi({
   baseQuery,
-  tagTypes: ["Teacher", "Student", "User"], // Types of data we are going to fetch from api
+  tagTypes: ["Teacher", "Student", "User", "Semester"], // Types of data we are going to fetch from api
   endpoints: (builder) => ({}), // you can inject other endpoints using injectEndpoints
 });

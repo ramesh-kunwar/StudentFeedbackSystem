@@ -1,36 +1,28 @@
 import React from "react";
+import { useGetSemestersQuery } from "../../slices/semesterApiSlice";
+import { Link } from "react-router-dom";
 
 const Semester = () => {
-  return (
-    <div className="bg-slate-50 min-h-screen">
-      <div className="container mx-auto">
-        <h1 className="text-4xl md:text-6xl pt-8 font-bold">Semester</h1>
+  const { data: semesters, isLoading, error } = useGetSemestersQuery();
+  console.log(semesters);
 
-        <div className="grid grid-cols-2 gap-4 mt-16">
-          <div className="bg-white max-w-4xl h-4xl">
-            <img
-              src={""}
-              alt=""
-              srcset=""
-              className="bg-slate-600 w-full h-48"
-            />
-            <div className="container mx-auto px-4">
-              <h1 className="text-2xl font-semibold my-3 ">Semester 1</h1>
+  return (
+    <div className="bg-slate-50 pt-24 h-screen ">
+      <div className="grid md:grid-cols-2  container max-w-6xl mx-auto gap-8">
+        {semesters?.data?.map((semester) => {
+          return (
+            <div className="container mx-auto my-4 rounded shadow  p-10 bg-white pt-5">
+              <h1 className=" text-4xl font-black my-2"> {semester.name}</h1>
+              <p className="my-5">{semester.description}</p>
+              <Link
+                to={`/semesterDetails/${semester._id}`}
+                className="rounded-md btn-primary px-6  py-2 inline-block   text-white"
+              >
+                View Details
+              </Link>
             </div>
-          </div>
-          <div className="bg-white max-w-4xl h-4xl">
-            <img
-              src={""}
-              alt=""
-              srcset=""
-              className="bg-slate-600 w-full h-48"
-            />
-            <div className="container mx-auto px-4">
-              <h1 className="text-2xl font-semibold my-3 ">Semester 1</h1>
-            </div>
-          </div>
-         
-        </div>
+          );
+        })}
       </div>
     </div>
   );
