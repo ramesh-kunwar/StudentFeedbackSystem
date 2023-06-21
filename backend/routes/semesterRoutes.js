@@ -1,6 +1,6 @@
 const express = require("express");
 
-const { isLoggedIn, isAdmin } = require("../middleware/user");
+const { isLoggedIn, isAdmin, isUniversity } = require("../middleware/user");
 const {
   getSemesters,
   createSemester,
@@ -26,7 +26,14 @@ const router = express.Router();
 // router.route("/:id/reviews").post(isLoggedIn, createTeacherReview);
 
 // Semester
-router.route("/").get(getSemesters).post(createSemester);
-router.route("/:id").get(getSemester).put(updateSemester).delete(deleteSemester)
+router
+  .route("/")
+  .get(getSemesters)
+  .post(isLoggedIn, isUniversity, createSemester);
+router
+  .route("/:id")
+  .get(getSemester)
+  .put(isLoggedIn, isUniversity, updateSemester)
+  .delete(isLoggedIn, isUniversity, deleteSemester);
 
 module.exports = router;

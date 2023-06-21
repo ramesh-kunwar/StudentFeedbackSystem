@@ -34,9 +34,16 @@ exports.isLoggedIn = asyncHandler(async (req, res, next) => {
 });
 
 exports.isAdmin = (req, res, next) => {
-  if (req.user && req.user.role) {
+  if (req.user && req.user.role === "admin") {
     next();
   } else {
     return next(new ErrorResponse(`Not authorized as admin`, 401));
+  }
+};
+exports.isUniversity = (req, res, next) => {
+  if (req.user && req.user.role === "university") {
+    next();
+  } else {
+    return next(new ErrorResponse(`Not authorized as University`, 401));
   }
 };
