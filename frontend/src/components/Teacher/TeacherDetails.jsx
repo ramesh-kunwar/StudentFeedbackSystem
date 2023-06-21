@@ -75,6 +75,8 @@ const TeacherDetails = () => {
             {/* rating model */}
 
             <RatingModelForm />
+
+            {/* / Rating Model */}
           </div>
 
           <div className="col-span-3 md:p-5">

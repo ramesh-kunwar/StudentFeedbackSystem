@@ -9,13 +9,6 @@ const reviewSchema = mongoose.Schema(
     resourceProvided: Number,
     averageRating: Number,
 
-    // teachingSkill: {
-    //    type: Number,
-
-    //     required: true
-    //   },
-    // communicationSkill: { type: Number, required: true },
-    // resourceProvided: { type: Number, required: true },
     comment: { type: String, required: true },
     user: {
       type: mongoose.Schema.Types.ObjectId,
@@ -45,15 +38,7 @@ const teacherSchema = new mongoose.Schema(
       type: String,
     },
 
-    // teachingSkill: {
-    //   type: Number,
-    // },
-    // communicationSkill: {
-    //   type: Number,
-    // },
-    // resourceProvided: {
-    //   type: Number,
-    // },
+
 
     teachingSkill: Number,
     communicationSkill: Number,
