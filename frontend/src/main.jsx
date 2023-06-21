@@ -22,6 +22,8 @@ import { ToastContainer } from "react-toastify";
 import CreateTeacherForm from "./components/Admin/CreateTeacherForm.jsx";
 import EditTeacher from "./components/Admin/EditTeacher.jsx";
 import Semester from "./components/Semester/Semester.jsx";
+import SemesterDetails from "./components/Semester/SemesterDetails.jsx";
+import GetAllStudents from "./components/Admin/GetAllStudents.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -34,12 +36,18 @@ const router = createBrowserRouter(
         <Route path="/teacherDetails/:teacherId" element={<TeacherDetails />} />
 
         <Route path="/semester" element={<Semester />} />
+        <Route
+          path="/semesterDetails/:semesterId"
+          element={<SemesterDetails />}
+        />
       </Route>
       {/* admin route */}
       <Route path="" element={<AdminRoute />}>
         <Route path="/admin/dashboard" element={<AdminDashBoard />} />
+        <Route path="/admin/students" element={<GetAllStudents />} />
         <Route path="/admin/teacher/create" element={<CreateTeacherForm />} />
         <Route path="/admin/teacher/:id/edit" element={<EditTeacher />} />
+
       </Route>
     </>
   )

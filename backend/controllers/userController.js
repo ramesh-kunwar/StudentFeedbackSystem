@@ -3,13 +3,30 @@ const ErrorResponse = require("../utils/ErrorResponse");
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 /**********************************
- *      @desc Create user
+ *      @desc Get all user
  *      @route POST /api/v1/users
  *      @access Private
 /**********************************/
 
 exports.getUsers = asyncHandler(async (req, res, next) => {
+  console.log(req.user);
   const user = await User.find();
+
+  res.status(200).json({
+    success: true,
+    count: user.length,
+    data: user,
+  });
+});
+/**********************************
+ *      @desc Get all students
+ *      @route POST /api/v1/studetns
+ *      @access Private
+/**********************************/
+
+exports.getAllStudents = asyncHandler(async (req, res, next) => {
+  console.log(req.user);
+  const user = await User.find({ role: "user" });
 
   res.status(200).json({
     success: true,
@@ -46,6 +63,8 @@ exports.registerUser = asyncHandler(async (req, res, next) => {
     role,
   });
 
+  user.password = undefined;
+
   sendTokenResponse(user, 200, res);
 });
 
@@ -63,21 +82,18 @@ exports.loginUser = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse(`All fields are required`, 400));
   }
 
-  const user = await User.findOne({ email });
-  if (!user )  {
-
+  const user = await User.findOne({ email }).select("+password");
+  if (!user) {
     return next(new ErrorResponse(`Invalid Credentials`, 404));
   }
 
   const isMatchedPassword = await user.comparePassword(password);
 
-  console.log('PASS-',password);
-  console.log(password);
-  console.log(password, '-pass');
 
   if (!isMatchedPassword) {
     return next(new ErrorResponse(`Invalid credentials`, 401));
   }
+  user.password = undefined;
 
   sendTokenResponse(user, 200, res);
 });
@@ -168,6 +184,7 @@ const sendTokenResponse = async (user, statusCode, res) => {
   };
 
   res.cookie("jwt", token, options);
+
   res.status(statusCode).json({
     success: true,
     data: user,

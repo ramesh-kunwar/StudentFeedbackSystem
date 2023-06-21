@@ -36,6 +36,11 @@ const AdminDashBoard = () => {
               Create Teachers
             </button>
           </Link>
+          <Link to="/admin/students">
+            <button className="px-8 py-4 ml-5 btn btn-warning  text-black font-bold rounded-lg">
+              Get all Students
+            </button>
+          </Link>
         </div>
         <h1 className="mt-20 text-3xl font-bold">All Teachers</h1>
 
@@ -55,7 +60,7 @@ const AdminDashBoard = () => {
               </div>
               <div className="flex gap-3 items-center md:text-2xl">
                 <div className="text-orange-600">
-                  <Rating value={teacher.averageRating} />
+                  <Rating value={teacher.rating} />
                 </div>
                 <Link
                   className="btn bg-transparent hover:bg-transparent border-none text-xl md:text-3xl text-primary"

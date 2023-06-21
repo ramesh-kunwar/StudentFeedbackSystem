@@ -10,7 +10,14 @@ export const semesterApiSlice = apiSlice.injectEndpoints({
       keepUnusedDataFor: 5,
       providesTags: ["Semester"],
     }),
+    getSemesterDetails: builder.query({
+      query: (semesterId) => ({
+        url: `${SEMESTERS_URL}/${semesterId}`,
+      }),
+      providesTags: ["Semester"],
+    }),
   }),
 });
 
-export const { useGetSemestersQuery } = semesterApiSlice;
+export const { useGetSemestersQuery, useGetSemesterDetailsQuery } =
+  semesterApiSlice;

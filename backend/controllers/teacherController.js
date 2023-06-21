@@ -180,9 +180,11 @@ exports.createTeacherReview = asyncHandler(async (req, res, next) => {
         3
       ).toFixed(2),
       comment,
+
       user: req.user._id,
     };
 
+    console.log(req.user);
     teacher.reviews.push(review);
 
     teacher.numOfReviews = teacher.reviews.length;
