@@ -9,7 +9,6 @@ import LoadingIcon from "../LoadingIcon/LoadingIcon";
 import Rating from "../../components/Rating";
 import { useDispatch, useSelector } from "react-redux";
 import RatingModelForm from "./RatingModelForm";
-import FormModel from "./FormModel";
 
 const TeacherDetails = () => {
   // const [teacher, setTeacher] = useState({});
@@ -18,40 +17,10 @@ const TeacherDetails = () => {
 
   const {
     data: teacher,
-    refetch,
     isLoading,
     error,
   } = useGetTeacherDetailsQuery(id);
-
-  const [createReview, { isLoading: loadingTeacherReview }] =
-    useCreateReviewMutation();
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const [rating, setRating] = useState(0);
-  const [teachingSkill, setTeachingSkill] = useState(0);
-  const [communicationSkill, setCommunicationSkill] = useState(0);
-  const [comment, setComment] = useState("");
-  const { userInfo } = useSelector((state) => state.auth);
-  console.log(teacher, "teacher");
-
-  const submitReviewHandler = async (e) => {
-    e.preventDefault();
-    try {
-      await createReview({
-        id, // teacherId
-        comment,
-        // teachingSkill,
-        // communicationSkill,
-        rating,
-      }).unwrap();
-      refetch();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  console.log(teacher, "teacher");
+console.log(teacher, 'teacher');
   return (
     <div className="bg-slate-50 pt-10 min-h-screen">
       <div className="container  mx-auto max-w-6xl bg-white shadow rounded-xl ">
@@ -65,15 +34,14 @@ const TeacherDetails = () => {
 
             <div className="text-xl my-3 mx-2  text-orange-600 flex items-center gap-3 ">
               <Rating value={teacher?.data?.rating} />
-              {/* <Rating value={teacher?.data?.averageRating} /> */}
               <p className="text-sm text-black">
                 {teacher?.data?.numOfReviews} Reviews
               </p>
             </div>
-            {/* <RatingModelForm userInfo={userInfo} /> */}
 
             {/* rating model */}
 
+            {/* <RatingModelForm /> */}
             <RatingModelForm />
 
             {/* / Rating Model */}

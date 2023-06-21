@@ -1,13 +1,19 @@
-import React, { useState } from "react";
-import FormModel from "./FormModel";
-import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
 import {
   useCreateReviewMutation,
   useGetTeacherDetailsQuery,
 } from "../../slices/teacherApiSlice";
-import {  toast } from "react-toastify";
+import { toast } from "react-toastify";
 const RatingModelForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const teacherId = useParams();
   const id = teacherId.teacherId;
 
@@ -21,18 +27,14 @@ const RatingModelForm = () => {
   const [createReview, { isLoading: loadingTeacherReview }] =
     useCreateReviewMutation();
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const [rating, setRating] = useState(0);
-  const [teachingSkill, setTeachingSkill] = useState(0);
-  const [communicationSkill, setCommunicationSkill] = useState(0);
-  const [resourceProvided, setResourceProvided] = useState(0);
-  const [comment, setComment] = useState("");
   const { userInfo } = useSelector((state) => state.auth);
 
-  const submitReviewHandler = async (e) => {
-    e.preventDefault();
+  const submitReviewHandler = async ({
+    teachingSkill,
+    communicationSkill,
+    resourceProvided,
+    comment,
+  }) => {
     try {
       await createReview({
         id, // teacherId
@@ -40,16 +42,15 @@ const RatingModelForm = () => {
         teachingSkill,
         communicationSkill,
         resourceProvided,
-        // rating,
       }).unwrap();
       refetch();
+      toast.success("Reviewed successfully");
     } catch (error) {
       toast.error(error?.data?.error);
 
       console.log(error);
     }
   };
-  console.log(teacher, "teacher");
 
   return (
     <>
@@ -65,70 +66,127 @@ const RatingModelForm = () => {
         <form
           method="dialog"
           className="modal-box"
-          onSubmit={submitReviewHandler}
+          // onSubmit={submitReviewHandler}
+          onSubmit={handleSubmit(submitReviewHandler)}
         >
           {/* <FormModel /> */}
           <div className="container max-w-xl mx-auto px-5 ">
-            <h1 className="text-3xl font-bold  mx-auto ">Rate Teacher</h1>
+            <h1 className="text-3xl font-bold  mx-auto  my-3 mb-7">
+              Rate Teacher
+            </h1>
 
-            {/* <div className="mb-6">
-              <label className="block mb-2 text-md   text-gray-700 ">
-                Rating
-              </label>
-              <input
-                type="number"
-                value={rating}
-                onChange={(e) => setRating(e.target.value)}
-                placeholder="0 - 5"
-                className="border border-gray-300 outline-none focus:border-gray-600 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
-              />
-            </div> */}
             <div className="mb-6">
               <label className="block mb-2 text-md   text-gray-700 ">
                 Communication Skill
               </label>
+
               <input
                 type="number"
-                value={communicationSkill}
-                onChange={(e) => setCommunicationSkill(e.target.value)}
+                {...register("communicationSkill", {
+                  required: true,
+                  min: 1,
+                  max: 5,
+                })}
                 placeholder="0 - 5"
                 className="border border-gray-300 outline-none focus:border-gray-600 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
               />
+              {errors.communicationSkill?.type === "min" && (
+                <p className="text-red-600 italic text-sm">
+                  Rate between 1 and 5
+                </p>
+              )}
+              {errors.communicationSkill?.type === "max" && (
+                <p className="text-red-600 italic text-sm">
+                  Rate between 1 and 5
+                </p>
+              )}
+              {errors.communicationSkill?.type === "required" && (
+                <p className="text-red-600 italic text-sm">
+                  Rating is required
+                </p>
+              )}
             </div>
             <div className="mb-6">
               <label className="block mb-2 text-md   text-gray-700 ">
                 Teaching Skill
               </label>
+
               <input
                 type="number"
-                value={teachingSkill}
-                onChange={(e) => setTeachingSkill(e.target.value)}
+                {...register("teachingSkill", {
+                  required: true,
+                  min: 1,
+                  max: 5,
+                })}
                 placeholder="0 - 5"
                 className="border border-gray-300 outline-none focus:border-gray-600 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
               />
+              {errors.teachingSkill?.type === "min" && (
+                <p className="text-red-600 italic text-sm">
+                  Rate between 1 and 5
+                </p>
+              )}
+              {errors.teachingSkill?.type === "max" && (
+                <p className="text-red-600 italic text-sm">
+                  Rate between 1 and 5
+                </p>
+              )}
+              {errors.teachingSkill?.type === "required" && (
+                <p className="text-red-600 italic text-sm">
+                  Rating is required
+                </p>
+              )}
             </div>
+
             <div className="mb-6">
               <label className="block mb-2 text-md   text-gray-700 ">
-                Teaching Skill
+                Resources Provided
               </label>
+
               <input
                 type="number"
-                value={resourceProvided}
-                onChange={(e) => setResourceProvided(e.target.value)}
+                {...register("resourceProvided", {
+                  required: true,
+                  min: 1,
+                  max: 5,
+                })}
                 placeholder="0 - 5"
                 className="border border-gray-300 outline-none focus:border-gray-600 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
               />
+              {errors.resourceProvided?.type === "min" && (
+                <p className="text-red-600 italic text-sm">
+                  Rate between 1 and 5
+                </p>
+              )}
+              {errors.resourceProvided?.type === "max" && (
+                <p className="text-red-600 italic text-sm">
+                  Rate between 1 and 5
+                </p>
+              )}
+              {errors.resourceProvided?.type === "required" && (
+                <p className="text-red-600 italic text-sm">
+                  Rating is required
+                </p>
+              )}
             </div>
             <div className="mb-6">
               <label className="block mb-2 text-md   text-gray-700 ">
                 Give Your Feedback
               </label>
-              <textarea
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-                placeholder="Feedback Here"
-                className="textarea textarea-bordered textarea-sm w-full "
-              ></textarea>
+
+              <input
+                type="text"
+                {...register("comment", {
+                  required: true,
+                })}
+                className="border border-gray-300 outline-none focus:border-gray-600 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
+              />
+
+              {errors.comment?.type === "required" && (
+                <p className="text-red-600  italic text-sm">
+                  Feedback is required
+                </p>
+              )}
             </div>
 
             <div className="mt-5">

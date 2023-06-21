@@ -16,7 +16,7 @@ const Teachers = () => {
   return (
     <div className=" w-full bg-slate-50 ">
       <div className="container max-w-6xl mx-auto py-20 px-5">
-        <h1 className="text-4xl font-bold">All Teacher</h1>
+        <h1 className="text-4xl font-bold ">All Teacher</h1>
 
         <div className="grid  grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
           {teachers?.data?.map((teacher) => {

@@ -10,7 +10,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { setTeachers } from "../../slices/teacherSlice";
 import { toast } from "react-toastify";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const EditTeacher = ({}) => {
   const { id: teacherId } = useParams();
@@ -19,13 +19,14 @@ const EditTeacher = ({}) => {
   const [updateTeacher, { isLoading: loading }] = useUpdateTeacherMutation();
   // const [uploadTeacherImage, { isLoading: loadingImage }] =
   //   useUploadTeacherImageMutation();
-
+const navigate = useNavigate()
   const [name, setName] = useState("");
-  const [image, setImage] = useState('');
-  const [photos, setPHotos] = useState(null);
+  const [image, setImage] = useState("");
+  // const [photos, setPHotos] = useState(null);
   const [description, setDescription] = useState("");
   const [coursesTaught, setCoursesTaught] = useState("");
 
+  console.log(teacher);
   useEffect(() => {
     if (teacher) {
       setName(teacher.data.name);
@@ -56,24 +57,25 @@ const EditTeacher = ({}) => {
       toast.error("Unsuccess");
     } else {
       toast.success("updates");
+      navigate("/admin/dashboard")
     }
   };
 
-  const uploadFileHandler = async (e) => {
-    const formData = new FormData();
+  // const uploadFileHandler = async (e) => {
+  //   const formData = new FormData();
 
-    formData.append("image", e.target.files[0]);
-    console.log(e.target.files[0]);
+  //   formData.append("image", e.target.files[0]);
+  //   console.log(e.target.files[0]);
 
-    try {
-      const res = await uploadTeacherImage(formData).unwrap();
-      toast.success(res.message);
-      setImage(res.image);
-    } catch (error) {
-      console.log(error.error);
-      toast.error(err?.data?.message || error.error);
-    }
-  };
+  //   try {
+  //     const res = await uploadTeacherImage(formData).unwrap();
+  //     toast.success(res.message);
+  //     setImage(res.image);
+  //   } catch (error) {
+  //     console.log(error.error);
+  //     toast.error(err?.data?.message || error.error);
+  //   }
+  // };
 
   return (
     <>
@@ -84,18 +86,18 @@ const EditTeacher = ({}) => {
           </h1>
 
           <form action="" className="px-5 mt-10" onSubmit={editTeacherHandler}>
-            <div className="mb-6">
+            {/* <div className="mb-6">
               <input type="text" placeholder="Enter Image url" value={image} onChange={(e)=> setImage} />
               <label className="block mb-2 text-md   text-gray-700 ">
                 Upload Image
               </label>
               <input
                 type="file"
-                // value={image}
+
                 onChange={uploadFileHandler}
                 className="border border-gray-300 outline-none focus:border-gray-600 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
               />
-            </div>
+            </div> */}
             <div className="mb-6">
               <label className="block mb-2 text-md   text-gray-700 ">
                 Teacher Name

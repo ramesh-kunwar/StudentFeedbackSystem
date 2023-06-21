@@ -34,9 +34,11 @@ exports.getTeacher = asyncHandler(async (req, res, next) => {
     );
   }
 
+
   res.status(200).json({
     success: true,
     data: teacher,
+
   });
 });
 
@@ -144,14 +146,11 @@ exports.deleteTeachers = asyncHandler(async (req, res, next) => {
   });
 });
 
+// Review Teacher
+
 exports.createTeacherReview = asyncHandler(async (req, res, next) => {
-  const {
-    rating,
-    comment,
-    teachingSkill,
-    communicationSkill,
-    resourceProvided,
-  } = req.body;
+  const { comment, teachingSkill, communicationSkill, resourceProvided } =
+    req.body;
 
   const teacher = await Teacher.findById(req.params.id);
 
