@@ -25,11 +25,11 @@ console.log(teacher, 'teacher');
     <div className="bg-slate-50 pt-10 min-h-screen">
       <div className="container  mx-auto max-w-6xl bg-white shadow rounded-xl ">
         <div className="lg:grid sm:block px-8 md:px-0 gap-6  py-6 mx-3 md:grid-cols-4 ">
-          <div className="col-span-1">
+          <div className="col-span-1 ml-1 ">
             <img
               src={teacher?.data?.image}
               alt=""
-              className=" rounded-md h-fit w-fit"
+              className=" rounded-md h-60 w-full"
             />
 
             <div className="text-xl my-3 mx-2  text-orange-600 flex items-center gap-3 ">
