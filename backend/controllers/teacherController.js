@@ -34,11 +34,9 @@ exports.getTeacher = asyncHandler(async (req, res, next) => {
     );
   }
 
-
   res.status(200).json({
     success: true,
     data: teacher,
-
   });
 });
 
@@ -54,29 +52,6 @@ exports.createTeachers = asyncHandler(async (req, res, next) => {
   // check for existign teacher
   const { name, description, coursesTaught, image } = req.body;
 
-  if (!name || !description) {
-    return next(
-      new ErrorResponse(
-        "Name, description, photos, coursesTaught are required",
-        401
-      )
-    );
-  }
-
-  // if (!req.file) {
-  //   return next(new ErrorResponse("Image is required", 401));
-  // }
-
-  // if (req.file) {
-  //   const result = await cloudinary.uploader.upload(req.file.path);
-  //   const imagesObj = {
-  //     id: result.public_id,
-  //     secure_url: result.secure_url,
-  //   };
-
-  //   req.body.image = imagesObj;
-  // }
-
   // Checking for existing user
   const existingTeacher = await Teacher.findOne({ name });
 
@@ -84,11 +59,17 @@ exports.createTeachers = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse("Teacher already exists", 400));
   }
   // Create teacher
-  const teacher = await Teacher.create(req.body);
+  const teacher = await Teacher.create({
+    name,
+    description,
+    coursesTaught,
+    image
+  });
 
   res.status(201).json({
     success: true,
     data: teacher,
+    image,
   });
 });
 
@@ -99,7 +80,7 @@ exports.createTeachers = asyncHandler(async (req, res, next) => {
 /**********************************/
 
 exports.updateTeachers = asyncHandler(async (req, res, next) => {
-  const { name, description, coursesTaught, photo } = req.body;
+  const { name, description, coursesTaught, photo, image } = req.body;
 
   const teacher = await Teacher.findById(req.params.id);
 
@@ -110,15 +91,15 @@ exports.updateTeachers = asyncHandler(async (req, res, next) => {
   }
 
   if (teacher) {
-    (teacher.name = name),
-      (teacher.description = description),
-      (teacher.coursesTaught = coursesTaught);
-    teacher.photo = photo;
+    teacher.name = name;
+    teacher.description = description;
+    teacher.coursesTaught = coursesTaught;
+    teacher.image = image;
 
     const updatedTeacher = await teacher.save();
     res.status(200).json({
       success: true,
-      photo,
+      image,
       updatedTeacher,
     });
   }

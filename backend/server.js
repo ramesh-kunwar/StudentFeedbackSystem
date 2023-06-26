@@ -12,14 +12,16 @@ const app = express();
 
 connectDB();
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+// cloudinary.config({
+//   cloud_name: process.env.CLOUDINARY_NAME,
+//   api_key: process.env.CLOUDINARY_API_KEY,
+//   api_secret: process.env.CLOUDINARY_API_SECRET,
+// });
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
+
 // app.use(bodyParser.urlencoded({ extended: true }));
 
 // app.use(
@@ -36,7 +38,7 @@ app.use(morgan("tiny"));
 const teachersRoutes = require("./routes/teacherRoutes");
 const semesterRoutes = require("./routes/semesterRoutes");
 const userRoutes = require("./routes/userRoutes");
-// const uploadRoutes = require("./routes/uploadRoutes");
+const uploadRoutes = require("./routes/uploadRoutes");
 
 const errorHander = require("./middleware/error");
 
@@ -53,12 +55,10 @@ app.get("/", (req, res) => {
 app.use("/api/v1/teachers", teachersRoutes);
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/semesters", semesterRoutes);
-// app.use("/api/v1/upload", uploadRoutes);
+app.use("/api/v1/upload", uploadRoutes);
 
-// // const __dirname = path.resolve()
-// __dirname = path.resolve();
-
-// app.use("/uploads", express.static(path.join(__dirname)));
+__dirname = path.resolve();
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 // error handler
 app.use(errorHander);

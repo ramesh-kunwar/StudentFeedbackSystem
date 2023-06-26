@@ -19,8 +19,8 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
   const dispatch = useDispatch();
 
   const [createTeacher, { isLoading }] = useCreateTeacherMutation();
-  // const [uploadTeacherImage, { isLoading: loadingUpload }] =
-  //   useUploadTeacherImageMutation();
+  const [uploadTeacherImage, { isLoading: loadingUpload }] =
+    useUploadTeacherImageMutation();
   const [teacher, setTeacher] = useState({
     name: "",
     description: "",
@@ -38,15 +38,11 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
     e.preventDefault();
 
     try {
-      // const res = await createTeacher({
-      //   name,
-      //   description,
-      //   coursesTaught,
-      // }).unwrap();
       await createTeacher({
         name,
         description,
         coursesTaught,
+        image,
       }).unwrap();
 
       // dispatch(setTeachers({ ...res }));
@@ -62,21 +58,15 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
   };
   console.log(image);
 
-  const handleImage = async (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
+  const uploadFileHandler = async (e) => {
     const formData = new FormData();
-    reader.onload = (r) => {
-      setImage({
-        // placeholder: r.target.result,
-        file: e.target.files[0],
-      });
-      formData.append(image);
-
-      console.log(r.target.result);
-    };
-    console.log(reader, "rea");
+    formData.append("image", e.target.files[0]);
+    try {
+      const res = await uploadTeacherImage(formData).unwrap();
+      setImage(res.image);
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
   };
 
   return (
@@ -135,18 +125,20 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
             </div>
 
             <div className="mb-6">
-              <label
-                htmlFor="teacherImage"
-                className="block mb-2 text-md   text-gray-700 "
-              >
+              <input
+                type="text"
+                value={image}
+                hidden
+                onChange={(e) => setImage(e.target.value)}
+              />
+              <label className="block mb-2 text-md   text-gray-700 ">
                 Upload Image
               </label>
-              {/* <input
+              <input
                 type="file"
-                className=" border border-gray-300 outline-none focus:border-gray-600  text-gray-900 text-sm rounded-lg  block w-full p-2.5 "
-                multiple={false}
-                onChange={handleImage}
-              /> */}
+                onChange={uploadFileHandler}
+                className="border border-gray-300 outline-none focus:border-gray-600 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
+              />
             </div>
 
             <div className="mt-5">

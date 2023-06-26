@@ -42,7 +42,7 @@ const teacherSchema = new mongoose.Schema(
     },
     image: {
       type: String,
-      // default: "images/teacherProfile.jpeg",
+      // required: true,
       default:
         "https://media.istockphoto.com/id/1083619800/photo/crazy-angry-professor-yelling-and-pointing-with-a-stick.jpg?s=612x612&w=0&k=20&c=ykXbJvGrrRltXpJNl9iB55cf393d4NtCkDSg9tsuqU0=",
     },

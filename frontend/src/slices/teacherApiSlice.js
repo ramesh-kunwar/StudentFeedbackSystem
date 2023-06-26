@@ -26,13 +26,13 @@ export const teacherApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Teachers"],
     }),
-    // uploadTeacherImage: builder.mutation({
-    //   query: (data) => ({
-    //     url: `${UPLOAD_URL}`,
-    //     method: "POST",
-    //     body: data,
-    //   }),
-    // }),
+    uploadTeacherImage: builder.mutation({
+      query: (data) => ({
+        url: `${UPLOAD_URL}`,
+        method: "POST",
+        body: data,
+      }),
+    }),
 
     updateTeacher: builder.mutation({
       query: (data) => ({
@@ -58,8 +58,6 @@ export const teacherApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Product"],
     }),
-
-   
   }),
 });
 
