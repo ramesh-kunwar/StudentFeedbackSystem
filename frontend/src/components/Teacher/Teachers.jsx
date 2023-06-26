@@ -23,10 +23,10 @@ const Teachers = () => {
   console.log(topRatedTeachers, "top");
 
   return (
-    <div className=" w-full bg-slate-50 ">
+    <div className=" h-screen bg-slate-50 ">
       <div className="container max-w-6xl mx-auto py-20 px-5">
         {/* Top Instructors */}
-        <h1 className="text-4xl font-bold ">Top Instructors</h1>
+        {/* <h1 className="text-4xl font-bold ">Top Instructors</h1>
         <div className="grid  grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 mb-20">
           {topRatedTeachers.map((teacher) => {
             return (
@@ -77,7 +77,7 @@ const Teachers = () => {
               </div>
             );
           })}
-        </div>
+        </div> */}
         {/* / Top Instructors */}
 
         <h1 className="text-4xl font-bold ">All Teacher</h1>
