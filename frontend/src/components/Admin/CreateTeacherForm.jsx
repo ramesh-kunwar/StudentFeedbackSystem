@@ -10,6 +10,9 @@ import {
 import { useDispatch } from "react-redux";
 import { setTeachers } from "../../slices/teacherSlice";
 import { toast } from "react-toastify";
+
+import { motion } from "framer-motion";
+
 const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -71,7 +74,11 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
 
   return (
     <>
-      <div>
+      <motion.div
+        initial={{ opacity: 0, y: '0.5%' }}
+        animate={{ opacity: 1, y: '0%' }}
+        transition={{ duration: .5 }}
+      >
         <div className="container max-w-xl mx-auto">
           <h1 className="text-5xl font-extrabold  mt-20 flex justify-center">
             Create Teacher <IoIosCreate />
@@ -151,7 +158,7 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
             </div>
           </form>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

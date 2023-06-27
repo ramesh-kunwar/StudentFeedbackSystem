@@ -7,6 +7,7 @@ import { setCredentials } from "../slices/authSlice";
 
 import { toast } from "react-toastify";
 import { useRegisterMutation } from "../slices/userApiSlice";
+import { motion } from "framer-motion";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -38,7 +39,11 @@ const Register = () => {
     }
   };
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0, y: "0.5%" }}
+      animate={{ opacity: 1, y: "0%" }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="container max-w-xl mx-auto">
         <h1 className="text-5xl font-extrabold  mt-20 flex justify-center">
           Register <IoCreateOutline />
@@ -97,7 +102,7 @@ const Register = () => {
           </div>
         </form>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

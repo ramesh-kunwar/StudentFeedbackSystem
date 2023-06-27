@@ -12,6 +12,7 @@ import {
 } from "../../slices/teacherApiSlice";
 import Rating from "../Rating";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 
 const AdminDashBoard = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -28,7 +29,12 @@ const AdminDashBoard = () => {
     }
   };
   return (
-    <div className="bg-slate-50 pt-16 min-h-screen">
+    <motion.div
+      initial={{ opacity: 0, y: "0.5%" }}
+      animate={{ opacity: 1, y: "0%" }}
+      transition={{ duration: 0.5 }}
+      className="bg-slate-50 pt-16 min-h-screen"
+    >
       <div className="container px-4 mx-auto max-w-6xl">
         <div className="">
           <Link to="/admin/teacher/create">
@@ -116,7 +122,7 @@ const AdminDashBoard = () => {
           </table>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

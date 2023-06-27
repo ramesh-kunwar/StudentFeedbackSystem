@@ -8,6 +8,7 @@ import {
 } from "../../slices/teacherApiSlice";
 import LoadingIcon from "../LoadingIcon/LoadingIcon";
 import Rating from "../Rating";
+import { motion } from "framer-motion";
 
 const Teachers = () => {
   const { data: teachers, isLoading, error } = useGetTeachersQuery();
@@ -23,7 +24,11 @@ const Teachers = () => {
   console.log(topRatedTeachers, "top");
 
   return (
-    <div className=" h-screen bg-slate-50 ">
+    <motion.div 
+    initial={{ opacity: 0, y: '0.5%' }}
+    animate={{ opacity: 1, y: '0%' }}
+    transition={{ duration: .5 }}
+    className=" h-screen bg-slate-50 ">
       <div className="container max-w-6xl mx-auto py-20 px-5">
         {/* Top Instructors */}
         {/* <h1 className="text-4xl font-bold ">Top Instructors</h1>
@@ -136,7 +141,7 @@ const Teachers = () => {
         </div>
         {/* / All Teachers */}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

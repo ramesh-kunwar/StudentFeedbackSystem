@@ -1,11 +1,17 @@
 import React from "react";
 import { useGetAllStudentsQuery } from "../../slices/userApiSlice";
+import { motion } from "framer-motion";
 
 const GetAllStudents = () => {
   const { data: students } = useGetAllStudentsQuery();
   console.log(students);
   return (
-    <div className="bg-slate-50 py-10 h-screen">
+    <motion.div 
+    initial={{ opacity: 0, y: '0.5%' }}
+    animate={{ opacity: 1, y: '0%' }}
+    transition={{ duration: .5 }}
+
+    className="bg-slate-50 py-10 h-screen">
       <div className="container px-4 mx-auto max-w-4xl ">
         <h1 className="text-4xl font-bold py-10 ">All Students</h1>
         {/* <div class="relative overflow-x-auto"> */}
@@ -46,7 +52,7 @@ const GetAllStudents = () => {
         </table>
         {/* </div> */}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

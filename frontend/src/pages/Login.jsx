@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../slices/userApiSlice";
 import { setCredentials } from "../slices/authSlice";
 import { useForm } from "react-hook-form";
+import { motion } from "framer-motion";
 
 import { toast } from "react-toastify";
 
@@ -37,7 +38,11 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <motion.div
+    initial={{ opacity: 0, y: '0.5%' }}
+    animate={{ opacity: 1, y: '0%' }}
+    transition={{ duration: .5 }}
+    >
       <div className="container max-w-xl mx-auto">
         <h1 className="text-5xl font-extrabold  mt-20 flex justify-center">
           Login <BiLogInCircle />
@@ -87,7 +92,7 @@ const Login = () => {
           </div>
         </form>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,9 +1,16 @@
 import React from "react";
 import homeImage from "../assets/images/home.jpg";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+
 const Home = () => {
   return (
-    <div>
+    <motion.div
+    initial={{ opacity: 0, y: '0.5%' }}
+    animate={{ opacity: 1, y: '0%' }}
+    transition={{ duration: .5 }}
+
+    >
       <div className="container mx-auto max-w-7xl">
         <div className="flex flex-wrap flex-col-reverse md:flex-row items-center min-h-screen">
           <div className="px-6 md:w-1/2">
@@ -34,7 +41,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
 
    
   );

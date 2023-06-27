@@ -9,20 +9,23 @@ import LoadingIcon from "../LoadingIcon/LoadingIcon";
 import Rating from "../../components/Rating";
 import { useDispatch, useSelector } from "react-redux";
 import RatingModelForm from "./RatingModelForm";
+import { motion } from "framer-motion";
 
 const TeacherDetails = () => {
   // const [teacher, setTeacher] = useState({});
   const teacherId = useParams();
   const id = teacherId.teacherId;
 
-  const {
-    data: teacher,
-    isLoading,
-    error,
-  } = useGetTeacherDetailsQuery(id);
-console.log(teacher, 'teacher');
+  const { data: teacher, isLoading, error } = useGetTeacherDetailsQuery(id);
+  console.log(teacher, "teacher");
   return (
-    <div className="bg-slate-50 pt-10 min-h-screen">
+    <motion.div
+    initial={{ opacity: 0, y: '0.5%' }}
+    animate={{ opacity: 1, y: '0%' }}
+    transition={{ duration: .5 }}
+
+
+    className="bg-slate-50 pt-10 min-h-screen">
       <div className="container  mx-auto max-w-6xl bg-white shadow rounded-xl ">
         <div className="lg:grid sm:block px-8 md:px-0 gap-6  py-6 mx-3 md:grid-cols-4 ">
           <div className="col-span-1 ml-1 ">
@@ -120,7 +123,7 @@ console.log(teacher, 'teacher');
         </div>
       </div>
       {/* / Review Section */}
-    </div>
+    </motion.div>
   );
 };
 
