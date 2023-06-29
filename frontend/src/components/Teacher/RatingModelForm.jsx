@@ -58,7 +58,7 @@ const RatingModelForm = () => {
       <button
         onClick={() => window.my_modal_2.showModal()}
         className="btn  btn-primary btn-wide rounded-md text-white font-bold "
-        disabled={!userInfo?.data?._id}
+        disabled={!(userInfo?.data?.role === "student")}
       >
         Rate Teacher
       </button>
