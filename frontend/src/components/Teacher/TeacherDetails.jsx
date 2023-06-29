@@ -5,6 +5,8 @@ import {
   useCreateReviewMutation,
   useGetTeacherDetailsQuery,
 } from "../../slices/teacherApiSlice";
+import { FaUserCircle } from "react-icons/fa";
+
 import LoadingIcon from "../LoadingIcon/LoadingIcon";
 import Rating from "../../components/Rating";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,12 +22,11 @@ const TeacherDetails = () => {
   console.log(teacher, "teacher");
   return (
     <motion.div
-    initial={{ opacity: 0, y: '0.5%' }}
-    animate={{ opacity: 1, y: '0%' }}
-    transition={{ duration: .5 }}
-
-
-    className="bg-slate-50 pt-10 min-h-screen">
+      initial={{ opacity: 0, y: "0.5%" }}
+      animate={{ opacity: 1, y: "0%" }}
+      transition={{ duration: 0.5 }}
+      className="bg-slate-50 pt-10 min-h-screen"
+    >
       <div className="container  mx-auto max-w-6xl bg-white shadow rounded-xl ">
         <div className="lg:grid sm:block px-8 md:px-0 gap-6  py-6 mx-3 md:grid-cols-4 ">
           <div className="col-span-1 ml-1 ">
@@ -109,9 +110,11 @@ const TeacherDetails = () => {
                   className="bg-white container mx-auto p-5 shadow rounded-md my-4"
                 >
                   <p className="text-gray-700 text-sm">{reviewDate}</p>
+
                   <>
-                    <div className="flex items-center gap-3 my-1">
+                    <div className="flex items-center gap-3 my-2">
                       <h1 className="font-bold text-xl"> {review.name}</h1>
+
                       <Rating value={review.averageRating} />
                     </div>
                   </>
