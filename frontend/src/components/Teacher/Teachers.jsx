@@ -28,7 +28,7 @@ const Teachers = () => {
     initial={{ opacity: 0, y: '0.5%' }}
     animate={{ opacity: 1, y: '0%' }}
     transition={{ duration: .5 }}
-    className=" h-screen bg-slate-50 ">
+    className="min-h-screen bg-slate-50 ">
       <div className="container max-w-6xl mx-auto py-20 px-5">
         {/* Top Instructors */}
         {/* <h1 className="text-4xl font-bold ">Top Instructors</h1>

@@ -17,18 +17,13 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [coursesTaught, setCoursesTaught] = useState([]);
-  const [photos, setPhotos] = useState();
   const [image, setImage] = useState("");
   const dispatch = useDispatch();
 
   const [createTeacher, { isLoading }] = useCreateTeacherMutation();
   const [uploadTeacherImage, { isLoading: loadingUpload }] =
     useUploadTeacherImageMutation();
-  const [teacher, setTeacher] = useState({
-    name: "",
-    description: "",
-    coursesTaught: "",
-  });
+ 
   function handleCourse(e) {
     const text = e.target.value;
     const splittedText = text.split(",");
@@ -36,8 +31,6 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
   }
 
   const createTeacherHandler = async (e) => {
-    console.log(image, "image");
-    console.log(photos, "sb");
     e.preventDefault();
 
     try {
@@ -54,12 +47,12 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
       setName("");
       setDescription("");
       setCoursesTaught("");
+
     } catch (error) {
       toast.error(error.data.error);
       console.log(error?.data?.error);
     }
   };
-  console.log(image);
 
   const uploadFileHandler = async (e) => {
     const formData = new FormData();
@@ -75,9 +68,9 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
   return (
     <>
       <motion.div
-        initial={{ opacity: 0, y: '0.5%' }}
-        animate={{ opacity: 1, y: '0%' }}
-        transition={{ duration: .5 }}
+        initial={{ opacity: 0, y: "0.5%" }}
+        animate={{ opacity: 1, y: "0%" }}
+        transition={{ duration: 0.5 }}
       >
         <div className="container max-w-xl mx-auto">
           <h1 className="text-5xl font-extrabold  mt-20 flex justify-center">
@@ -100,27 +93,15 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
                 className="border border-gray-300 outline-none focus:border-gray-600 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
               />
             </div>
-
             <div className="mb-6">
               <label
                 htmlFor="teacherDetails"
-                className="block mb-2 text-md   text-gray-700 "
+                className="block mb-2 text-md   text-gray-700  "
               >
-                Teacher Details
-              </label>
-              <input
-                type="text"
-                value={description}
-                className=" border border-gray-300 outline-none focus:border-gray-600  text-gray-900 text-sm rounded-lg  block w-full p-2.5 "
-                onChange={(e) => setDescription(e.target.value)}
-              />
-            </div>
-            <div className="mb-6">
-              <label
-                htmlFor="teacherDetails"
-                className="block mb-2 text-md   text-gray-700 "
-              >
-                Courses Taught <span>(Separate using comma)</span>
+                Courses Taught{" "}
+                <span className="text-red-600 italic">
+                  (Separate using comma)
+                </span>
               </label>
               <input
                 type="text"
@@ -129,6 +110,23 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
                 onChange={handleCourse}
                 className=" border border-gray-300 outline-none focus:border-gray-600  text-gray-900 text-sm rounded-lg  block w-full p-2.5 "
               />
+            </div>
+            <div className="mb-6">
+              <label
+                htmlFor="teacherDetails"
+                className="block mb-2 text-md   text-gray-700 "
+              >
+                Teacher Details
+              </label>
+
+              <textarea
+              value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                id="message"
+                rows="4"
+                class="border border-gray-300 outline-none focus:border-gray-600 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+                placeholder="Write your thoughts here..."
+              ></textarea>
             </div>
 
             <div className="mb-6">

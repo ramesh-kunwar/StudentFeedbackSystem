@@ -26,7 +26,9 @@ exports.getUsers = asyncHandler(async (req, res, next) => {
 
 exports.getAllStudents = asyncHandler(async (req, res, next) => {
   console.log(req.user);
-  const user = await User.find({ role: "user" });
+  const user = await User.find({ role: "student"});
+  // const user = await User.find({ role: { $in: ["student", "user"] } });
+
 
   res.status(200).json({
     success: true,
@@ -88,7 +90,6 @@ exports.loginUser = asyncHandler(async (req, res, next) => {
   }
 
   const isMatchedPassword = await user.comparePassword(password);
-
 
   if (!isMatchedPassword) {
     return next(new ErrorResponse(`Invalid credentials`, 401));

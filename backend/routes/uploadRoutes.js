@@ -2,6 +2,7 @@ const path = require("path");
 const express = require("express");
 const multer = require("multer");
 const router = express.Router();
+const sharp = require("sharp");
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
@@ -41,10 +42,26 @@ router.post("/", (req, res) => {
       res.status(400).send({ message: err.message });
     }
 
-    res.status(200).send({
-      message: "Image uploaded successfully",
-      image: `/uploads/${req.file.filename}`,
-    });
+    // res.status(200).send({
+    //   message: "Image uploaded successfully",
+    //   image: `/uploads/${req.file.filename}`,
+    // });
+
+    const imagePath = `/uploads/${req.file.filename}`;
+
+    // Resize the image using sharp library
+    sharp(req.file.path)
+      .resize(300, 300) // Set your desired width and height
+      .toFile(req.file.path.replace(path.extname(req.file.path), '.jpg'))
+      .then(() => {
+        res.status(200).send({
+          message: "Image uploaded and resized successfully",
+          image: imagePath,
+        });
+      })
+      .catch((resizeErr) => {
+        res.status(400).send({ message: resizeErr.message });
+      });
   });
 });
 

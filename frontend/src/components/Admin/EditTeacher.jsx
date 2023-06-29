@@ -96,7 +96,7 @@ const EditTeacher = ({}) => {
                 className="border border-gray-300 outline-none focus:border-gray-600 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
               />
             </div>
-            <div className="mb-6">
+            {/* <div className="mb-6">
               <label className="block mb-2 text-md   text-gray-700 ">
                 Teacher Details
               </label>
@@ -106,7 +106,8 @@ const EditTeacher = ({}) => {
                 value={description}
                 className="border border-gray-300 outline-none focus:border-gray-600 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
               />
-            </div>
+            </div> */}
+
             <div className="mb-6">
               <label className="block mb-2 text-md   text-gray-700 ">
                 Courses Taught{" "}
@@ -120,6 +121,24 @@ const EditTeacher = ({}) => {
                 value={coursesTaught}
                 className="border border-gray-300 outline-none focus:border-gray-600 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
               />
+            </div>
+
+            <div className="mb-6">
+              <label
+                htmlFor="teacherDetails"
+                className="block mb-2 text-md   text-gray-700 "
+              >
+                Teacher Details
+              </label>
+
+              <textarea
+              value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                id="message"
+                rows="4"
+                class="border border-gray-300 outline-none focus:border-gray-600 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+                placeholder="Write your thoughts here..."
+              ></textarea>
             </div>
 
             <div className="mb-6">

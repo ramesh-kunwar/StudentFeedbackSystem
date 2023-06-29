@@ -67,7 +67,7 @@ const TeacherDetails = () => {
                 );
               })}
             </div>
-            <p className="my-2">{teacher?.data?.description}</p>
+            <p className="my-2 text-gray-500">{teacher?.data?.description}</p>
             <div className="grid grid-cols-3">
               <div>
                 <p className="font-bold font-xl my-2">Teaching Skill</p>
@@ -109,7 +109,7 @@ const TeacherDetails = () => {
                   key={review._id}
                   className="bg-white container mx-auto p-5 shadow rounded-md my-4"
                 >
-                  <p className="text-gray-700 text-sm">{reviewDate}</p>
+                  <p className="text-gray-500 text-sm">{reviewDate}</p>
 
                   <>
                     <div className="flex items-center gap-3 my-2">

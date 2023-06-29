@@ -112,7 +112,7 @@ export default function Navbar() {
                                   to={"/profile"}
                                   className="block px-4 py-2 text-sm hover:bg-slate-100 text-gray-700"
                                 >
-                                  View Profile
+                                  {userInfo?.data?.name}
                                 </Link>
                               )}
                             </Menu.Item>

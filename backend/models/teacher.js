@@ -42,12 +42,13 @@ const teacherSchema = new mongoose.Schema(
     },
     image: {
       type: String,
-      // required: true,
+      required: true,
       default:
-        "https://media.istockphoto.com/id/1083619800/photo/crazy-angry-professor-yelling-and-pointing-with-a-stick.jpg?s=612x612&w=0&k=20&c=ykXbJvGrrRltXpJNl9iB55cf393d4NtCkDSg9tsuqU0=",
+        "https://t3.ftcdn.net/jpg/02/44/40/64/360_F_244406408_87va1TTebuoPfUperNffP6upK2HioHfm.jpg",
     },
     description: {
       type: String,
+      required: true,
     },
 
     teachingSkill: Number,
@@ -63,14 +64,9 @@ const teacherSchema = new mongoose.Schema(
       default: 0,
     },
     reviews: [reviewSchema],
-
-    photo: {
-      id: { type: String },
-      secure_url: { type: String },
-    },
     coursesTaught: {
       type: [],
-      // require: true,
+      required: true,
     },
     user: {
       type: mongoose.Schema.ObjectId,

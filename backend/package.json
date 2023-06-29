@@ -23,7 +23,8 @@
     "mongoose": "^7.2.0",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
-    "parserjs": "^0.2.0"
+    "parserjs": "^0.2.0",
+    "sharp": "^0.32.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"

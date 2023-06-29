@@ -1,8 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const ErrorResponse = require("../utils/ErrorResponse");
 const Teacher = require("../models/teacher");
-const errorHander = require("../middleware/error");
-const cloudinary = require("cloudinary").v2;
 /**********************************
  *      @desc Get all teachers
  *      @route GET /api/v1/teachers
@@ -51,6 +49,10 @@ exports.createTeachers = asyncHandler(async (req, res, next) => {
 
   // check for existign teacher
   const { name, description, coursesTaught, image } = req.body;
+  if(!name || !description || !coursesTaught || !image){
+    return next(new ErrorResponse("All fields are required", 401));
+
+  }
 
   // Checking for existing user
   const existingTeacher = await Teacher.findOne({ name });
