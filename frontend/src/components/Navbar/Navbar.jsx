@@ -22,7 +22,7 @@ function classNames(...classes) {
 export default function Navbar() {
   const { userInfo } = useSelector((state) => state.auth);
   const [logoutApiCall] = useLogoutMutation();
-
+  console.log(userInfo);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -103,16 +103,23 @@ export default function Navbar() {
                               {userInfo?.data?.role === "admin" ? (
                                 <Link
                                   to={"/admin/dashboard"}
-                                  className="block px-4 py-2 text-sm hover:bg-slate-100 text-gray-700"
+                                  className="block  px-4   py-2 text-sm  hover:bg-slate-300 text-gray-700"
                                 >
                                   Admin Dashboard
+                                </Link>
+                              ) : userInfo?.data?.role == "university" ? (
+                                <Link
+                                  to={"/university/dashboard"}
+                                  className="block  px-4   py-2 text-sm  hover:bg-slate-300 text-gray-700"
+                                >
+                                  University Dashboard
                                 </Link>
                               ) : (
                                 <Link
                                   to={"/profile"}
-                                  className="block px-4 py-2 text-sm hover:bg-slate-100 text-gray-700"
+                                  className="block  px-4 py-2 text-sm hover:bg-slate-300 text-gray-700"
                                 >
-                                  {userInfo?.data?.name}
+                                  View Profile
                                 </Link>
                               )}
                             </Menu.Item>
@@ -188,6 +195,13 @@ export default function Navbar() {
                                   className="block  px-4   py-2 text-sm  hover:bg-slate-300 text-gray-700"
                                 >
                                   Admin Dashboard
+                                </Link>
+                              ) : userInfo?.data?.role == "university" ? (
+                                <Link
+                                  to={"/university/dashboard"}
+                                  className="block  px-4   py-2 text-sm  hover:bg-slate-300 text-gray-700"
+                                >
+                                  University Dashboard
                                 </Link>
                               ) : (
                                 <Link

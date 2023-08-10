@@ -16,8 +16,29 @@ export const semesterApiSlice = apiSlice.injectEndpoints({
       }),
       providesTags: ["Semester"],
     }),
+
+    createSemester: builder.mutation({
+      query: (data) => ({
+        url: `${SEMESTERS_URL}`,
+        method: 'POST',
+        body: data,
+      }),
+      invalidatesTags: ["Semester"],
+    }),
+    updateSemester: builder.mutation({
+      query: (data) => ({
+        url: `${SEMESTERS_URL}/${data.semesterId}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["Teachers"],
+    }),
   }),
 });
 
-export const { useGetSemestersQuery, useGetSemesterDetailsQuery } =
-  semesterApiSlice;
+export const {
+  useGetSemestersQuery,
+  useGetSemesterDetailsQuery,
+  useCreateSemesterMutation,
+  useUpdateSemesterMutation
+} = semesterApiSlice;

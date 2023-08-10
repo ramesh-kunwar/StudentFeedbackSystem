@@ -17,6 +17,7 @@ import { Provider } from "react-redux";
 import store from "./store.js";
 import Register from "./pages/Register.jsx";
 import AdminRoute from "./components/AdminRoute.jsx";
+import UniversityRoute from "./components/UniversityRoute.jsx";
 import AdminDashBoard from "./components/Admin/AdminDashBoard.jsx";
 import { ToastContainer } from "react-toastify";
 import CreateTeacherForm from "./components/Admin/CreateTeacherForm.jsx";
@@ -25,6 +26,9 @@ import Semester from "./components/Semester/Semester.jsx";
 import SemesterDetails from "./components/Semester/SemesterDetails.jsx";
 import GetAllStudents from "./components/Admin/GetAllStudents.jsx";
 import NotFound from "./components/NotFound.jsx";
+import UniversityDashboard from "./components/University/UniversityDashboard.jsx";
+import CreateSemesterForm from "./components/University/CreateSemesterForm.jsx";
+import EditSemester from "./components/University/EditSemester.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -49,6 +53,15 @@ const router = createBrowserRouter(
         <Route path="/admin/students" element={<GetAllStudents />} />
         <Route path="/admin/teacher/create" element={<CreateTeacherForm />} />
         <Route path="/admin/teacher/:id/edit" element={<EditTeacher />} />
+      </Route>
+
+      {/* university route */}
+
+      <Route path="" element={<UniversityRoute />}>
+        <Route path="university/dashboard" element={<UniversityDashboard />} />
+        <Route path="university/semester/create" element={<CreateSemesterForm />} />
+        <Route path="/university/semester/:id/edit" element={<EditSemester />} />
+
       </Route>
     </>
   )

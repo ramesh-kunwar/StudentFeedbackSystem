@@ -17,6 +17,7 @@ const EditTeacher = ({}) => {
   const { data: teacher, isLoading } = useGetTeacherDetailsQuery(teacherId);
 
   const [updateTeacher, { isLoading: loading }] = useUpdateTeacherMutation();
+  
   const [uploadTeacherImage, { isLoading: loadingImage }] =
     useUploadTeacherImageMutation();
   const navigate = useNavigate();

@@ -78,6 +78,7 @@ exports.updateSemester = asyncHandler(async (req, res, next) => {
   const { name, description, coursesTaught } = req.body;
 
   const semester = await Semester.findById(req.params.id);
+  console.log(semester);
 
   if (!semester) {
     return next(
@@ -86,14 +87,14 @@ exports.updateSemester = asyncHandler(async (req, res, next) => {
   }
 
   if (semester) {
-    (semester.name = name),
-      (semester.description = description),
-      (semester.coursesTaught = coursesTaught);
+    semester.name = name;
+    semester.description = description;
+    semester.coursesTaught = coursesTaught;
 
-    const updateSemester = await semester.save();
+    const updatedSemester = await semester.save();
     res.status(200).json({
       success: true,
-      updateSemester,
+      updatedSemester,
     });
   }
 });

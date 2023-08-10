@@ -1,0 +1,52 @@
+.teacher-details {
+  background-color: rgb(244, 244, 244);
+  padding: 2rem 1rem;
+}
+.teacher-description {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+.teacher-details-grid {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+
+  img {
+    width: 300px;
+    height: 250px;
+  }
+  .courses-taught {
+    display: flex;
+    gap: 0.2rem;
+    p {
+      //   font-size: 12px;
+      background-color: #5138ed;
+      color: white;
+      padding: 0.2rem 0.5rem;
+      border-radius: 5px;
+      margin: 1rem 0;
+    }
+  }
+  .teacher-rating-grid {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/**
+ TEACHER REVIEW
+**/
+.review-container {
+  max-width: 1200px;
+  margin: 7rem auto;
+}
+.review-item {
+  background-color: white;
+  margin: 1rem auto;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+}

@@ -10,7 +10,7 @@ const errorHander = (err, req, res, next) => {
 
   // mongose bad ObjectId
   if (err.name === "CastError") {
-    const message = `Teacher not found with id of ${err.value}`;
+    const message = `No data found with id of ${err.value}`;
     error = new ErrorResponse(message, 404);
   }
 

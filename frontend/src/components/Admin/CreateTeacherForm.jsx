@@ -124,7 +124,7 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
                 onChange={(e) => setDescription(e.target.value)}
                 id="message"
                 rows="4"
-                class="border border-gray-300 outline-none focus:border-gray-600 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+                className="border border-gray-300 outline-none focus:border-gray-600 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                 placeholder="Write your thoughts here..."
               ></textarea>
             </div>
