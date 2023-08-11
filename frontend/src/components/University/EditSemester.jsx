@@ -44,10 +44,11 @@ const EditSemester = () => {
 
     try {
       await updateSemester({ semesterId, name, description, coursesTaught });
+      refetch();
       toast.success("Semester updated Successfully", {
         position: toast.POSITION.TOP_CENTER,
       });
-      navigate("/university/dashboard")
+      navigate("/university/dashboard");
     } catch (error) {
       console.log(error);
       toast.error("Semester update failed", {

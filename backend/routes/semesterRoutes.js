@@ -7,6 +7,7 @@ const {
   getSemester,
   updateSemester,
   deleteSemester,
+  createSemesterReview,
 } = require("../controllers/semestercontroller");
 
 const router = express.Router();
@@ -35,5 +36,7 @@ router
   .get(getSemester)
   .put(isLoggedIn, isUniversity, updateSemester)
   .delete(isLoggedIn, isUniversity, deleteSemester);
+
+router.route("/:id/reviews").post( isLoggedIn, createSemesterReview);
 
 module.exports = router;

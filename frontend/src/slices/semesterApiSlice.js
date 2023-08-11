@@ -15,7 +15,7 @@ export const semesterApiSlice = apiSlice.injectEndpoints({
         url: `${SEMESTERS_URL}/${semesterId}`,
       }),
       keepUnusedDataFor: 5,
-      // providesTags: ["Semesters"],
+      providesTags: ["Semesters"],
       // invalidatesTags: ['Semester']
     }),
 
@@ -44,6 +44,15 @@ export const semesterApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ["Semester"],
       // invalidatesTags: ['Semesters']
     }),
+
+    createSemesterReview: builder.mutation({
+      query: (data) => ({
+        url: `${SEMESTERS_URL}/${data.id}/reviews`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Semester"],
+    }),
   }),
 });
 
@@ -53,4 +62,5 @@ export const {
   useCreateSemesterMutation,
   useUpdateSemesterMutation,
   useDeleteSemesterMutation,
+  useCreateSemesterReviewMutation
 } = semesterApiSlice;
