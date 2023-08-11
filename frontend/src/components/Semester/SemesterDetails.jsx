@@ -4,10 +4,10 @@ import { useParams } from "react-router-dom";
 
 const SemesterDetails = () => {
   const id = useParams();
-  const semesterId = id.semesterId;
-  console.log(semesterId);
 
-  const { data: semester } = useGetSemesterDetailsQuery(semesterId);
+  console.log(id.semesterId, 'id');
+
+  const { data: semester } = useGetSemesterDetailsQuery(id.semesterId);
   return (
     <div className="flex place-content-center min-h-screen items-center text-center">
       <div>

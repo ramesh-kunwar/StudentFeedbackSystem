@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   // teachers: null,
-  semesters: localStorage.getItem("teacherInfo")
-    ? JSON.parse(localStorage.getItem("teacherInfo"))
+  semesters: localStorage.getItem("semesterInfo")
+    ? JSON.parse(localStorage.getItem("semesterInfo"))
     : null,
 };
 const semesterSlice = createSlice({
@@ -11,9 +11,9 @@ const semesterSlice = createSlice({
   initialState,
   reducers: {
     setSemesters: (state, action) => {
-      //   state.teacherInfo = action.payload;
+      //   state.semesterInfo = action.payload;
       // storing in localstorage
-      localStorage.setItem("semestrInfo", JSON.stringify(action.payload));
+      localStorage.setItem("semesterInfo", JSON.stringify(action.payload));
     },
   },
 });

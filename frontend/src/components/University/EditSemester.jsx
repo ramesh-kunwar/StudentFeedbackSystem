@@ -17,7 +17,7 @@ const EditSemester = () => {
   const [coursesTaught, setCoursesTaught] = useState([]);
 
   const { data: semester } = useGetSemesterDetailsQuery(semesterId);
-
+  console.log(semester);
   // setting default input values
   useEffect(() => {
     if (semester) {
@@ -38,14 +38,14 @@ const EditSemester = () => {
 
   const updateSemesterHandler = async (e) => {
     e.preventDefault();
+
     try {
-      const res = await updateSemester({ name, description, coursesTaught });
-      console.log(res);
-      console.log("Semester updated successfully");
+      await updateSemester({ semesterId, name, description, coursesTaught });
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
     <>
       <div className="container max-w-xl mx-auto">
@@ -108,7 +108,7 @@ const EditSemester = () => {
               type="submit"
               className=" btn btn-primary text-white rounded-lg block w-full p-2.5 "
             >
-              Create
+              Save
             </button>
           </div>
         </form>

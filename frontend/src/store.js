@@ -10,9 +10,9 @@ const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
     auth: authSliceReducer,
-    // cart: cartSliceReducer,
+
     teachers: teacherSliceReducer,
-    semesters: semesterSliceReducer
+    // semesters: semesterSliceReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),

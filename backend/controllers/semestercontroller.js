@@ -76,7 +76,7 @@ exports.createSemester = asyncHandler(async (req, res, next) => {
 
 exports.updateSemester = asyncHandler(async (req, res, next) => {
   const { name, description, coursesTaught } = req.body;
-
+console.log(name, description, coursesTaught);
   const semester = await Semester.findById(req.params.id);
   console.log(semester);
 
