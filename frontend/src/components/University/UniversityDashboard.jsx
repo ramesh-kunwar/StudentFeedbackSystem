@@ -10,11 +10,30 @@ import { Link } from "react-router-dom";
 import Rating from "../Rating";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
-import { useGetSemestersQuery } from "../../slices/semesterApiSlice";
+import {
+  useDeleteSemesterMutation,
+  useGetSemestersQuery,
+} from "../../slices/semesterApiSlice";
 
 const UniversityDashboard = () => {
-  const {data: semesters} = useGetSemestersQuery()
-  console.log(semesters);
+  const { data: semesters, refetch } = useGetSemestersQuery();
+  const [deleteSemester] = useDeleteSemesterMutation();
+  const deleteHandler = async (id) => {
+    console.log(id, "id");
+    try {
+      await deleteSemester(id);
+      refetch()
+      toast.success("Semester deleted Successfully", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      console.log("Semester deleted successfully");
+    } catch (error) {
+      toast.error("Semester deletion failed", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      console.log(error);
+    }
+  };
   return (
     <motion.div
       initial={{ opacity: 0, y: "0.5%" }}
@@ -58,11 +77,11 @@ const UniversityDashboard = () => {
                     >
                       <Link to={`/semesterDetails/${semester._id}`}>
                         <div className="flex items-center gap-5">
-                          <img
+                          {/* <img
                             src={semester.image}
                             className="w-14 h-14 rounded-full"
                             alt=""
-                          />
+                          /> */}
                           <h3 className="text-md">{semester.name}</h3>
                         </div>
                       </Link>
@@ -80,7 +99,7 @@ const UniversityDashboard = () => {
                       </Link>
                       <Link
                         className="text-red-600 btn text-xl md:text-3xl bg-transparent hover:bg-transparent border-none"
-                        // onClick={() => deleteHandler(semester._id)}
+                        onClick={() => deleteHandler(semester._id)}
                       >
                         <RiDeleteBack2Fill />
                       </Link>

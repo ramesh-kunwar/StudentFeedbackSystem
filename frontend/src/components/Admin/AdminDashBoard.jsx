@@ -15,7 +15,6 @@ import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 
 const AdminDashBoard = () => {
-  const [isFormOpen, setIsFormOpen] = useState(false);
   const { data: teachers, isLoading } = useGetTeachersQuery();
   const [deleteTeacher, { isLoading: isDeleting }] = useDeleteTeacherMutation();
 

@@ -6,14 +6,15 @@ import Navbar from "./components/Navbar/Navbar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 const App = () => {
   return (
     <div className="">
       {/* <img src={"/uploads/image-1687785246489.jpeg"} alt="" /> */}
       <Navbar />
       <Outlet />
+
       <ToastContainer autoClose={1000} />
+      {/* <Toaster position="top-center" reverseOrder={false} gutter={8} /> */}
     </div>
   );
 };

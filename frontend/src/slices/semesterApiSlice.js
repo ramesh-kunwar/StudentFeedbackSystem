@@ -8,13 +8,14 @@ export const semesterApiSlice = apiSlice.injectEndpoints({
         url: SEMESTERS_URL,
       }),
       keepUnusedDataFor: 5,
-      providedTags: ["Semesters"],
+      providesTags: ["Semester"],
     }),
     getSemesterDetails: builder.query({
       query: (semesterId) => ({
         url: `${SEMESTERS_URL}/${semesterId}`,
       }),
-      providesTags: ["Semesters"],
+      keepUnusedDataFor: 5,
+      // providesTags: ["Semesters"],
       // invalidatesTags: ['Semester']
     }),
 
@@ -24,7 +25,7 @@ export const semesterApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["Semesters"],
+      invalidatesTags: ["Semester"],
     }),
     updateSemester: builder.mutation({
       query: (data) => ({
@@ -32,7 +33,16 @@ export const semesterApiSlice = apiSlice.injectEndpoints({
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: ["Semesters"],
+      invalidatesTags: ['Semester'],
+
+    }),
+    deleteSemester: builder.mutation({
+      query: (semesterId) => ({
+        url: `${SEMESTERS_URL}/${semesterId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Semester"],
+      // invalidatesTags: ['Semesters']
     }),
   }),
 });
@@ -42,4 +52,5 @@ export const {
   useGetSemesterDetailsQuery,
   useCreateSemesterMutation,
   useUpdateSemesterMutation,
+  useDeleteSemesterMutation,
 } = semesterApiSlice;

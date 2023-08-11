@@ -6,8 +6,9 @@ import {
   useGetSemestersQuery,
   useUpdateSemesterMutation,
 } from "../../slices/semesterApiSlice";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
+import { toast } from "react-toastify";
 const EditSemester = () => {
   const { id: semesterId } = useParams();
   console.log(semesterId);
@@ -16,7 +17,9 @@ const EditSemester = () => {
   const [description, setDescription] = useState("");
   const [coursesTaught, setCoursesTaught] = useState([]);
 
-  const { data: semester } = useGetSemesterDetailsQuery(semesterId);
+  const { data: semester, refetch } = useGetSemesterDetailsQuery(semesterId);
+
+  const navigate = useNavigate();
   console.log(semester);
   // setting default input values
   useEffect(() => {
@@ -41,8 +44,15 @@ const EditSemester = () => {
 
     try {
       await updateSemester({ semesterId, name, description, coursesTaught });
+      toast.success("Semester updated Successfully", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      navigate("/university/dashboard")
     } catch (error) {
       console.log(error);
+      toast.error("Semester update failed", {
+        position: toast.POSITION.TOP_CENTER,
+      });
     }
   };
 
@@ -52,7 +62,6 @@ const EditSemester = () => {
         <h1 className="text-5xl font-extrabold  mt-20 flex justify-center">
           Edit Semester <IoIosCreate />
         </h1>
-
         <form onSubmit={updateSemesterHandler} className="px-5 mt-10">
           <div className="mb-6">
             <label className="block mb-2 text-md   text-gray-700 ">
