@@ -13,40 +13,48 @@ const Semester = () => {
 
   return (
     <div className="bg-slate-50 pt-24 h-screen ">
-
-      <h1 className="max-w-6xl mx-auto text-4xl mb-8 font-black">All Semesters</h1>
+      <h1 className="max-w-6xl mx-auto text-4xl mb-8 font-black">
+        All Semesters
+      </h1>
       <div className="grid md:grid-cols-2  container max-w-6xl mx-auto gap-4">
         {semesters?.data?.map((semester) => {
           return (
-            <div className="container mx-auto my- rounded shadow  p-8 bg-white pt-5">
-
-              <div className="flex items-start gap-4">
+            <div className="container mx-auto my- rounded shadow  p-8  pt-5 bg-orange-100">
+              <div className="flex items-start gap-4 ">
                 <img
                   src={imageUrl}
                   className="w-10 h-10 mt-2   rounded-full"
                   alt=""
                 />
                 <div>
-                  <h1 className=" text-4xl font-semibold my-2">
-                    {semester.name}
-                  </h1>
-                  <Rating />
-                  <p className="my-2">{semester.description}</p>
-                  <p>
+                  <Link
+                    to={`/semesterDetails/${semester._id}`}
+                    className="hover:text-gray-700"
+                  >
+                    <h1 className=" text-4xl font-semibold my-2">
+                      {semester.name}
+                    </h1>
+                  </Link>
+                  <Rating value={semester.rating} />
+
+                  <p className="my-3">
                     {semester.coursesTaught.map((course) => {
                       return (
-                        <span className=" bg-orange-600 inline-block mb-2 mr-1 text-[10px] px-2 py-1 rounded text-white">
+                        <span className=" bg-orange-600 inline-block  mr-1 text-[10px] px-2 py-1 rounded text-white">
                           {course}
                         </span>
                       );
                     })}
                   </p>
-                  <Link
-                    to={`/semesterDetails/${semester._id}`}
-                    className="rounded-md btn-primary px-6 py-1.5   inline-block   text-white"
-                  >
-                    View Details
-                  </Link>
+                  <p className="my-4">{semester.description}</p>
+                  <div>
+                    <Link
+                      to={`/semesterDetails/${semester._id}`}
+                      className="rounded-md btn-primary  px-4 py-2.5    text-white"
+                    >
+                      View Details
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

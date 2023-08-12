@@ -56,7 +56,7 @@ export const teacherApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["Product"],
+      invalidatesTags: ["Teachers"],
     }),
   }),
 });

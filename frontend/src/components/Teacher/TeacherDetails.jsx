@@ -47,9 +47,7 @@ const TeacherDetails = () => {
               // className=" rounded-md h-60 w-full"
             />
 
-            <div 
-            className="text-xl my-3 mx-2  text-orange-600 flex items-center gap-3 "
-            >
+            <div className="text-xl my-3 mx-2  text-orange-600 flex items-center gap-3 ">
               <Rating value={teacher?.data?.rating} />
               <p className="text-sm text-black">
                 {teacher?.data?.numOfReviews} Reviews
@@ -71,9 +69,9 @@ const TeacherDetails = () => {
               {teacher?.data?.name}
             </h1>
             <div
-            //  className="flex gap-2"
-            className="courses-taught"
-             >
+              //  className="flex gap-2"
+              className="courses-taught"
+            >
               {teacher?.data?.coursesTaught.map((course, index) => {
                 return (
                   <p
@@ -86,12 +84,14 @@ const TeacherDetails = () => {
                 );
               })}
             </div>
-            <p 
+            <p
             // className="my-2 text-gray-500"
-            >{teacher?.data?.description}</p>
-            <div 
-            // className="grid grid-cols-3"
-            className="teacher-rating-grid"
+            >
+              {teacher?.data?.description}
+            </p>
+            <div
+              // className="grid grid-cols-3"
+              className="teacher-rating-grid"
             >
               <div>
                 <p className="font-bold font-xl my-2">Teaching Skill</p>
@@ -113,11 +113,11 @@ const TeacherDetails = () => {
 
       {/* Reviews Section */}
 
-      <div 
-      className="review-container"
-      // className="mt-20 mx-auto max-w-6xl"
+      <div
+        className="review-container"
+        // className="mt-20 mx-auto max-w-6xl"
       >
-        <div 
+        <div
         // className="container mx-auto"
         >
           <h1 className="text-5xl my-8 font-bold">Reviews</h1>
@@ -131,8 +131,24 @@ const TeacherDetails = () => {
               const month = date.getMonth();
               const day = date.getDate();
               console.log("Review", review);
+              const months = [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December",
+              ];
 
-              const reviewDate = `${year}-${month}-${day}`;
+              const monthName = months[month];
+
+              const reviewDate = `${year}-${monthName}-${day}`;
               return (
                 <div
                   key={review._id}

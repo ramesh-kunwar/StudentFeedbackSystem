@@ -15,7 +15,7 @@ export const semesterApiSlice = apiSlice.injectEndpoints({
         url: `${SEMESTERS_URL}/${semesterId}`,
       }),
       keepUnusedDataFor: 5,
-      providesTags: ["Semesters"],
+      providesTags: ["Semester"],
       // invalidatesTags: ['Semester']
     }),
 

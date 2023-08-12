@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-import { useCreateSemesterReviewMutation } from "../../slices/semesterApiSlice";
+import {
+  useCreateSemesterReviewMutation,
+  useGetSemesterDetailsQuery,
+} from "../../slices/semesterApiSlice";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 const RateSemesterForm = () => {
   const [rateSemester] = useCreateSemesterReviewMutation();
-
+  const { data: semester, refetch } = useGetSemesterDetailsQuery();
   const { semesterId: id } = useParams();
 
   const {
@@ -18,6 +21,7 @@ const RateSemesterForm = () => {
   const rateSemesterHandler = async ({ rating, comment }) => {
     try {
       await rateSemester({ id, rating, comment }).unwrap();
+      // refetch()
       toast.success("Semester Reviewed Successfully", {
         position: toast.POSITION.TOP_CENTER,
       });
