@@ -42,6 +42,7 @@ export const teacherApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Teachers"],
     }),
+
     deleteTeacher: builder.mutation({
       query: (teacherId) => ({
         url: `${TEACHERS_URL}/${teacherId}`,
@@ -58,6 +59,8 @@ export const teacherApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Teachers"],
     }),
+
+  
   }),
 });
 

@@ -49,9 +49,8 @@ exports.createTeachers = asyncHandler(async (req, res, next) => {
 
   // check for existign teacher
   const { name, description, coursesTaught, image } = req.body;
-  if(!name || !description || !coursesTaught || !image){
+  if (!name || !description || !coursesTaught || !image) {
     return next(new ErrorResponse("All fields are required", 401));
-
   }
 
   // Checking for existing user
@@ -65,7 +64,7 @@ exports.createTeachers = asyncHandler(async (req, res, next) => {
     name,
     description,
     coursesTaught,
-    image
+    image,
   });
 
   res.status(201).json({
@@ -140,7 +139,22 @@ exports.createTeacherReview = asyncHandler(async (req, res, next) => {
   if (!teacher) {
     return next(new ErrorResponse("Teacher not found ", 404));
   }
+  const review = {
+    user: req.user._id,
+    name: req.user.name,
+    comment,
 
+    teachingSkill: Number(teachingSkill),
+    communicationSkill: Number(communicationSkill),
+    resourceProvided: Number(resourceProvided),
+
+    averageRating: (
+      (Number(communicationSkill) +
+        Number(teachingSkill) +
+        Number(resourceProvided)) /
+      3
+    ).toFixed(2),
+  };
   if (teacher) {
     const alreadyReviewed = teacher.reviews.find(
       (review) => review.user.toString() === req.user._id.toString()
@@ -148,28 +162,29 @@ exports.createTeacherReview = asyncHandler(async (req, res, next) => {
 
     if (alreadyReviewed) {
       return next(new ErrorResponse("Teacher already reviewed", 400));
+      // teacher.reviews.forEach((review) => {
+      //   if (review.user.toString() === req.user._id.toString()) {
+      //     review.comment = comment;
+      //     review.teachingSkill = teachingSkill;
+      //     review.communicationSkill = communicationSkill;
+      //     review.resourceProvided = resourceProvided;
+
+      //     review.averageRating =
+      //       (Number(communicationSkill) +
+      //         Number(teachingSkill) +
+      //         Number(resourceProvided)) /
+      //       3;
+      //   }
+      // });
+    } else {
+      console.log(req.user);
+      teacher.reviews.push(review);
+      teacher.numOfReviews = teacher.reviews.length;
     }
-    const review = {
-      teachingSkill: Number(teachingSkill),
-      communicationSkill: Number(communicationSkill),
-      resourceProvided: Number(resourceProvided),
 
-      name: req.user.name,
-      averageRating: (
-        (Number(communicationSkill) +
-          Number(teachingSkill) +
-          Number(resourceProvided)) /
-        3
-      ).toFixed(2),
-      comment,
-
-      user: req.user._id,
-    };
-
-    console.log(req.user);
-    teacher.reviews.push(review);
-
-    teacher.numOfReviews = teacher.reviews.length;
+    /****************************
+     * adjust rating
+     * ***************************/
 
     // teaching skill
     teacher.teachingSkill =
@@ -196,11 +211,78 @@ exports.createTeacherReview = asyncHandler(async (req, res, next) => {
     teacher.rating =
       teacher.reviews.reduce((acc, review) => acc + review.averageRating, 0) /
       teacher.numOfReviews;
-
-    await teacher.save();
+    await teacher.save({ validateBeforeSave: false });
 
     res.status(201).json({
       message: "Review Added",
     });
   }
 });
+
+// exports.deleteTeacherReview = asyncHandler(async (req, res, next) => {
+//   const { comment, teachingSkill, communicationSkill, resourceProvided } =
+//     req.body;
+
+//   const teacher = await Teacher.findById(req.params.id);
+
+//   if (!teacher) {
+//     return next(new ErrorResponse("Teacher not found ", 404));
+//   }
+
+//   const reviews = teacher.reviews.filter(
+//     (rev) => rev.user.toString() === req.user._id.toString()
+//   );
+
+//   /****************************
+//    * adjust rating
+//    * ***************************/
+
+//   // teaching skill
+//   teacher.teachingSkill =
+//     teacher.reviews
+//       .filter((review) => !isNaN(review.teachingSkill))
+//       .reduce((acc, review) => acc + review.teachingSkill, 0) /
+//     teacher.reviews.length;
+
+//   // communicatin skill
+//   teacher.communicationSkill =
+//     teacher.reviews
+//       .filter((review) => !isNaN(review.communicationSkill))
+//       .reduce((acc, review) => acc + review.communicationSkill, 0) /
+//     teacher.reviews.length;
+
+//   // resource provided
+//   teacher.resourceProvided =
+//     teacher.reviews
+//       .filter((review) => !isNaN(review.resourceProvided))
+//       .reduce((acc, review) => acc + review.resourceProvided, 0) /
+//     teacher.reviews.length;
+
+//   // rating
+//   teacher.rating =
+//     teacher.reviews.reduce((acc, review) => acc + review.averageRating, 0) /
+//     teacher.numOfReviews;
+//   await teacher.save({ validateBeforeSave: false });
+
+//   res.status(201).json({
+//     message: "Review Added",
+//   });
+// });
+
+// exports.likeReview = asyncHandler(async (req, res, next) => {
+//   // Find the teacher document using the provided teacherId
+//   const teacherId = req.params.id;
+//   const teacher = await Teacher.findById(teacherId);
+
+//   if (!teacher) {
+//     throw new Error("Teacher not found");
+//   }
+
+//   // Extract review IDs from the teacher's reviews array
+//   const reviewIds = teacher.reviews.map((review) => review._id);
+//   console.log(reviewIds, 'dkkk');
+//   res.status(200).json({
+//     reviewIds,
+//     teacher
+//   })
+// });

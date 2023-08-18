@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
 import axios from "axios";
 import {
-  useCreateReviewMutation,
+
   useGetTeachersQuery,
 } from "../../slices/teacherApiSlice";
 import LoadingIcon from "../LoadingIcon/LoadingIcon";

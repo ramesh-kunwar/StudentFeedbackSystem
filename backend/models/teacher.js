@@ -21,6 +21,11 @@ const reviewSchema = mongoose.Schema(
       required: true,
     },
 
+    // likeCount: {
+    //   type: Number,
+    //   default: 0,
+    // },
+
     comment: { type: String, required: true },
     user: {
       type: mongoose.Schema.Types.ObjectId,

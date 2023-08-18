@@ -6,6 +6,7 @@ const {
   updateTeachers,
   deleteTeachers,
   createTeacherReview,
+  likeReview,
 } = require("../controllers/teacherController");
 const { isLoggedIn, isAdmin } = require("../middleware/user");
 const { uploadImage } = require("../middleware/multer");
@@ -25,5 +26,8 @@ router
 
 // reviews
 router.route("/:id/reviews").post(isLoggedIn, createTeacherReview);
+
+// like a review
+// router.route("/:id/reviews/like").get(isLoggedIn, likeReview);
 
 module.exports = router;

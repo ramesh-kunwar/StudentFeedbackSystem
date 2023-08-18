@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
-  useCreateReviewMutation,
+  // useGetSingleReviewQuery,
   useGetTeacherDetailsQuery,
 } from "../../slices/teacherApiSlice";
 import { FaUserCircle } from "react-icons/fa";
+import { RiDeleteBack2Fill } from "react-icons/ri";
 
 import LoadingIcon from "../LoadingIcon/LoadingIcon";
 import Rating from "../../components/Rating";
@@ -19,9 +20,13 @@ const TeacherDetails = () => {
   // const [teacher, setTeacher] = useState({});
   const teacherId = useParams();
   const id = teacherId.teacherId;
-
+  console.log(id);
   const { data: teacher, isLoading, error } = useGetTeacherDetailsQuery(id);
-  console.log(teacher, "teacher");
+
+  const deleteHandler = async (th) => {
+    const reviewId = th._id;
+    console.log(reviewId);
+  };
   return (
     <motion.div
       initial={{ opacity: 0, y: "0.5%" }}
@@ -130,7 +135,7 @@ const TeacherDetails = () => {
               const year = date.getFullYear();
               const month = date.getMonth();
               const day = date.getDate();
-              console.log("Review", review);
+              // console.log("Review", review);
               const months = [
                 "January",
                 "February",
@@ -162,6 +167,14 @@ const TeacherDetails = () => {
                       <h1 className="font-bold text-xl"> {review.name}</h1>
 
                       <Rating value={review.averageRating} />
+                      <h2>
+                        {/* <div
+                          className="text-red-600 btn text-xl md:text-3xl bg-transparent hover:bg-transparent border-none"
+                          onClick={() => deleteHandler(review)}
+                        >
+                          <RiDeleteBack2Fill />
+                        </div> */}
+                      </h2>
                     </div>
                   </>
                   <p>{review.comment}</p>
