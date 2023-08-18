@@ -6,10 +6,8 @@ const GetAllStudents = () => {
   const { data: students } = useGetAllStudentsQuery();
   console.log(students);
   return (
-    <motion.div 
-    initial={{ opacity: 0, y: '0.5%' }}
-    animate={{ opacity: 1, y: '0%' }}
-    transition={{ duration: .5 }}
+    <div 
+  
 
     className="bg-slate-50 py-10 h-screen">
       <div className="container px-4 mx-auto max-w-4xl ">
@@ -52,7 +50,7 @@ const GetAllStudents = () => {
         </table>
         {/* </div> */}
       </div>
-    </motion.div>
+    </div>
   );
 };
 

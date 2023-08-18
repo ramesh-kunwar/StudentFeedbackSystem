@@ -38,10 +38,8 @@ const Login = () => {
   };
 
   return (
-    <motion.div
-    initial={{ opacity: 0, y: '0.5%' }}
-    animate={{ opacity: 1, y: '0%' }}
-    transition={{ duration: .5 }}
+    <div
+
     >
       <div className="container max-w-xl mx-auto">
         <h1 className="text-5xl font-extrabold  mt-20 flex justify-center">
@@ -92,7 +90,7 @@ const Login = () => {
           </div>
         </form>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

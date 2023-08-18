@@ -6,12 +6,13 @@ import {
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 const RateSemesterForm = () => {
   const [rateSemester] = useCreateSemesterReviewMutation();
   const { data: semester, refetch } = useGetSemesterDetailsQuery();
   const { semesterId: id } = useParams();
-
+  const { userInfo } = useSelector((state) => state.auth);
   const {
     register,
     handleSubmit,
@@ -40,6 +41,7 @@ const RateSemesterForm = () => {
       <button
         className="btn btn-primary text-white block w-56"
         onClick={() => window.my_modal_2.showModal()}
+        disabled={!(userInfo?.data?.role === "student")}
       >
         Rate Semester
       </button>

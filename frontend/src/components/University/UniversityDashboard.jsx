@@ -35,10 +35,8 @@ const UniversityDashboard = () => {
     }
   };
   return (
-    <motion.div
-      initial={{ opacity: 0, y: "0.5%" }}
-      animate={{ opacity: 1, y: "0%" }}
-      transition={{ duration: 0.5 }}
+    <div
+    
       className="bg-slate-50 pt-16 min-h-screen"
     >
       <div className="container px-4 mx-auto max-w-6xl">
@@ -123,7 +121,7 @@ const UniversityDashboard = () => {
           </table>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

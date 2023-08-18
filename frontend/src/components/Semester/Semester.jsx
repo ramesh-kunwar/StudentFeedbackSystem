@@ -18,6 +18,9 @@ const Semester = () => {
       </h1>
       <div className="grid md:grid-cols-2  container max-w-6xl mx-auto gap-4">
         {semesters?.data?.map((semester) => {
+          // cut text
+          const words = semester.description.split(" ");
+          const semDescription = words.slice(0, 20).join(" ");
           return (
             <div className="container mx-auto my- rounded shadow  p-8  pt-5 bg-orange-100">
               <div className="flex items-start gap-4 ">
@@ -46,7 +49,8 @@ const Semester = () => {
                       );
                     })}
                   </p>
-                  <p className="my-4">{semester.description}</p>
+                  <p className="my-4">{semDescription}</p>
+                  {/* <p className="my-4">{semester.description}</p> */}
                   <div>
                     <Link
                       to={`/semesterDetails/${semester._id}`}

@@ -161,21 +161,21 @@ exports.createTeacherReview = asyncHandler(async (req, res, next) => {
     );
 
     if (alreadyReviewed) {
-      return next(new ErrorResponse("Teacher already reviewed", 400));
-      // teacher.reviews.forEach((review) => {
-      //   if (review.user.toString() === req.user._id.toString()) {
-      //     review.comment = comment;
-      //     review.teachingSkill = teachingSkill;
-      //     review.communicationSkill = communicationSkill;
-      //     review.resourceProvided = resourceProvided;
+      // return next(new ErrorResponse("Teacher already reviewed", 400));
+      teacher.reviews.forEach((review) => {
+        if (review.user.toString() === req.user._id.toString()) {
+          review.comment = comment;
+          review.teachingSkill = teachingSkill;
+          review.communicationSkill = communicationSkill;
+          review.resourceProvided = resourceProvided;
 
-      //     review.averageRating =
-      //       (Number(communicationSkill) +
-      //         Number(teachingSkill) +
-      //         Number(resourceProvided)) /
-      //       3;
-      //   }
-      // });
+          review.averageRating =
+            (Number(communicationSkill) +
+              Number(teachingSkill) +
+              Number(resourceProvided)) /
+            3;
+        }
+      });
     } else {
       console.log(req.user);
       teacher.reviews.push(review);

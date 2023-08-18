@@ -28,10 +28,8 @@ const TeacherDetails = () => {
     console.log(reviewId);
   };
   return (
-    <motion.div
-      initial={{ opacity: 0, y: "0.5%" }}
-      animate={{ opacity: 1, y: "0%" }}
-      transition={{ duration: 0.5 }}
+    <div
+
       // className="bg-slate-50 pt-10 min-h-screen"
       className="teacher-details"
     >
@@ -185,7 +183,7 @@ const TeacherDetails = () => {
         </div>
       </div>
       {/* / Review Section */}
-    </motion.div>
+    </div>
   );
 };
 

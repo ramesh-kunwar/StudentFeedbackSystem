@@ -135,19 +135,29 @@ exports.createSemesterReview = asyncHandler(async (req, res, next) => {
       (review) => review.user.toString() === req.user._id.toString()
     );
 
-    if (alreadyReviewed) {
-      return next(new ErrorResponse("Semester already reviewed", 400));
-    }
     const review = {
       name: req.user.name,
       rating: Number(rating),
       comment,
       user: req.user._id,
     };
+    if (alreadyReviewed) {
+      // return next(new ErrorResponse("Semester already reviewed", 400));
+      semester.reviews.forEach((review) => {
+        if (review.user.toString() === req.user._id.toString()) {
+          review.comment = comment;
+          review.rating = rating;
+        
+        }
+      });
+    }else{
+      semester.reviews.push(review);
 
-    semester.reviews.push(review);
+      semester.numOfReviews = semester.reviews.length;
+    }
+   
 
-    semester.numOfReviews = semester.reviews.length;
+  
 
     // rating calculation
     semester.rating =

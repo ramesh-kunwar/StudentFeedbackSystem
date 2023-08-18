@@ -5,11 +5,8 @@ import { motion } from "framer-motion";
 
 const Home = () => {
   return (
-    <motion.div
-    initial={{ opacity: 0, y: '0.5%' }}
-    animate={{ opacity: 1, y: '0%' }}
-    transition={{ duration: .5 }}
-
+    <div
+   
     >
       <div className="container mx-auto max-w-7xl">
         <div className="flex flex-wrap flex-col-reverse md:flex-row items-center min-h-screen">
@@ -41,7 +38,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
 
    
   );
