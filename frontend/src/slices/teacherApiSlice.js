@@ -8,14 +8,14 @@ export const teacherApiSlice = apiSlice.injectEndpoints({
         url: TEACHERS_URL,
       }),
       keepUnusedDataFor: 5,
-      providesTags: ["Teachers"],
+      providesTags: ["Teacher"],
     }),
     getTeacherDetails: builder.query({
       query: (teacherId) => ({
         url: `${TEACHERS_URL}/${teacherId}`,
       }),
       // keepUnusedDataFor: 5,
-      providesTags: ["Teachers"],
+      providesTags: ["Teacher"],
     }),
     createTeacher: builder.mutation({
       query: (data) => ({
@@ -24,7 +24,7 @@ export const teacherApiSlice = apiSlice.injectEndpoints({
 
         body: data,
       }),
-      invalidatesTags: ["Teachers"],
+      invalidatesTags: ["Teacher"],
     }),
     uploadTeacherImage: builder.mutation({
       query: (data) => ({
@@ -40,7 +40,7 @@ export const teacherApiSlice = apiSlice.injectEndpoints({
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: ["Teachers"],
+      invalidatesTags: ["Teacher"],
     }),
 
     deleteTeacher: builder.mutation({
@@ -48,7 +48,7 @@ export const teacherApiSlice = apiSlice.injectEndpoints({
         url: `${TEACHERS_URL}/${teacherId}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Teachers"],
+      invalidatesTags: ["Teacher"],
     }),
 
     createReview: builder.mutation({
@@ -57,7 +57,7 @@ export const teacherApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["Teachers"],
+      invalidatesTags: ["Teacher"],
     }),
 
   
