@@ -50,7 +50,7 @@ exports.createTeachers = asyncHandler(async (req, res, next) => {
   // check for existign teacher
   const { name, description, coursesTaught, image } = req.body;
   if (!name || !description || !coursesTaught || !image) {
-    return next(new ErrorResponse("All fields are required", 401));
+    return next(new ErrorResponse("All fields are required", 400));
   }
 
   // Checking for existing user

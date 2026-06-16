@@ -16,7 +16,7 @@ const router = express.Router();
 router
   .route("/")
   .get(getTeachers)
-  .post(isLoggedIn, isAdmin, uploadImage.single("image"), createTeachers);
+  .post(isLoggedIn, isAdmin, createTeachers);
 
 router.route("/:id").get(getTeacher);
 router
