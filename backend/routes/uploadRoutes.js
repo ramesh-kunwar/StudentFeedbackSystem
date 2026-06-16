@@ -23,6 +23,16 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({ storage, fileFilter });
 
 router.post("/", upload.single("image"), async (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ message: "No image file provided" });
+  }
+
+  const cfg = cloudinary.config();
+  if (!cfg.cloud_name || !cfg.api_key || !cfg.api_secret) {
+    console.error("Cloudinary not configured. cloud_name:", cfg.cloud_name);
+    return res.status(500).json({ message: "Image upload service is not configured on the server" });
+  }
+
   try {
     const result = await new Promise((resolve, reject) => {
       const stream = cloudinary.uploader.upload_stream(
@@ -40,6 +50,7 @@ router.post("/", upload.single("image"), async (req, res) => {
       image: result.secure_url,
     });
   } catch (error) {
+    console.error("Cloudinary upload error:", error.message);
     res.status(400).json({ message: error.message });
   }
 });

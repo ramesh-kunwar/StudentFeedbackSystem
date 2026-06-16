@@ -33,6 +33,13 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
   const createTeacherHandler = async (e) => {
     e.preventDefault();
 
+    if (!name || !description || !coursesTaught.length) {
+      return toast.error("Please fill in all fields");
+    }
+    if (!image) {
+      return toast.error("Please upload a teacher image before submitting");
+    }
+
     try {
       await createTeacher({
         name,
@@ -41,16 +48,15 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
         image,
       }).unwrap();
 
-      // dispatch(setTeachers({ ...res }));
       toast.success("Teacher Added Successfully");
 
       setName("");
       setDescription("");
-      setCoursesTaught("");
-
+      setCoursesTaught([]);
+      setImage("");
     } catch (error) {
-      toast.error(error.data.error);
-      console.log(error?.data?.error);
+      toast.error(error?.data?.message || error?.data?.error || "Failed to create teacher");
+      console.log(error);
     }
   };
 
@@ -60,8 +66,11 @@ const CreateTeacherForm = ({ isFormOpen, setIsFormOpen }) => {
     try {
       const res = await uploadTeacherImage(formData).unwrap();
       setImage(res.image);
+      toast.success("Image uploaded successfully");
     } catch (err) {
-      toast.error(err?.data?.message || err.error);
+      const msg = err?.data?.message || err?.error || "Image upload failed";
+      toast.error(msg);
+      console.error("Upload error:", err);
     }
   };
 
