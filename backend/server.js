@@ -2,6 +2,7 @@ require("dotenv").config();
 const path = require("path");
 const express = require("express");
 const morgan = require("morgan");
+const cors = require("cors");
 const connectDB = require("./config/connect");
 const cookieParser = require("cookie-parser");
 const cloudinary = require("cloudinary").v2;
@@ -11,6 +12,13 @@ const bodyParser = require("body-parser");
 const app = express();
 
 connectDB();
+
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL || "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 // cloudinary.config({
 //   cloud_name: process.env.CLOUDINARY_NAME,

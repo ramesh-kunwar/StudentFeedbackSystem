@@ -51,7 +51,7 @@ const users = [
 const getTeachers = (adminId) => [
   {
     name: "Dr. Rajendra Prasad Sharma",
-    image: "/uploads/20943401.jpg",
+    image: "https://i.pravatar.cc/300?img=12",
     description:
       "Dr. Sharma has over 15 years of experience in Computer Science and specialises in algorithms and data structures. He completed his PhD from Tribhuvan University.",
     coursesTaught: ["Data Structures", "Algorithms", "Discrete Mathematics"],
@@ -65,7 +65,7 @@ const getTeachers = (adminId) => [
   },
   {
     name: "Prof. Sunita Devi Acharya",
-    image: "/uploads/20943501.jpg",
+    image: "https://i.pravatar.cc/300?img=47",
     description:
       "Prof. Acharya is a renowned educator in the field of Database Systems and Software Engineering with 12 years of teaching experience.",
     coursesTaught: [
@@ -83,7 +83,7 @@ const getTeachers = (adminId) => [
   },
   {
     name: "Mr. Bikash Thapa Magar",
-    image: "/uploads/20944398.jpg",
+    image: "https://i.pravatar.cc/300?img=15",
     description:
       "Mr. Magar is an industry veteran turned educator with 8 years in software development before joining academia. He specialises in networking and system administration.",
     coursesTaught: [
@@ -101,7 +101,7 @@ const getTeachers = (adminId) => [
   },
   {
     name: "Dr. Priya Pandey",
-    image: "/uploads/teacherProfile.jpeg",
+    image: "https://i.pravatar.cc/300?img=44",
     description:
       "Dr. Pandey holds a PhD in Artificial Intelligence and Machine Learning. She is passionate about research and actively publishes in international journals.",
     coursesTaught: [
@@ -119,7 +119,7 @@ const getTeachers = (adminId) => [
   },
   {
     name: "Mr. Dipendra Karki",
-    image: "/uploads/image-1691827860339.jpg",
+    image: "https://i.pravatar.cc/300?img=8",
     description:
       "Mr. Karki is an experienced lecturer in Mathematics and Statistics with a focus on making complex topics accessible through real-world examples.",
     coursesTaught: ["Engineering Mathematics", "Statistics", "Calculus"],
@@ -133,7 +133,7 @@ const getTeachers = (adminId) => [
   },
   {
     name: "Ms. Kabita Maharjan",
-    image: "/uploads/image-1688021544849.jpg",
+    image: "https://i.pravatar.cc/300?img=56",
     description:
       "Ms. Maharjan specialises in Object-Oriented Programming and Software Design Patterns. She has worked at several IT companies before transitioning to academia.",
     coursesTaught: [
@@ -151,7 +151,7 @@ const getTeachers = (adminId) => [
   },
   {
     name: "Dr. Naresh Bajracharya",
-    image: "/uploads/image-1688021687286.jpeg",
+    image: "https://i.pravatar.cc/300?img=33",
     description:
       "Dr. Bajracharya is a senior professor with 20+ years of experience in Electronics and Communication Engineering.",
     coursesTaught: [
@@ -169,7 +169,7 @@ const getTeachers = (adminId) => [
   },
   {
     name: "Mr. Suresh Bhandari",
-    image: "/uploads/image-1688021779011.jpg",
+    image: "https://i.pravatar.cc/300?img=52",
     description:
       "Mr. Bhandari is a young and dynamic lecturer in Cloud Computing and DevOps, bringing cutting-edge industry practices into the classroom.",
     coursesTaught: ["Cloud Computing", "DevOps", "Docker & Kubernetes"],
