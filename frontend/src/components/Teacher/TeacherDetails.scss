@@ -2,38 +2,49 @@
   background-color: rgb(244, 244, 244);
   padding: 2rem 1rem;
 }
+
 .teacher-description {
   max-width: 1200px;
   margin: 0 auto;
   background-color: white;
   border-radius: 0.5rem;
-  padding: 1rem;
+  padding: 1.5rem;
 }
+
 .teacher-details-grid {
   display: flex;
   gap: 2rem;
-  align-items: center;
+  align-items: flex-start;
 
   img {
-    width: 300px;
+    width: 280px;
+    min-width: 280px;
     height: 250px;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 8px;
   }
+
   .courses-taught {
     display: flex;
-    gap: 0.2rem;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.75rem 0;
+
     p {
-      //   font-size: 12px;
       background-color: #5138ed;
       color: white;
-      padding: 0.2rem 0.5rem;
+      padding: 0.25rem 0.6rem;
       border-radius: 5px;
-      margin: 1rem 0;
+      font-size: 13px;
     }
   }
+
   .teacher-rating-grid {
     margin-top: 1rem;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
   }
 }
 
@@ -42,11 +53,29 @@
 **/
 .review-container {
   max-width: 1200px;
-  margin: 7rem auto;
+  margin: 4rem auto;
+  padding: 0 1rem;
 }
+
 .review-item {
   background-color: white;
   margin: 1rem auto;
   padding: 1rem 2rem;
   border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .teacher-details-grid {
+    flex-direction: column;
+
+    img {
+      width: 100%;
+      min-width: unset;
+      height: 240px;
+    }
+
+    .teacher-rating-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 }

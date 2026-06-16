@@ -33,8 +33,8 @@ const Home = () => {
               </Link>
             </div>
           </div>
-          <div className="md:w-1/2">
-            <img src={homeImage} alt="HOme image" />
+          <div className="md:w-1/2 px-4 md:px-0">
+            <img src={homeImage} alt="Home image" className="w-full h-auto object-cover rounded-lg" />
           </div>
         </div>
       </div>

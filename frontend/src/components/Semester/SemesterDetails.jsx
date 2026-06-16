@@ -24,17 +24,16 @@ const SemesterDetails = () => {
 
   return (
     <div className="bg-slate-50 pt-10 min-h-screen">
-      <div className=" md:grid grid-cols-3 container  mx-auto max-w-6xl bg-white shadow rounded-xl  px-10 py-10">
-        <div className="">
-          <h1 className="mx-auto  text-4xl font-bold -8">
+      <div className="md:grid grid-cols-3 container mx-auto max-w-6xl bg-white shadow rounded-xl px-5 sm:px-10 py-10">
+        <div className="mb-8 md:mb-0">
+          <h1 className="text-3xl sm:text-4xl font-bold mb-2">
             {semester?.data?.name}
           </h1>
-          <h1 className="text-8xl  font-black text-orange-600">
+          <h1 className="text-7xl sm:text-8xl font-black text-orange-600">
             {semester?.data?.rating.toFixed(2)}
           </h1>
-          <div className="  my-4">
+          <div className="my-4">
             <Rating value={semester?.data?.rating} />
-            {/* <p className="text-sm mt-3 text-black">Overall Rating</p> */}
           </div>
 
           <RateSemesterForm />
@@ -42,17 +41,15 @@ const SemesterDetails = () => {
         {/* description */}
         <div className="col-span-2">
           <p className="my-2 text-gray-500">{semester?.data?.description}</p>
-          <div className="flex gap-2">
-            {semester?.data?.coursesTaught.map((course, index) => {
-              return (
-                <p
-                  key={index}
-                  className="bg-primary text-white rounded px-2 py-0.5 my-2"
-                >
-                  {course}
-                </p>
-              );
-            })}
+          <div className="flex flex-wrap gap-2 mt-3">
+            {semester?.data?.coursesTaught.map((course, index) => (
+              <span
+                key={index}
+                className="bg-primary text-white rounded px-2 py-1 text-sm"
+              >
+                {course}
+              </span>
+            ))}
           </div>
         </div>
       </div>
